@@ -7,6 +7,7 @@ import {StronaGlownaComponent} from './strona-glowna/strona-glowna.component';
 import {RouterModule, Routes} from "@angular/router";
 import {
   MAT_DATE_LOCALE,
+  MatButtonModule,
   MatCardModule,
   MatDatepickerModule,
   MatIconModule,
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatButtonModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
