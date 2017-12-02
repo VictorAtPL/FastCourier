@@ -28,8 +28,12 @@
     "@covalent/highlight": "^1.0.0-rc.0",
     "@covalent/http": "^1.0.0-rc.0",
     "@covalent/markdown": "^1.0.0-rc.0",
+    "body-parser": "^1.18.2",
+    "connect-busboy": "0.0.2",
     "core-js": "^2.4.1",
+    "express": "^4.16.2",
     "material-design-icons-iconfont": "^3.0.3",
+    "path": "^0.12.7",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
