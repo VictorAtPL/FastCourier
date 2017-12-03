@@ -13,7 +13,11 @@ export class AppComponent {
       {
         'label': 'Strona główna',
         'path': 'powitanie'
-      }
+      },
+      {
+        'label': 'Napisz wiadomość',
+        'path': '/wiadomosc/wyslij'
+      },
     ];
   }
 }
