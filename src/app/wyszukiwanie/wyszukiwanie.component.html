@@ -1,0 +1,50 @@
+<p>
+  <mat-card>
+        <mat-card-title>Formularz wyszukiwania </mat-card-title>
+        <mat-card-content>Ten formularz pozwala wyszukiwanie oferty w serwisie.</mat-card-content>
+
+
+     <form>
+        <mat-form-field>
+            <mat-select placeholder="Miasto początkowe">
+              <mat-option>Warszawa</mat-option>
+              <mat-option>Kraków</mat-option>
+              <mat-option>Pruszków</mat-option>
+              <mat-option>Halinów</mat-option>
+              <mat-option>Ostrów Mazowiecka</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </form>
+
+        <form>
+          <mat-form-field>
+            <mat-select placeholder="Miasto docelowe">
+              <mat-option>Warszawa</mat-option>
+              <mat-option>Kraków</mat-option>
+              <mat-option>Pruszków</mat-option>
+              <mat-option>Halinów</mat-option>
+              <mat-option>Ostrów Mazowiecka</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+
+    <form>
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Data wyjazdu">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Godzina wyjazdu" type="time">
+      </mat-form-field>
+    </form>
+
+    <form>
+            <button mat-raised-button color="primary">Szukaj</button>
+    </form>
+    <br>
+    <form>
+            <button mat-raised-button color="primary">Wyzzukiwanie zaawansowane</button>
+    </form>
+  </mat-card>
+</p>
