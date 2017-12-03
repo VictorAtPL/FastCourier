@@ -13,7 +13,11 @@ export class AppComponent {
       {
         'label': 'Strona główna',
         'path': 'powitanie'
-      }
+      },
+      {
+        'label': 'Wyszukiwanie',
+        'path': 'StronaGlowna/Wyszukiwanie'
+  }
     ];
   }
 }
