@@ -1,0 +1,89 @@
+<p>
+  <mat-card>
+    <mat-card-title>Formularz wyszukiwania zaawansowanego</mat-card-title>
+    <mat-card-content>Ten formularz pozwala zaawansowane wyszukiwanie oferty w serwisie.</mat-card-content>
+
+
+  <form>
+    <mat-form-field>
+        <mat-select placeholder="Miasto początkowe">
+          <mat-option>Warszawa</mat-option>
+          <mat-option>Kraków</mat-option>
+          <mat-option>Pruszków</mat-option>
+          <mat-option>Halinów</mat-option>
+          <mat-option>Ostrów Mazowiecka</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </form>
+
+    <form>
+      <mat-form-field>
+        <mat-select placeholder="Miasto docelowe">
+          <mat-option>Warszawa</mat-option>
+          <mat-option>Kraków</mat-option>
+          <mat-option>Pruszków</mat-option>
+          <mat-option>Halinów</mat-option>
+          <mat-option>Ostrów Mazowiecka</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+
+    <form>
+        <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="picker" placeholder="Data wyjazdu">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Godzina wyjazdu" type="time">
+      </mat-form-field>
+    </form>
+
+    <form>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Cena minimalna" type="number">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Cena maksymalna" type="number">
+        </mat-form-field>
+    </form>
+
+    <form>
+    <mat-form-field class="example-full-width">
+        <mat-select placeholder="Kategoria" >
+          <mat-option>Żywność</mat-option>
+          <mat-option>Elektronika mała</mat-option>
+          <mat-option>Elektronika duża</mat-option>
+          <mat-option>Szkło</mat-option>
+          <mat-option>Sztuka</mat-option>
+          <mat-option>Instrumenty</mat-option>
+          <mat-option>Inna</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+    <form>
+    <mat-form-field class="example-full-width">
+        <mat-select placeholder="Rozmiar">
+          <mat-option>Mała</mat-option>
+          <mat-option>Średnia</mat-option>
+          <mat-option>Duża</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </form>
+
+
+    <form>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Waga" type="number">
+        </mat-form-field>
+    </form>
+
+    <form>
+      <button mat-raised-button color="primary">Szukaj</button>
+    </form>
+
+  </mat-card>
+</p>
