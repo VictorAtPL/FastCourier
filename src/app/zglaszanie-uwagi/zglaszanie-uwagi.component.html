@@ -1,0 +1,41 @@
+<mat-card>
+  <form class="example-form">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td colspan="2" align="center">
+          <mat-card-title class="example-full-width">Formularz zgłaszania uwagi</mat-card-title>
+        </td>
+      </tr>
+      <br><br>
+      <tr>
+        <td colspan="2" align="center">
+          <mat-card-content> Wybierz typ zgłaszanej uwagi:</mat-card-content>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <mat-form-field class="listaRozwijana">
+            <mat-select [(value)]="selected">
+              <mat-option value="opcja1">Brak funkcji aplikacji</mat-option>
+              <mat-option value="opcja2">Niewłaściwe funkcjonowanie aplikacji</mat-option>
+              <mat-option value="opcja3">Zmiana zawartości aplikacji</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p>Wybrałeś: {{selected}}
+        </td>
+      </tr>
+      <br>
+      <tr>
+        <td colspan="2" align="center">
+          <mat-form-field class="tekstUwagi">
+            <textarea matInput placeholder="Treść uwagi:"  rows="10"></textarea>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td align="center"><button mat-raised-button style="width:80%">Anuluj</button></td>
+        <td align="center"><button mat-raised-button color="primary" style="width:80%">Wyślij</button></td>
+      </tr>
+    </table>
+  </form>
+</mat-card>
