@@ -13,6 +13,10 @@ export class AppComponent {
       {
         'label': 'Strona główna',
         'path': 'powitanie'
+      },
+      {
+        'label': 'Dodaj regulamin',
+        'path': '/regulaminy/dodaj'
       }
     ];
   }
