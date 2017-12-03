@@ -17,6 +17,7 @@ import {
 import {CovalentLayoutModule} from '@covalent/core';
 import {PisanieWiadomosciComponent} from './pisanie-wiadomosci/pisanie-wiadomosci.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ZglaszanieUzytkownikaComponent} from './zglaszanie-uzytkownika/zglaszanie-uzytkownika.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'powitanie', pathMatch: 'full' },
@@ -29,6 +30,11 @@ const appRoutes: Routes = [
     component: PisanieWiadomosciComponent,
     data: { title: 'Fast Courier - Pisanie wiadomości do użytkownika' }
   },
+  {
+    path: 'uzytkownik/zglos',
+    component: ZglaszanieUzytkownikaComponent,
+    data: { title: 'Fast Courier - Zgłaszanie użytkownika' }
+  },
   { path: '**',
     redirectTo: 'powitanie',
   }
@@ -38,7 +44,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     StronaGlownaComponent,
-    PisanieWiadomosciComponent
+    PisanieWiadomosciComponent,
+    ZglaszanieUzytkownikaComponent
   ],
   imports: [
     BrowserModule,
