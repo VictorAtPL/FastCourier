@@ -13,6 +13,10 @@ export class AppComponent {
       {
         'label': 'Strona główna',
         'path': 'powitanie'
+      },
+      {
+        'label': 'Ocen transakcje',
+        'path': '/transakcja/ocen'
       }
     ];
   }
