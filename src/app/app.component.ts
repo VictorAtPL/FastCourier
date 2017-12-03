@@ -13,6 +13,10 @@ export class AppComponent {
       {
         'label': 'Strona główna',
         'path': 'powitanie'
+      },
+      {
+        'label': 'Zgłoś transakcję',
+        'path': 'transakcja/zglosTransakcje'
       }
     ];
   }
