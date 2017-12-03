@@ -15,7 +15,6 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import {CovalentLayoutModule} from '@covalent/core';
-import {PisanieWiadomosciComponent} from './pisanie-wiadomosci/pisanie-wiadomosci.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ZglaszanieUzytkownikaComponent} from './zglaszanie-uzytkownika/zglaszanie-uzytkownika.component';
 
@@ -24,11 +23,6 @@ const appRoutes: Routes = [
   { path: 'powitanie',
     component: StronaGlownaComponent,
     data: { title: 'Fast Courier' }
-  },
-  {
-    path: 'wiadomosc/wyslij',
-    component: PisanieWiadomosciComponent,
-    data: { title: 'Fast Courier - Pisanie wiadomości do użytkownika' }
   },
   {
     path: 'uzytkownik/zglos',
@@ -44,7 +38,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     StronaGlownaComponent,
-    PisanieWiadomosciComponent,
     ZglaszanieUzytkownikaComponent
   ],
   imports: [

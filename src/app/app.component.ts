@@ -15,10 +15,6 @@ export class AppComponent {
         'path': 'powitanie'
       },
       {
-        'label': 'Napisz wiadomość',
-        'path': '/wiadomosc/wyslij'
-      },
-      {
         'label': 'Zgłoś użytkownika',
         'path': '/uzytkownik/zglos'
       }
