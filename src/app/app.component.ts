@@ -14,6 +14,11 @@ export class AppComponent {
         'label': 'Strona główna',
         'path': 'powitanie'
       }
+      ,
+      {
+        'label': 'Edytuj zapoznanie sie z serwisem',
+        'path': '/zapoznaj_sie_z_serwisem/edytuj'
+      }
     ];
   }
 }
