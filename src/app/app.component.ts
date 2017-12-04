@@ -14,6 +14,11 @@ export class AppComponent {
         'label': 'Strona główna',
         'path': 'powitanie'
       }
+      ,
+      {
+        'label': 'Spersonalizuj profil',
+        'path': '/profil/edytuj'
+      }
     ];
   }
 }
