@@ -53,6 +53,7 @@ import {DodawanieOfertyComponent} from './dodawanie-oferty/dodawanie-oferty.comp
 import {SzukanieZaawansowaneComponent} from './szukanie-zaawansowane/szukanie-zaawansowane.component';
 import {LogowanieComponent} from './logowanie/logowanie.component';
 import {RejestracjaComponent} from "./rejestracja/rejestracja.component";
+import {PisanieWiadomosciComponent} from "./pisanie-wiadomosci/pisanie-wiadomosci.component";
 
 const appRoutes: Routes = [
   {
@@ -80,6 +81,11 @@ const appRoutes: Routes = [
     component: RejestracjaComponent,
     data: {title: 'Fast Courier - Rejestracja'}
   },
+  {
+    path: 'wiadomosc/wyslij',
+    component: PisanieWiadomosciComponent,
+    data: { title: 'Fast Courier - Pisanie wiadomości do użytkownika' }
+  },
   { path: '**',
     redirectTo: 'powitanie',
   }
@@ -92,7 +98,8 @@ const appRoutes: Routes = [
     DodawanieOfertyComponent,
     SzukanieZaawansowaneComponent,
     LogowanieComponent,
-    RejestracjaComponent
+    RejestracjaComponent,
+    PisanieWiadomosciComponent
   ],
   imports: [
     BrowserModule,

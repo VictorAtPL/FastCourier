@@ -27,6 +27,11 @@ export class AppComponent {
         'label': 'Logowanie',
         'path': 'logowanie'
       }
+      },
+      {
+        'label': 'Napisz wiadomość',
+        'path': '/wiadomosc/wyslij'
+      },
     ];
 
     this._iconRegistry.addSvgIconInNamespace('assets', 'teradata-ux',
