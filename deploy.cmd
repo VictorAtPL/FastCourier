@@ -107,7 +107,7 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 
 :: 3. Angular Prod Build
 IF EXIST "%DEPLOYMENT_TARGET%/.angular-cli.json" (
-  echo Building App in %DEPLOYMENT_SOURCE%…
+  echo Building App in %DEPLOYMENT_TARGET%…
   pushd "%DEPLOYMENT_TARGET%"
   call :ExecuteCmd !NPM_CMD! run build
   :: If the above command fails comment above and uncomment below one

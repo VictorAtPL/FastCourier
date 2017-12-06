@@ -1,13 +1,27 @@
-<mat-toolbar color="primary">
-  <span>Fast Courier</span>
-  <span class="example-fill-remaining-space"></span>
-  <span>Magical Solutions</span>
-</mat-toolbar>
-<nav mat-tab-nav-bar>
-  <a mat-tab-link
-     *ngFor="let link of navLinks"
-     [routerLink]="link.path">
-    {{link.label}}
-  </a>
-</nav>
-<router-outlet></router-outlet>
+<td-layout>
+  <td-navigation-drawer flex sidenavTitle="Menu">
+    <mat-nav-list>
+      <a *ngFor="let link of navLinks" mat-list-item [routerLink]="link.path">{{link.label}}</a>
+    </mat-nav-list>
+  </td-navigation-drawer>
+  <td-layout-nav color="primary">
+    <button mat-icon-button td-menu-button tdLayoutToggle hide-gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div td-toolbar-content layout="row" layout-align="start center" flex>
+      <span>Fast Courier</span>
+      <span flex></span>
+      <span>Magical Solutions</span>
+    </div>
+    <mat-toolbar class="pad-none" hide-sm hide-xs>
+      <nav mat-stretch-tabs mat-tab-nav-bar class="text-upper pad-bottom-xs pull-bottom-sm" flex>
+        <a mat-tab-link
+           *ngFor="let link of navLinks"
+           [routerLink]="link.path">
+          {{link.label}}
+        </a>
+      </nav>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </td-layout-nav>
+</td-layout>

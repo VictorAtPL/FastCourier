@@ -5,8 +5,49 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {StronaGlownaComponent} from './strona-glowna/strona-glowna.component';
 import {RouterModule, Routes} from "@angular/router";
-import {MatCardModule, MatIconModule, MatTabsModule, MatToolbarModule} from "@angular/material";
-import {CovalentLayoutModule} from "@covalent/core";
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule
+} from "@angular/material";
+import {
+  CovalentCommonModule,
+  CovalentDataTableModule,
+  CovalentDialogsModule,
+  CovalentExpansionPanelModule,
+  CovalentLayoutModule,
+  CovalentLoadingModule,
+  CovalentMediaModule,
+  CovalentMenuModule,
+  CovalentMessageModule,
+  CovalentNotificationsModule,
+  CovalentPagingModule,
+  CovalentSearchModule,
+  CovalentStepsModule
+} from "@covalent/core";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HttpClientJsonpModule, HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'powitanie', pathMatch: 'full' },
@@ -26,11 +67,48 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
+    /** Material Modules */
+    MatButtonModule,
+    MatListModule,
+    MatIconModule,
+    MatCardModule,
+    MatMenuModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatSnackBarModule,
     MatToolbarModule,
     MatTabsModule,
-    MatCardModule,
-    MatIconModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    MatRippleModule,
+    MatRadioModule,
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSliderModule,
+    MatAutocompleteModule,
+    /** Covalent Modules */
+    CovalentCommonModule,
     CovalentLayoutModule,
+    CovalentMediaModule,
+    CovalentExpansionPanelModule,
+    CovalentStepsModule,
+    CovalentDialogsModule,
+    CovalentLoadingModule,
+    CovalentSearchModule,
+    CovalentPagingModule,
+    CovalentNotificationsModule,
+    CovalentMenuModule,
+    CovalentDataTableModule,
+    CovalentMessageModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
