@@ -102,7 +102,7 @@ const appRoutes: Routes = [
   {
     path: 'transakcja/zglos',
     component: ZglaszanieTransakcjiComponent,
-    data: { title: 'Fast Courier - Zgłaszanie transakcji' }
+    data: {title: 'Fast Courier - Zgłaszanie transakcji'}
   },
   { path: '**',
     redirectTo: 'powitanie',

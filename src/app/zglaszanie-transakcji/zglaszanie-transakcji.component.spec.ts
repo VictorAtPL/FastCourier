@@ -8,9 +8,9 @@ describe('ZglaszanieTransakcjiComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ZglaszanieTransakcjiComponent ]
+      declarations: [ZglaszanieTransakcjiComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
