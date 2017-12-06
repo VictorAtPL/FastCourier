@@ -1,0 +1,7 @@
+.example-full-width {
+  width: 100%;
+}
+
+.mat-input-placeholder-wrapper::after {
+  content: '\00a0';
+}

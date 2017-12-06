@@ -18,6 +18,10 @@ export class AppComponent {
       {
         'label': 'Strona główna',
         'path': 'powitanie'
+      },
+      {
+        'label': 'Dodaj ofertę',
+        'path': 'oferta/dodaj'
       }
     ];
 
