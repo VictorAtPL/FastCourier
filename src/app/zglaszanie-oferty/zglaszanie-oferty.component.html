@@ -1,49 +1,28 @@
 <mat-card>
-  <form class="example-form">
-    <table class="example-full-width" cellspacing="0">
-      <tr>
-        <td colspan="2" align="center">
-          <mat-card-title class="example-full-width">Formularz zgłaszania oferty</mat-card-title>
-        </td>
-      </tr>
-      <br><br>
-      <tr>
-        <td colspan="2" align="center">
-          <mat-form-field class="tekstUwagi">
-            <input matInput placeholder="Numer oferty:" disabled value="328746" style="text-align: center">
-          </mat-form-field>
-        </td>
-      </tr>
-      <br>
-      <tr>
-        <td colspan="2" align="center">
-          <mat-card-content> Wybierz typ zgłaszanej uwagi:</mat-card-content>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" align="center">
-          <mat-form-field class="listaRozwijana">
-            <mat-select [(value)]="selected">
-              <mat-option value="opcja1">Błędny opis oferty</mat-option>
-              <mat-option value="opcja2">Oferta narusza zasady</mat-option>
-              <mat-option value="opcja3">Inne</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <p>Wybrałeś: {{selected}}
-        </td>
-      </tr>
-      <br>
-      <tr>
-        <td colspan="2" align="center">
-          <mat-form-field class="tekstUwagi">
-            <textarea matInput placeholder="Treść uwagi:"  rows="10"></textarea>
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td align="center"><button mat-raised-button style="width:80%">Anuluj</button></td>
-        <td align="center"><button mat-raised-button color="primary" style="width:80%">Wyślij</button></td>
-      </tr>
-    </table>
-  </form>
+  <mat-card-title class="example-full-width">Formularz zgłaszania oferty</mat-card-title>
+  <mat-card-content>
+
+    <form class="example-form">
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Numer oferty:" disabled value="328746">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-select [(value)]="selected" placeholder="Typ zgłaszanej uwagi">
+          <mat-option value="opcja1">Błędny opis oferty</mat-option>
+          <mat-option value="opcja2">Oferta narusza zasady</mat-option>
+          <mat-option value="opcja3">Inne</mat-option>
+        </mat-select>
+        <mat-hint> Wybierz typ zgłaszanej uwagi</mat-hint>
+      </mat-form-field>
+      <p>Wybrałeś: {{selected}}</p>
+
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Treść uwagi:" rows="10"></textarea>
+      </mat-form-field>
+      <button mat-raised-button>Anuluj</button>
+      <button mat-raised-button color="primary">Wyślij</button>
+    </form>
+  </mat-card-content>
 </mat-card>

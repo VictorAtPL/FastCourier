@@ -71,7 +71,7 @@ const appRoutes: Routes = [
   {
     path: 'oferta/zglos',
     component: ZglaszanieOfertyComponent,
-    data: { title: 'Fast Courier - Zgłaszanie oferty' }
+    data: {title: 'Fast Courier - Zgłaszanie oferty'}
   },
   {
     path: 'oferta/dodaj',
@@ -112,7 +112,8 @@ const appRoutes: Routes = [
     LogowanieComponent,
     RejestracjaComponent,
     PisanieWiadomosciComponent,
-    ZglaszanieUzytkownikaComponent
+    ZglaszanieUzytkownikaComponent,
+    ZglaszanieOfertyComponent
   ],
   imports: [
     BrowserModule,
