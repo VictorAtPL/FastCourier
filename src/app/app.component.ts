@@ -22,6 +22,10 @@ export class AppComponent {
       {
         'label': 'Dodaj ofertę',
         'path': 'oferta/dodaj'
+      },
+      {
+        'label': 'Logowanie',
+        'path': 'logowanie'
       }
     ];
 
