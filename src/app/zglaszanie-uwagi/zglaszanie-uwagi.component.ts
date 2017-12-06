@@ -9,4 +9,6 @@ import {Component} from '@angular/core';
   styleUrls: ['./zglaszanie-uwagi.component.css']
 })
 export class ZglaszanieUwagiComponent {
+
+  selected: String;
 }

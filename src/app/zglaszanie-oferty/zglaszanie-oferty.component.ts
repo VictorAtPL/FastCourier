@@ -9,4 +9,5 @@ import {Component} from '@angular/core';
   styleUrls: ['./zglaszanie-oferty.component.css']
 })
 export class ZglaszanieOfertyComponent {
+  selected: String;
 }
