@@ -1,7 +1,7 @@
 <td-layout>
   <td-navigation-drawer flex sidenavTitle="Menu">
     <mat-nav-list>
-      <a *ngFor="let link of navLinks" mat-list-item [routerLink]="link.path">{{link.label}}</a>
+      <a *ngFor="let link of navLinks" mat-list-item [routerLink]="link.path">{{ link.label }}</a>
     </mat-nav-list>
   </td-navigation-drawer>
   <td-layout-nav color="primary">
@@ -18,7 +18,7 @@
         <a mat-tab-link
            *ngFor="let link of navLinks"
            [routerLink]="link.path">
-          {{link.label}}
+          {{ link.label }}
         </a>
       </nav>
     </mat-toolbar>
