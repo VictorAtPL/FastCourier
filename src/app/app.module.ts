@@ -51,7 +51,8 @@ import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {DodawanieOfertyComponent} from './dodawanie-oferty/dodawanie-oferty.component';
 import {SzukanieZaawansowaneComponent} from './szukanie-zaawansowane/szukanie-zaawansowane.component';
-import {LogowanieComponent} from "./logowanie/logowanie.component";
+import {LogowanieComponent} from './logowanie/logowanie.component';
+import {RejestracjaComponent} from "./rejestracja/rejestracja.component";
 
 const appRoutes: Routes = [
   {
@@ -74,6 +75,11 @@ const appRoutes: Routes = [
     component: SzukanieZaawansowaneComponent,
     data: {title: 'Fast Courier - Wyszukiwanie zaawnswoane'}
   },
+  {
+    path: 'rejestracja',
+    component: RejestracjaComponent,
+    data: {title: 'Fast Courier - Rejestracja'}
+  },
   { path: '**',
     redirectTo: 'powitanie',
   }
@@ -85,7 +91,8 @@ const appRoutes: Routes = [
     StronaGlownaComponent,
     DodawanieOfertyComponent,
     SzukanieZaawansowaneComponent,
-    LogowanieComponent
+    LogowanieComponent,
+    RejestracjaComponent
   ],
   imports: [
     BrowserModule,
