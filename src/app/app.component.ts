@@ -47,6 +47,11 @@ export class AppComponent {
         'label': 'Zgłoś uwagę',
         'path': 'uwaga/zglos'
       }
+      ,
+      {
+        'label': 'Edytuj zapoznanie sie z serwisem',
+        'path': '/zapoznaj_sie_z_serwisem/edytuj'
+      }
     ];
 
     this._iconRegistry.addSvgIconInNamespace('assets', 'teradata-ux',
