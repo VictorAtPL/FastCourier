@@ -1,0 +1,102 @@
+<mat-card>
+  <mat-card-title>Formularz edytowania oferty</mat-card-title>
+  <mat-card-content>Ten formularz pozwala na edytowanie oferty dodanej już do serwisu.</mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Tytuł" disabled value="Przykładowa oferta">
+      </mat-form-field>
+
+      <div layout-gt-xs="row">
+        <div flex-gt-xs="50">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Cena minimalna" type="number" value="10">
+          </mat-form-field>
+        </div>
+        <div flex-gt-xs="50">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Cena maksymalna" type="number" value="20">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div layout-gt-xs="row">
+        <div flex-gt-xs="50">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Miasto początkowe" value="2">
+              <mat-option value="1">Warszawa</mat-option>
+              <mat-option value="2">Kraków</mat-option>
+              <mat-option value="3">Pruszków</mat-option>
+              <mat-option value="4">Halinów</mat-option>
+              <mat-option value="5">Ostrów Mazowiecka</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div flex-gt-xs="50">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Miasto docelowe" value="3">
+              <mat-option value="1">Warszawa</mat-option>
+              <mat-option value="2">Kraków</mat-option>
+              <mat-option value="3">Pruszków</mat-option>
+              <mat-option value="4">Halinów</mat-option>
+              <mat-option value="5">Ostrów Mazowiecka</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div layout-gt-xs="row">
+        <div flex-gt-xs="33.3">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Kategoria paczek" multiple>
+              <mat-option value="1">żywność</mat-option>
+              <mat-option value="2">szkło</mat-option>
+              <mat-option value="3">zwierzęta</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div flex-gt-xs="33.3">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Rozmiary paczek" multiple>
+              <mat-option value="1">mała</mat-option>
+              <mat-option value="2">średnia</mat-option>
+              <mat-option value="3">duża</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div flex-gt-xs="33.3">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Wagi paczek" multiple>
+              <mat-option value="1">lekka</mat-option>
+              <mat-option value="2">przeciętna</mat-option>
+              <mat-option value="3">ciężka</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div layout-gt-xs="row">
+        <div flex-gt-xs="50">
+          <mat-form-field class="example-full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Data wyjazdu">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div flex-gt-xs="50">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Godzina wyjazdu" type="time">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-slide-toggle checked>Czy wyróżnić ofertę?</mat-slide-toggle>
+      <br><br>
+      <button mat-raised-button color="primary">Dodaj ofertę</button>
+    </form>
+  </mat-card-content>
+</mat-card>

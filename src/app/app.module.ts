@@ -56,14 +56,15 @@ import {RejestracjaComponent} from './rejestracja/rejestracja.component';
 import {PisanieWiadomosciComponent} from './pisanie-wiadomosci/pisanie-wiadomosci.component';
 import {ZglaszanieUzytkownikaComponent} from './zglaszanie-uzytkownika/zglaszanie-uzytkownika.component';
 import {ZglaszanieOfertyComponent} from './zglaszanie-oferty/zglaszanie-oferty.component';
-import {ZglaszanieTransakcjiComponent} from "./zglaszanie-transakcji/zglaszanie-transakcji.component";
-import {ZglaszanieUwagiComponent} from "./zglaszanie-uwagi/zglaszanie-uwagi.component";
-import {EdytowaniaZapoznaniaComponent} from "./edytowania-zapoznania/edytowania-zapoznania.component";
-import {EdycjaProfiluUzytkownikaComponent} from "./edycja-profilu-uzytkownika/edycja-profilu-uzytkownika.component";
-import {DodawanieRegulaminuComponent} from "./dodawanie-regulaminu/dodawanie-regulaminu.component";
-import {OcenaTransakcjiComponent} from "./ocena-transakcji/ocena-transakcji.component";
+import {ZglaszanieTransakcjiComponent} from './zglaszanie-transakcji/zglaszanie-transakcji.component';
+import {ZglaszanieUwagiComponent} from './zglaszanie-uwagi/zglaszanie-uwagi.component';
+import {EdytowaniaZapoznaniaComponent} from './edytowania-zapoznania/edytowania-zapoznania.component';
+import {EdycjaProfiluUzytkownikaComponent} from './edycja-profilu-uzytkownika/edycja-profilu-uzytkownika.component';
+import {DodawanieRegulaminuComponent} from './dodawanie-regulaminu/dodawanie-regulaminu.component';
+import {OcenaTransakcjiComponent} from './ocena-transakcji/ocena-transakcji.component';
 import {PanelAdministratoraComponent} from './panel-administratora/panel-administratora.component';
 import {PanelUzytkownikaComponent} from './panel-uzytkownika/panel-uzytkownika.component';
+import {EdytowanieOfertyComponent} from './edytowanie-oferty/edytowanie-oferty.component';
 
 const appRoutes: Routes = [
   {
@@ -105,6 +106,11 @@ const appRoutes: Routes = [
     path: 'oferta/dodaj',
     component: DodawanieOfertyComponent,
     data: {title: 'Fast Courier - Dodawanie oferty'}
+  },
+  {
+    path: 'oferta/edytuj',
+    component: EdytowanieOfertyComponent,
+    data: {title: 'Fast Courier - Edytowanie oferty'}
   },
   {
     path: 'oferta/wyszukiwanie',
@@ -169,7 +175,8 @@ const appRoutes: Routes = [
     ZglaszanieTransakcjiComponent,
     EdytowaniaZapoznaniaComponent,
     PanelAdministratoraComponent,
-    PanelUzytkownikaComponent
+    PanelUzytkownikaComponent,
+    EdytowanieOfertyComponent
   ],
   imports: [
     BrowserModule,
