@@ -1,3 +1,7 @@
-.example-full-width {
-  width: 100%;
+.rate {
+  color: lightgray;
+}
+
+.rate_selected {
+  color: dimgray;
 }

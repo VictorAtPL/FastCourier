@@ -8,9 +8,9 @@ describe('OcenaTransakcjiComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OcenaTransakcjiComponent ]
+      declarations: [OcenaTransakcjiComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

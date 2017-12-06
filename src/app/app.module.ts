@@ -77,7 +77,7 @@ const appRoutes: Routes = [
   {
     path: 'transakcja/ocen',
     component: OcenaTransakcjiComponent,
-    data: { title: 'Fast Courier' }
+    data: {title: 'Fast Courier'}
   },
   {
     path: 'regulamin/dodaj',
