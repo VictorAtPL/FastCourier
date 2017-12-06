@@ -73,7 +73,7 @@ const appRoutes: Routes = [
   {
     path: 'uwaga/zglos',
     component: ZglaszanieUwagiComponent,
-    data: { title: 'Fast Courier - Zgłaszanie uwagi' }
+    data: {title: 'Fast Courier - Zgłaszanie uwagi'}
   },
   {
     path: 'oferta/zglos',

@@ -8,9 +8,9 @@ describe('ZglaszanieUwagiComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ZglaszanieUwagiComponent ]
+      declarations: [ZglaszanieUwagiComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
