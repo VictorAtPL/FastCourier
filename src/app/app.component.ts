@@ -31,6 +31,10 @@ export class AppComponent {
         'label': 'Napisz wiadomość',
         'path': '/wiadomosc/wyslij'
       },
+      {
+        'label': 'Zgłoś użytkownika',
+        'path': '/uzytkownik/zglos'
+      }
     ];
 
     this._iconRegistry.addSvgIconInNamespace('assets', 'teradata-ux',

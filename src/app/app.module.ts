@@ -54,6 +54,7 @@ import {SzukanieZaawansowaneComponent} from './szukanie-zaawansowane/szukanie-za
 import {LogowanieComponent} from './logowanie/logowanie.component';
 import {RejestracjaComponent} from "./rejestracja/rejestracja.component";
 import {PisanieWiadomosciComponent} from "./pisanie-wiadomosci/pisanie-wiadomosci.component";
+import {ZglaszanieUzytkownikaComponent} from "./zglaszanie-uzytkownika/zglaszanie-uzytkownika.component";
 
 const appRoutes: Routes = [
   {
@@ -86,6 +87,11 @@ const appRoutes: Routes = [
     component: PisanieWiadomosciComponent,
     data: {title: 'Fast Courier - Pisanie wiadomości do użytkownika'}
   },
+  {
+    path: 'uzytkownik/zglos',
+    component: ZglaszanieUzytkownikaComponent,
+    data: { title: 'Fast Courier - Zgłaszanie użytkownika' }
+  },
   { path: '**',
     redirectTo: 'powitanie',
   }
@@ -99,7 +105,8 @@ const appRoutes: Routes = [
     SzukanieZaawansowaneComponent,
     LogowanieComponent,
     RejestracjaComponent,
-    PisanieWiadomosciComponent
+    PisanieWiadomosciComponent,
+    ZglaszanieUzytkownikaComponent
   ],
   imports: [
     BrowserModule,
