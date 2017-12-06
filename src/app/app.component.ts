@@ -26,7 +26,6 @@ export class AppComponent {
       {
         'label': 'Logowanie',
         'path': 'logowanie'
-      }
       },
       {
         'label': 'Napisz wiadomość',

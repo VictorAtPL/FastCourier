@@ -1,22 +1,24 @@
 <mat-card>
   <mat-card-title>Napisz wiadomość</mat-card-title>
-  <form class="example-form">
+  <mat-card-content>
+    <form class="example-form">
 
-  <mat-form-field>
-    <mat-select placeholder="Do: adriik" disabled="disable">
-      <mat-option>adrian</mat-option>
-      <mat-option>michal</mat-option>
-      <mat-option>przemek</mat-option>
-      <mat-option>piotrek</mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Do: adriik" disabled="disable">
+          <mat-option>adrian</mat-option>
+          <mat-option>michal</mat-option>
+          <mat-option>przemek</mat-option>
+          <mat-option>piotrek</mat-option>
+        </mat-select>
+      </mat-form-field>
 
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Treść wiadomości" matTextareaAutosize matAutosizeMinRows="4"
+                  matAutosizeMaxRows="20"></textarea>
+      </mat-form-field>
+    </form>
 
-    <mat-form-field class="terscWiadomosci">
-  <textarea matInput placeholder="Treść wiadomości" matTextareaAutosize matAutosizeMinRows="4"
-            matAutosizeMaxRows="20"></textarea>
-    </mat-form-field>
-  </form>
-
-  <button mat-raised-button>Anuluj</button> <button mat-raised-button color="primary">Wyślij</button>
+    <button mat-raised-button>Anuluj</button>
+    <button mat-raised-button color="primary">Wyślij</button>
+  </mat-card-content>
 </mat-card>

@@ -8,9 +8,9 @@ describe('PisanieWiadomosciComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PisanieWiadomosciComponent ]
+      declarations: [PisanieWiadomosciComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

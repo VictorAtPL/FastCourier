@@ -84,7 +84,7 @@ const appRoutes: Routes = [
   {
     path: 'wiadomosc/wyslij',
     component: PisanieWiadomosciComponent,
-    data: { title: 'Fast Courier - Pisanie wiadomości do użytkownika' }
+    data: {title: 'Fast Courier - Pisanie wiadomości do użytkownika'}
   },
   { path: '**',
     redirectTo: 'powitanie',
