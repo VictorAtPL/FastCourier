@@ -50,6 +50,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {DodawanieOfertyComponent} from './dodawanie-oferty/dodawanie-oferty.component';
+import {SzukanieZaawansowaneComponent} from "./szukanie-zaawansowane/szukanie-zaawansowane.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'powitanie', pathMatch: 'full' },
@@ -62,7 +63,10 @@ const appRoutes: Routes = [
     component: DodawanieOfertyComponent,
     data: {title: 'Fast Courier - Dodawanie oferty'}
   },
-
+  {path: 'oferta/wyszukiwanie',
+    component: SzukanieZaawansowaneComponent,
+    data: { title: 'Fast Courier - Wyszukiwanie zaawnswoane' }
+  },
   { path: '**',
     redirectTo: 'powitanie',
   }
@@ -73,6 +77,7 @@ const appRoutes: Routes = [
     AppComponent,
     StronaGlownaComponent,
     DodawanieOfertyComponent
+    SzukanieZaawansowaneComponent
   ],
   imports: [
     BrowserModule,
