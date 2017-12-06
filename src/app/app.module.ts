@@ -76,7 +76,7 @@ const appRoutes: Routes = [
   {
     path: 'regulamin/dodaj',
     component: DodawanieRegulaminuComponent,
-    data: { title: 'Fast Courier' }
+    data: {title: 'Fast Courier'}
   },
   {
     path: 'profil/edytuj',

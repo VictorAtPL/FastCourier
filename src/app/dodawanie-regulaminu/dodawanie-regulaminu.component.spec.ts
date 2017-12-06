@@ -8,9 +8,9 @@ describe('DodawanieRegulaminuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DodawanieRegulaminuComponent ]
+      declarations: [DodawanieRegulaminuComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
