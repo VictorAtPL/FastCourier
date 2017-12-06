@@ -22,10 +22,6 @@ export class AppComponent {
       {
         'label': 'Dodaj ofertę',
         'path': 'oferta/dodaj'
-      },
-      {
-        'label': 'Wyszukiwanie Zaawansowane',
-        'path': 'oferta/wyszukiwanie'
       }
     ];
 
