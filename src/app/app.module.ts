@@ -4,8 +4,9 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {StronaGlownaComponent} from './strona-glowna/strona-glowna.component';
-import {RouterModule, Routes} from "@angular/router";
+import {RouterModule, Routes} from '@angular/router';
 import {
+  MAT_DATE_LOCALE,
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -29,7 +30,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
-} from "@angular/material";
+} from '@angular/material';
 import {
   CovalentCommonModule,
   CovalentDataTableModule,
@@ -44,10 +45,11 @@ import {
   CovalentPagingModule,
   CovalentSearchModule,
   CovalentStepsModule
-} from "@covalent/core";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HttpClientJsonpModule, HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+} from '@covalent/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import {DodawanieOfertyComponent} from './dodawanie-oferty/dodawanie-oferty.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'powitanie', pathMatch: 'full' },
@@ -55,6 +57,12 @@ const appRoutes: Routes = [
     component: StronaGlownaComponent,
     data: { title: 'Fast Courier' }
   },
+  {
+    path: 'oferta/dodaj',
+    component: DodawanieOfertyComponent,
+    data: {title: 'Fast Courier - Dodawanie oferty'}
+  },
+
   { path: '**',
     redirectTo: 'powitanie',
   }
@@ -63,7 +71,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    StronaGlownaComponent
+    StronaGlownaComponent,
+    DodawanieOfertyComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +123,9 @@ const appRoutes: Routes = [
       { enableTracing: false } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

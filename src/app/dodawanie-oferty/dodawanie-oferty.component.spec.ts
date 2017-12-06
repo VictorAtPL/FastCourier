@@ -8,9 +8,9 @@ describe('DodawanieOfertyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DodawanieOfertyComponent ]
+      declarations: [DodawanieOfertyComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
