@@ -57,7 +57,7 @@ const appRoutes: Routes = [
   {
     path: 'logowanie',
     component: LogowanieComponent,
-    data: { title: 'Fast Courier - Logowanie' }
+    data: {title: 'Fast Courier - Logowanie'}
   },
   { path: '', redirectTo: 'powitanie', pathMatch: 'full' },
   { path: 'powitanie',

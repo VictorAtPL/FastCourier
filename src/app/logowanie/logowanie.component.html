@@ -3,17 +3,20 @@
   <mat-card-content>Ten formularz pozwala na zalogowanie się do serwisu.</mat-card-content>
 </mat-card>
 <mat-card>
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Login">
-      <mat-hint>Wpisz login!</mat-hint>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Hasło">
-      <mat-hint>Wpisz hasło!</mat-hint>
-    </mat-form-field>
+  <mat-card-content>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Login">
+        <mat-hint>Wpisz login!</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput type="password" placeholder="Hasło">
+        <mat-hint>Wpisz hasło!</mat-hint>
+      </mat-form-field>
+      <br><br>
       <button mat-raised-button color="accent">Zaloguj</button>
-  </form>
-
+      <a mat-raised-button routerLink="/rejestracja">Zarejestruj sie</a>
+    </form>
+  </mat-card-content>
 </mat-card>
 
