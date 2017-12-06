@@ -20,16 +20,8 @@ export class AppComponent {
         'path': 'powitanie'
       },
       {
-        'label': 'Dodaj ofertę',
-        'path': 'oferta/dodaj'
-      },
-      {
-        'label': 'Logowanie',
-        'path': 'logowanie'
-      },
-      {
-        'label': 'Napisz wiadomość',
-        'path': 'wiadomosc/wyslij'
+        'label': 'Panel użytkownika',
+        'path': 'uzytkownik/panel'
       },
       {
         'label': 'Zgłoś użytkownika',
@@ -40,30 +32,12 @@ export class AppComponent {
         'path': 'oferta/zglos'
       },
       {
-        'label': 'Zgłoś transakcję',
-        'path': 'transakcja/zglos'
-      },
-      {
         'label': 'Zgłoś uwagę',
         'path': 'uwaga/zglos'
-      }
-      ,
-      {
-        'label': 'Edytuj zapoznanie sie z serwisem',
-        'path': 'zapoznaj_sie_z_serwisem/edytuj'
-      }
-      ,
-      {
-        'label': 'Spersonalizuj profil',
-        'path': 'profil/edytuj'
       },
       {
-        'label': 'Dodaj regulamin',
-        'path': 'regulamin/dodaj'
-      },
-      {
-        'label': 'Ocen transakcje',
-        'path': 'transakcja/ocen'
+        'label': 'Panel administratora',
+        'path': 'administrator/panel'
       }
     ];
 

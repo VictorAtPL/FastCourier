@@ -62,6 +62,8 @@ import {EdytowaniaZapoznaniaComponent} from "./edytowania-zapoznania/edytowania-
 import {EdycjaProfiluUzytkownikaComponent} from "./edycja-profilu-uzytkownika/edycja-profilu-uzytkownika.component";
 import {DodawanieRegulaminuComponent} from "./dodawanie-regulaminu/dodawanie-regulaminu.component";
 import {OcenaTransakcjiComponent} from "./ocena-transakcji/ocena-transakcji.component";
+import {PanelAdministratoraComponent} from './panel-administratora/panel-administratora.component';
+import {PanelUzytkownikaComponent} from './panel-uzytkownika/panel-uzytkownika.component';
 
 const appRoutes: Routes = [
   {
@@ -85,7 +87,7 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier'}
   },
   {
-    path: 'profil/edytuj',
+    path: 'uzytkownik/edytuj_profil',
     component: EdycjaProfiluUzytkownikaComponent,
     data: {title: 'Fast Courier - Personalizowanie profilu użytkownika'}
   },
@@ -130,9 +132,19 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Zgłaszanie transakcji'}
   },
   {
-    path: 'zapoznaj_sie_z_serwisem/edytuj',
+    path: 'administrator/edytuj_opis',
     component: EdytowaniaZapoznaniaComponent,
     data: {title: 'Fast Courier - Edytuj zapoznanie się z serwisem'}
+  },
+  {
+    path: 'uzytkownik/panel',
+    component: PanelUzytkownikaComponent,
+    data: {title: 'Fast Courier - Panel użytkownika'}
+  },
+  {
+    path: 'administrator/panel',
+    component: PanelAdministratoraComponent,
+    data: {title: 'Fast Courier - Panel administratora'}
   },
   { path: '**',
     redirectTo: 'powitanie',
@@ -155,7 +167,9 @@ const appRoutes: Routes = [
     ZglaszanieUzytkownikaComponent,
     ZglaszanieOfertyComponent,
     ZglaszanieTransakcjiComponent,
-    EdytowaniaZapoznaniaComponent
+    EdytowaniaZapoznaniaComponent,
+    PanelAdministratoraComponent,
+    PanelUzytkownikaComponent
   ],
   imports: [
     BrowserModule,
