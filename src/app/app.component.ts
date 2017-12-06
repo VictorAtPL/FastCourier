@@ -56,6 +56,10 @@ export class AppComponent {
       {
         'label': 'Spersonalizuj profil',
         'path': 'profil/edytuj'
+      },
+      {
+        'label': 'Dodaj regulamin',
+        'path': 'regulamin/dodaj'
       }
     ];
 
