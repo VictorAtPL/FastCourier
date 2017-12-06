@@ -52,6 +52,11 @@ export class AppComponent {
         'label': 'Edytuj zapoznanie sie z serwisem',
         'path': '/zapoznaj_sie_z_serwisem/edytuj'
       }
+      ,
+      {
+        'label': 'Spersonalizuj profil',
+        'path': '/profil/edytuj'
+      }
     ];
 
     this._iconRegistry.addSvgIconInNamespace('assets', 'teradata-ux',

@@ -1,0 +1,53 @@
+<mat-card>
+  <form class="example-form">
+
+    <table class="example-full-width" cellspacing="0">
+
+      <tr>
+        <td colspan="2" align="center">
+          <mat-card-title class="example-full-width">Formularz edycji profilu użytkownika</mat-card-title>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" align="center">
+          <table class="tekstEdycji" cellspacing="0"><tr>
+            <td><mat-form-field class="tekstEdycji">
+              <input matInput placeholder="Imię">
+            </mat-form-field></td>
+            <td><mat-form-field class="tekstEdycji">
+              <input matInput placeholder="Nazwisko">
+            </mat-form-field></td>
+          </tr></table>
+
+          <mat-form-field class="tekstEdycji">
+            <input matInput placeholder="Województwo">
+          </mat-form-field>
+
+          <mat-form-field class="tekstEdycji">
+            <input matInput placeholder="Miejscowość">
+          </mat-form-field>
+
+          <mat-form-field class="tekstEdycji">
+            <input matInput placeholder="Ulica">
+          </mat-form-field>
+
+          <mat-form-field class="tekstEdycji">
+            <input matInput placeholder="Telefon" type="number">
+          </mat-form-field>
+
+          <mat-form-field class="tekstEdycji">
+            <input matInput placeholder="Data urodzenia" type="date">
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <br>
+      <tr>
+        <td align="center" style="width: 50%"><button mat-raised-button style="width:80%">Anuluj</button></td>
+        <td align="center" style="width: 50%"><button mat-raised-button color="primary" style="width:80%">Zatwierdź</button></td>
+      </tr>
+    </table>
+
+  </form>
+</mat-card>

@@ -59,6 +59,7 @@ import {ZglaszanieOfertyComponent} from './zglaszanie-oferty/zglaszanie-oferty.c
 import {ZglaszanieTransakcjiComponent} from "./zglaszanie-transakcji/zglaszanie-transakcji.component";
 import {ZglaszanieUwagiComponent} from "./zglaszanie-uwagi/zglaszanie-uwagi.component";
 import {EdytowaniaZapoznaniaComponent} from "./edytowania-zapoznania/edytowania-zapoznania.component";
+import {EdycjaProfiluUzytkownikaComponent} from "./edycja-profilu-uzytkownika/edycja-profilu-uzytkownika.component";
 
 const appRoutes: Routes = [
   {
@@ -70,6 +71,11 @@ const appRoutes: Routes = [
   { path: 'powitanie',
     component: StronaGlownaComponent,
     data: { title: 'Fast Courier' }
+  },
+  {
+    path: 'profil/edytuj',
+    component: EdycjaProfiluUzytkownikaComponent,
+    data: { title: 'Fast Courier - Personalizowanie profilu użytkownika' }
   },
   {
     path: 'uwaga/zglos',
@@ -125,6 +131,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     StronaGlownaComponent,
+    EdycjaProfiluUzytkownikaComponent,
     ZglaszanieUwagiComponent,
     DodawanieOfertyComponent,
     SzukanieZaawansowaneComponent,
