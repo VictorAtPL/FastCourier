@@ -1,16 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
+/**
+ * Logika biznesowa dla panelu administratora
+ */
 @Component({
   selector: 'app-panel-uzytkownika',
   templateUrl: './panel-uzytkownika.component.html',
   styleUrls: ['./panel-uzytkownika.component.css']
 })
-export class PanelUzytkownikaComponent implements OnInit {
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
+export class PanelUzytkownikaComponent {
 }

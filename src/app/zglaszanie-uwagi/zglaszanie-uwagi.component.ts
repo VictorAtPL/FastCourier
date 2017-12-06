@@ -1,16 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
+/**
+ * Logika biznesowa dla komponentu zgłaszania uwagi
+ */
 @Component({
   selector: 'app-zglaszanie-uwagi',
   templateUrl: './zglaszanie-uwagi.component.html',
   styleUrls: ['./zglaszanie-uwagi.component.css']
 })
-export class ZglaszanieUwagiComponent implements OnInit {
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
+export class ZglaszanieUwagiComponent {
 }

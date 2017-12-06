@@ -1,18 +1,27 @@
 import {Component} from '@angular/core';
-import {TdMediaService} from '@covalent/core';
 import {MatIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 
+/**
+ * Logika biznesowa dla głównego komponentu serwisu, ładującego inne komponenty w zależności od aktualnie przeglądanej strony
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public navLinks;
+  /**
+   * Tablica z linkami dostępnymi w menu
+   */
+  public navLinks: any[];
 
-  constructor(public media: TdMediaService,
-              private _iconRegistry: MatIconRegistry,
+  /**
+   *
+   * @param {MatIconRegistry} _iconRegistry
+   * @param {DomSanitizer} _domSanitizer
+   */
+  constructor(private _iconRegistry: MatIconRegistry,
               private _domSanitizer: DomSanitizer) {
     this.navLinks = [
       {

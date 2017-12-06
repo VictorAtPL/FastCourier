@@ -66,6 +66,10 @@ import {PanelAdministratoraComponent} from './panel-administratora/panel-adminis
 import {PanelUzytkownikaComponent} from './panel-uzytkownika/panel-uzytkownika.component';
 import {EdytowanieOfertyComponent} from './edytowanie-oferty/edytowanie-oferty.component';
 
+/**
+ * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
+ * @type {[{path: string; component: LogowanieComponent; data: {title: string}} , {path: string; redirectTo: string; pathMatch: string} , {path: string; component: StronaGlownaComponent; data: {title: string}} , {path: string; component: OcenaTransakcjiComponent; data: {title: string}} , {path: string; component: DodawanieRegulaminuComponent; data: {title: string}} , {path: string; component: EdycjaProfiluUzytkownikaComponent; data: {title: string}} , {path: string; component: ZglaszanieUwagiComponent; data: {title: string}} , {path: string; component: ZglaszanieOfertyComponent; data: {title: string}} , {path: string; component: DodawanieOfertyComponent; data: {title: string}} , {path: string; component: EdytowanieOfertyComponent; data: {title: string}} , {path: string; component: SzukanieZaawansowaneComponent; data: {title: string}} , {path: string; component: RejestracjaComponent; data: {title: string}} , {path: string; component: PisanieWiadomosciComponent; data: {title: string}} , {path: string; component: ZglaszanieUzytkownikaComponent; data: {title: string}} , {path: string; component: ZglaszanieTransakcjiComponent; data: {title: string}} , {path: string; component: EdytowaniaZapoznaniaComponent; data: {title: string}} , {path: string; component: PanelUzytkownikaComponent; data: {title: string}} , {path: string; component: PanelAdministratoraComponent; data: {title: string}} , {path: string; redirectTo: string}]}
+ */
 const appRoutes: Routes = [
   {
     path: 'logowanie',
@@ -232,4 +236,8 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
+
+/**
+ * Główny moduł aplikacji w którym konfigurowane dołączane są zależności
+ */
 export class AppModule { }
