@@ -75,7 +75,7 @@ const appRoutes: Routes = [
   {
     path: 'profil/edytuj',
     component: EdycjaProfiluUzytkownikaComponent,
-    data: { title: 'Fast Courier - Personalizowanie profilu użytkownika' }
+    data: {title: 'Fast Courier - Personalizowanie profilu użytkownika'}
   },
   {
     path: 'uwaga/zglos',
