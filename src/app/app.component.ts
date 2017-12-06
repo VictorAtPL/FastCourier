@@ -38,6 +38,10 @@ export class AppComponent {
       {
         'label': 'Zgłoś ofertę',
         'path': 'oferta/zglos'
+      },
+      {
+        'label': 'Zgłoś transakcję',
+        'path': 'transakcja/zglos'
       }
     ];
 

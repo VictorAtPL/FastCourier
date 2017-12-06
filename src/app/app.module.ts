@@ -56,6 +56,7 @@ import {RejestracjaComponent} from './rejestracja/rejestracja.component';
 import {PisanieWiadomosciComponent} from './pisanie-wiadomosci/pisanie-wiadomosci.component';
 import {ZglaszanieUzytkownikaComponent} from './zglaszanie-uzytkownika/zglaszanie-uzytkownika.component';
 import {ZglaszanieOfertyComponent} from './zglaszanie-oferty/zglaszanie-oferty.component';
+import {ZglaszanieTransakcjiComponent} from "./zglaszanie-transakcji/zglaszanie-transakcji.component";
 
 const appRoutes: Routes = [
   {
@@ -98,6 +99,11 @@ const appRoutes: Routes = [
     component: ZglaszanieUzytkownikaComponent,
     data: { title: 'Fast Courier - Zgłaszanie użytkownika' }
   },
+  {
+    path: 'transakcja/zglos',
+    component: ZglaszanieTransakcjiComponent,
+    data: { title: 'Fast Courier - Zgłaszanie transakcji' }
+  },
   { path: '**',
     redirectTo: 'powitanie',
   }
@@ -113,7 +119,8 @@ const appRoutes: Routes = [
     RejestracjaComponent,
     PisanieWiadomosciComponent,
     ZglaszanieUzytkownikaComponent,
-    ZglaszanieOfertyComponent
+    ZglaszanieOfertyComponent,
+    ZglaszanieTransakcjiComponent
   ],
   imports: [
     BrowserModule,
