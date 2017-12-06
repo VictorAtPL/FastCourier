@@ -60,6 +60,10 @@ export class AppComponent {
       {
         'label': 'Dodaj regulamin',
         'path': 'regulamin/dodaj'
+      },
+      {
+        'label': 'Ocen transakcje',
+        'path': 'transakcja/ocen'
       }
     ];
 

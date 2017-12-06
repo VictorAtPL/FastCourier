@@ -61,6 +61,7 @@ import {ZglaszanieUwagiComponent} from "./zglaszanie-uwagi/zglaszanie-uwagi.comp
 import {EdytowaniaZapoznaniaComponent} from "./edytowania-zapoznania/edytowania-zapoznania.component";
 import {EdycjaProfiluUzytkownikaComponent} from "./edycja-profilu-uzytkownika/edycja-profilu-uzytkownika.component";
 import {DodawanieRegulaminuComponent} from "./dodawanie-regulaminu/dodawanie-regulaminu.component";
+import {OcenaTransakcjiComponent} from "./ocena-transakcji/ocena-transakcji.component";
 
 const appRoutes: Routes = [
   {
@@ -71,6 +72,11 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'powitanie', pathMatch: 'full' },
   { path: 'powitanie',
     component: StronaGlownaComponent,
+    data: { title: 'Fast Courier' }
+  },
+  {
+    path: 'transakcja/ocen',
+    component: OcenaTransakcjiComponent,
     data: { title: 'Fast Courier' }
   },
   {
@@ -136,6 +142,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    OcenaTransakcjiComponent,
     DodawanieRegulaminuComponent,
     StronaGlownaComponent,
     EdycjaProfiluUzytkownikaComponent,
