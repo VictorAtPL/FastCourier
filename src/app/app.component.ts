@@ -34,6 +34,10 @@ export class AppComponent {
       {
         'label': 'Zgłoś użytkownika',
         'path': '/uzytkownik/zglos'
+      },
+      {
+        'label': 'Zgłoś ofertę',
+        'path': 'oferta/zglos'
       }
     ];
 

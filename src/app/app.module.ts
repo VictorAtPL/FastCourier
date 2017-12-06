@@ -52,9 +52,10 @@ import {FormsModule} from '@angular/forms';
 import {DodawanieOfertyComponent} from './dodawanie-oferty/dodawanie-oferty.component';
 import {SzukanieZaawansowaneComponent} from './szukanie-zaawansowane/szukanie-zaawansowane.component';
 import {LogowanieComponent} from './logowanie/logowanie.component';
-import {RejestracjaComponent} from "./rejestracja/rejestracja.component";
-import {PisanieWiadomosciComponent} from "./pisanie-wiadomosci/pisanie-wiadomosci.component";
-import {ZglaszanieUzytkownikaComponent} from "./zglaszanie-uzytkownika/zglaszanie-uzytkownika.component";
+import {RejestracjaComponent} from './rejestracja/rejestracja.component';
+import {PisanieWiadomosciComponent} from './pisanie-wiadomosci/pisanie-wiadomosci.component';
+import {ZglaszanieUzytkownikaComponent} from './zglaszanie-uzytkownika/zglaszanie-uzytkownika.component';
+import {ZglaszanieOfertyComponent} from './zglaszanie-oferty/zglaszanie-oferty.component';
 
 const appRoutes: Routes = [
   {
@@ -66,6 +67,11 @@ const appRoutes: Routes = [
   { path: 'powitanie',
     component: StronaGlownaComponent,
     data: { title: 'Fast Courier' }
+  },
+  {
+    path: 'oferta/zglos',
+    component: ZglaszanieOfertyComponent,
+    data: { title: 'Fast Courier - Zgłaszanie oferty' }
   },
   {
     path: 'oferta/dodaj',
