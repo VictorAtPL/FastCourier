@@ -114,7 +114,7 @@ const appRoutes: Routes = [
   {
     path: 'zapoznaj_sie_z_serwisem/edytuj',
     component: EdytowaniaZapoznaniaComponent,
-    data: { title: 'Fast Courier - Edytuj zapoznanie się z serwisem' }
+    data: {title: 'Fast Courier - Edytuj zapoznanie się z serwisem'}
   },
   { path: '**',
     redirectTo: 'powitanie',
