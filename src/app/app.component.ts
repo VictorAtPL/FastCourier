@@ -29,11 +29,11 @@ export class AppComponent {
       },
       {
         'label': 'Napisz wiadomość',
-        'path': '/wiadomosc/wyslij'
+        'path': 'wiadomosc/wyslij'
       },
       {
         'label': 'Zgłoś użytkownika',
-        'path': '/uzytkownik/zglos'
+        'path': 'uzytkownik/zglos'
       },
       {
         'label': 'Zgłoś ofertę',
@@ -42,6 +42,10 @@ export class AppComponent {
       {
         'label': 'Zgłoś transakcję',
         'path': 'transakcja/zglos'
+      },
+      {
+        'label': 'Zgłoś uwagę',
+        'path': 'uwaga/zglos'
       }
     ];
 
