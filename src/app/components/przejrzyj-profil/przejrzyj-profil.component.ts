@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UzytkownikService} from "../../services/uzytkownik.service";
 import {MatSnackBar} from "@angular/material";
 
@@ -14,7 +14,7 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
   uzytkownik: any = {};
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService, private snackBar: MatSnackBar) {
+  constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService, private snackBar: MatSnackBar, private router: Router) {
   }
 
   ngOnInit() {
@@ -35,4 +35,7 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  zglosUzytkownika(login: String) {
+    this.router.navigate(['/uzytkownik/zglos', login]);
+  }
 }

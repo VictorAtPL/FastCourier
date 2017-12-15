@@ -2,9 +2,10 @@
   <mat-card-title>Profil użytkownika {{ login }}</mat-card-title>
   <mat-card-content>
     <span *ngFor="let entry of uzytkownik | keys">
-      <ng-container *ngIf="entry.key != 'haslo' && entry.key != '_links'">
+      <ng-container *ngIf="entry.key != 'haslo' && entry.key != '_links' && entry.key != '_embedded'">
         <strong>{{entry.key | capitalize }}</strong>: {{entry.value}}<br/>
       </ng-container>
-    </span>
+    </span><br/>
+    <button mat-raised-button color="warn" (click)="zglosUzytkownika(login)">Zgłoś użytkownika</button>
   </mat-card-content>
 </mat-card>

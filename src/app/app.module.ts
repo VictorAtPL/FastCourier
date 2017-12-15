@@ -27,6 +27,7 @@ import {
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
+  MatTableModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
@@ -71,6 +72,7 @@ import {AutentykacjaService} from './services/autentykacja.service';
 import {PrzejrzyjProfilComponent} from './components/przejrzyj-profil/przejrzyj-profil.component';
 import {KeysPipe} from "./pipes/keys.pipe";
 import {CapitalizePipe} from "./pipes/capitalize.pipe";
+import {PrzejrzyjZgloszeniaUzytkownikowComponent} from './components/przejrzyj-zgloszenia-uzytkownikow/przejrzyj-zgloszenia-uzytkownikow.component';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -139,7 +141,7 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Pisanie wiadomości do użytkownika'}
   },
   {
-    path: 'uzytkownik/zglos',
+    path: 'uzytkownik/zglos/:login',
     component: ZglaszanieUzytkownikaComponent,
     data: {title: 'Fast Courier - Zgłaszanie użytkownika'}
   },
@@ -162,6 +164,11 @@ const appRoutes: Routes = [
     path: 'administrator/panel',
     component: PanelAdministratoraComponent,
     data: {title: 'Fast Courier - Panel administratora'}
+  },
+  {
+    path: 'administrator/zgloszeniauzytkownikow',
+    component: PrzejrzyjZgloszeniaUzytkownikowComponent,
+    data: {title: 'Fast Courier - Zgłoszenia użytkowników'}
   },
   {
     path: 'uzytkownik/profil/:login',
@@ -196,7 +203,8 @@ const appRoutes: Routes = [
     EdytowanieOfertyComponent,
     PrzejrzyjProfilComponent,
     KeysPipe,
-    CapitalizePipe
+    CapitalizePipe,
+    PrzejrzyjZgloszeniaUzytkownikowComponent
   ],
   imports: [
     BrowserModule,
@@ -225,6 +233,7 @@ const appRoutes: Routes = [
     MatTooltipModule,
     MatRippleModule,
     MatRadioModule,
+    MatTableModule,
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,

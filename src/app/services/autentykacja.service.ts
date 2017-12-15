@@ -8,7 +8,6 @@ export class AutentykacjaService {
   private zalogowanyUzytkownik = new BehaviorSubject<object>(null);
 
   constructor(private http: HttpClient) {
-    console.log(localStorage.getItem('zalogowanyUzytkownik'));
     if (localStorage.getItem('zalogowanyUzytkownik')) {
       const zalogowanyUzytkownik: any = JSON.parse(localStorage.getItem('zalogowanyUzytkownik'));
 

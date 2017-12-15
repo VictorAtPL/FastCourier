@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {MatIconRegistry, MatSnackBar} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Router} from "@angular/router";
-import {AutentykacjaService} from "./services/autentykacja.service";
+import {Router} from '@angular/router';
+import {AutentykacjaService} from './services/autentykacja.service';
 
 /**
  * Logika biznesowa dla głównego komponentu serwisu, ładującego inne komponenty w zależności od aktualnie przeglądanej strony
