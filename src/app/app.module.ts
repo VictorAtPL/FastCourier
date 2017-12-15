@@ -48,7 +48,7 @@ import {
 } from '@covalent/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DodawanieOfertyComponent} from './dodawanie-oferty/dodawanie-oferty.component';
 import {SzukanieZaawansowaneComponent} from './szukanie-zaawansowane/szukanie-zaawansowane.component';
 import {LogowanieComponent} from './logowanie/logowanie.component';
@@ -65,6 +65,8 @@ import {OcenaTransakcjiComponent} from './ocena-transakcji/ocena-transakcji.comp
 import {PanelAdministratoraComponent} from './panel-administratora/panel-administratora.component';
 import {PanelUzytkownikaComponent} from './panel-uzytkownika/panel-uzytkownika.component';
 import {EdytowanieOfertyComponent} from './edytowanie-oferty/edytowanie-oferty.component';
+import {DatePipe} from '@angular/common';
+import {CustomFormsModule} from 'ng2-validation';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -186,6 +188,8 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    CustomFormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
     /** Material Modules */
@@ -232,7 +236,8 @@ const appRoutes: Routes = [
     )
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'}
+    {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

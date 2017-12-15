@@ -4,20 +4,61 @@
 </mat-card>
 <mat-card>
   <mat-card-content>
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Tytuł">
+    <form class="example-form" [formGroup]="dodawanieOfertyForm">
+      <mat-form-field class="example-full-width" hintLabel="Min. 10 znaków, maks. 40 znaków">
+        <input matInput #input maxlength="40" placeholder="Tytuł" required formControlName="tytul">
+        <mat-error
+          *ngIf="this.dodawanieOfertyForm.controls['tytul'].invalid && this.dodawanieOfertyForm.controls['tytul'].errors.minlength">
+          Długość tytułu musi wynosić co najmniej 10 znaków
+        </mat-error>
+        <mat-error
+          *ngIf="this.dodawanieOfertyForm.controls['tytul'].invalid && this.dodawanieOfertyForm.controls['tytul'].errors.maxlength">
+          Długość tytułu musi wynosić najwyżej 40 znaków
+        </mat-error>
+        <mat-hint align="end">{{ input.value?.length || 0 }}/40</mat-hint>
       </mat-form-field>
 
       <div layout-gt-xs="row">
         <div flex-gt-xs="50">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Cena minimalna" type="number">
+            <input matInput placeholder="Cena minimalna" required formControlName="cenaMinimalna"
+                   (change)="weryfikujCeneMaksymalna()">
+            <span matSuffix>zł</span>
+            <mat-error *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].invalid">
+              <span
+                *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].errors.czyWiekszaOdCenyMaksymalnej; else elseBlock1">Cena minimalna musi być mniejsza lub równa cenie maksymalnej</span>
+              <ng-template #elseBlock1>
+                <span *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].errors.min; else elseBlock2">Cena minimalna musi być większa od 0</span>
+                <ng-template #elseBlock2>
+                  <span *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].errors.number; else elseBlock3">Cena minimalna musi być liczbą</span>
+                  <ng-template #elseBlock3>
+                    <span *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].errors.pattern">Cena minimalna musi być zaokrąglona do dwóch miejsc po kropce</span>
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+            </mat-error>
+            <mat-hint>Nie może być większa niż cena maksymalna</mat-hint>
           </mat-form-field>
         </div>
         <div flex-gt-xs="50">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Cena maksymalna" type="number">
+            <input matInput placeholder="Cena maksymalna" required formControlName="cenaMaksymalna"
+                   (change)="weryfikujCeneMinimalna()">
+            <span matSuffix>zł</span>
+            <mat-error *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].invalid">
+              <span
+                *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].errors.czyMniejszaOdCenyMinimalnej; else elseBlock4">Cena maksymalna musi być większa lub równa cenie minimalnej</span>
+              <ng-template #elseBlock4>
+                <span *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].errors.min; else elseBlock5">Cena maksymalna musi być większa od 0</span>
+                <ng-template #elseBlock5>
+                  <span *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].errors.number; else elseBlock6">Cena maksymalna musi być liczbą</span>
+                  <ng-template #elseBlock6>
+                    <span *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].errors.pattern">Cena maksymalna musi być zaokrąglona do dwóch miejsc po kropce</span>
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+            </mat-error>
+            <mat-hint>Nie może być mniejsza niż cena minimalna</mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -25,24 +66,26 @@
       <div layout-gt-xs="row">
         <div flex-gt-xs="50">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Miasto początkowe">
+            <mat-select placeholder="Miasto początkowe" required formControlName="miastoPoczatkowe">
               <mat-option value="1">Warszawa</mat-option>
               <mat-option value="2">Kraków</mat-option>
               <mat-option value="3">Pruszków</mat-option>
               <mat-option value="4">Halinów</mat-option>
               <mat-option value="5">Ostrów Mazowiecka</mat-option>
             </mat-select>
+            <mat-hint>Wybierz jedno z miast występujących na liście</mat-hint>
           </mat-form-field>
         </div>
         <div flex-gt-xs="50">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Miasto docelowe">
+            <mat-select placeholder="Miasto docelowe" required formControlName="miastoDocelowe">
               <mat-option value="1">Warszawa</mat-option>
               <mat-option value="2">Kraków</mat-option>
               <mat-option value="3">Pruszków</mat-option>
               <mat-option value="4">Halinów</mat-option>
               <mat-option value="5">Ostrów Mazowiecka</mat-option>
             </mat-select>
+            <mat-hint>Wybierz jedno z miast występujących na liście</mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -50,31 +93,35 @@
       <div layout-gt-xs="row">
         <div flex-gt-xs="33.3">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Kategoria paczek" multiple>
+            <mat-select placeholder="Kategoria paczek" multiple required formControlName="kategoriePaczek">
               <mat-option value="1">żywność</mat-option>
               <mat-option value="2">szkło</mat-option>
               <mat-option value="3">zwierzęta</mat-option>
             </mat-select>
+            <mat-hint>Wybierz co najmniej jedną kategorię paczki</mat-hint>
           </mat-form-field>
         </div>
 
         <div flex-gt-xs="33.3">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Rozmiary paczek" multiple>
+            <mat-select placeholder="Rozmiary paczek" multiple required formControlName="rozmiaryPaczek">
               <mat-option value="1">mała</mat-option>
               <mat-option value="2">średnia</mat-option>
               <mat-option value="3">duża</mat-option>
             </mat-select>
+            <mat-hint>Wybierz co najmniej jeden rozmiar paczki</mat-hint>
           </mat-form-field>
         </div>
 
         <div flex-gt-xs="33.3">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Wagi paczek" multiple>
-              <mat-option value="1">lekka</mat-option>
-              <mat-option value="2">przeciętna</mat-option>
-              <mat-option value="3">ciężka</mat-option>
-            </mat-select>
+            <input matInput placeholder="Maks. waga paczki" formControlName="maksymalnaWagaPaczki">
+            <span matSuffix>kg</span>
+            <mat-error
+              *ngIf="this.dodawanieOfertyForm.controls['maksymalnaWagaPaczki'].invalid && this.dodawanieOfertyForm.controls['maksymalnaWagaPaczki'].errors.pattern">
+              Waga paczki musi być liczbą całkowitą
+            </mat-error>
+            <mat-hint>Podaj w jednostkach całkowitych</mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -82,21 +129,46 @@
       <div layout-gt-xs="row">
         <div flex-gt-xs="50">
           <mat-form-field class="example-full-width">
-            <input matInput [matDatepicker]="picker" placeholder="Data wyjazdu">
+            <input matInput [matDatepicker]="picker" placeholder="Data wyjazdu" required formControlName="dataWyjazdu">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error
+              *ngIf="this.dodawanieOfertyForm.controls['dataWyjazdu'].invalid && this.dodawanieOfertyForm.controls['dataWyjazdu'].errors.matDatepickerParse">
+              Data musi być wybrana z powyższego kalendarza
+            </mat-error>
+            <mat-hint align="end">Wybierz datę z powyższego kalendarza</mat-hint>
           </mat-form-field>
         </div>
         <div flex-gt-xs="50">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Godzina wyjazdu" type="time">
+            <input matInput placeholder="Godzina wyjazdu" required formControlName="godzinaWyjazdu">
+            <mat-hint>Podaj w formacie gg:mm</mat-hint>
+            <mat-error
+              *ngIf="this.dodawanieOfertyForm.controls['godzinaWyjazdu'].invalid && this.dodawanieOfertyForm.controls['godzinaWyjazdu'].errors.pattern">
+              Godzina musi być w formacie gg:mm
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
 
-      <mat-slide-toggle>Czy wyróżnić ofertę?</mat-slide-toggle>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Opis oferty" matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="10"
+                  maxlength="200" required formControlName="opis" #textarea></textarea>
+        <mat-error
+          *ngIf="this.dodawanieOfertyForm.controls['opis'].invalid && this.dodawanieOfertyForm.controls['opis'].errors.minlength">
+          Długość tytułu musi wynosić co najmniej 40 znaków
+        </mat-error>
+        <mat-error
+          *ngIf="this.dodawanieOfertyForm.controls['opis'].invalid && this.dodawanieOfertyForm.controls['opis'].errors.maxlength">
+          Długość tytułu musi wynosić najwyżej 200 znaków
+        </mat-error>
+        <mat-hint>Min. 20 znaków, maks. 200.</mat-hint>
+        <mat-hint align="end">{{ textarea.value?.length || 0 }}/200</mat-hint>
+      </mat-form-field>
+
+      <mat-slide-toggle required formControlName="czyWyroznic">Czy wyróżnić ofertę?</mat-slide-toggle>
       <br><br>
-      <button mat-raised-button color="primary">Dodaj ofertę</button>
+      <button mat-raised-button color="primary" [disabled]="this.dodawanieOfertyForm.invalid">Dodaj ofertę</button>
     </form>
   </mat-card-content>
 </mat-card>
