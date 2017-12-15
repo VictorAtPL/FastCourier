@@ -68,6 +68,9 @@ import {EdytowanieOfertyComponent} from './components/edytowanie-oferty/edytowan
 import {DatePipe} from '@angular/common';
 import {CustomFormsModule} from 'ng2-validation';
 import {AutentykacjaService} from './services/autentykacja.service';
+import {PrzejrzyjProfilComponent} from './components/przejrzyj-profil/przejrzyj-profil.component';
+import {KeysPipe} from "./pipes/keys.pipe";
+import {CapitalizePipe} from "./pipes/capitalize.pipe";
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -161,6 +164,11 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Panel administratora'}
   },
   {
+    path: 'uzytkownik/profil/:login',
+    component: PrzejrzyjProfilComponent,
+    data: {title: 'Fast Courier - Profil użytkownika'}
+  },
+  {
     path: '**',
     redirectTo: 'powitanie',
   }
@@ -185,7 +193,10 @@ const appRoutes: Routes = [
     EdytowaniaZapoznaniaComponent,
     PanelAdministratoraComponent,
     PanelUzytkownikaComponent,
-    EdytowanieOfertyComponent
+    EdytowanieOfertyComponent,
+    PrzejrzyjProfilComponent,
+    KeysPipe,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,

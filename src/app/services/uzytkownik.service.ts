@@ -11,4 +11,8 @@ export class UzytkownikService {
   postUzytkownik(data: any) {
     return this.http.post<any>(environment.restUrl + '/uzytkownicy', data);
   }
+
+  getUzytkownik(login: string) {
+    return this.http.get<any>(environment.restUrl + '/uzytkownicy/' + login);
+  }
 }

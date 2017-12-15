@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AutentykacjaService} from '../../services/autentykacja.service';
 
 /**
  * Logika biznesowa dla panelu administratora
@@ -8,5 +9,15 @@ import {Component} from '@angular/core';
   templateUrl: './panel-uzytkownika.component.html',
   styleUrls: ['./panel-uzytkownika.component.css']
 })
-export class PanelUzytkownikaComponent {
+export class PanelUzytkownikaComponent implements OnInit {
+  zalogowanyUzytkownik: any;
+
+  constructor(private autentykacjaService: AutentykacjaService) {
+  }
+
+  ngOnInit(): void {
+    this.autentykacjaService.czyZalogowany().subscribe(next => {
+      this.zalogowanyUzytkownik = next;
+    });
+  }
 }

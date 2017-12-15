@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title>Profil użytkownika {{ login }}</mat-card-title>
+  <mat-card-content>
+    <span *ngFor="let entry of uzytkownik | keys">
+      <ng-container *ngIf="entry.key != 'haslo' && entry.key != '_links'">
+        <strong>{{entry.key | capitalize }}</strong>: {{entry.value}}<br/>
+      </ng-container>
+    </span>
+  </mat-card-content>
+</mat-card>
