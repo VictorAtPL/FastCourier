@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {StronaGlownaComponent} from './strona-glowna/strona-glowna.component';
+import {StronaGlownaComponent} from './components/strona-glowna/strona-glowna.component';
 import {RouterModule, Routes} from '@angular/router';
 import {
   MAT_DATE_LOCALE,
@@ -49,25 +49,25 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DodawanieOfertyComponent} from './dodawanie-oferty/dodawanie-oferty.component';
-import {SzukanieZaawansowaneComponent} from './szukanie-zaawansowane/szukanie-zaawansowane.component';
-import {LogowanieComponent} from './logowanie/logowanie.component';
-import {RejestracjaComponent} from './rejestracja/rejestracja.component';
-import {PisanieWiadomosciComponent} from './pisanie-wiadomosci/pisanie-wiadomosci.component';
-import {ZglaszanieUzytkownikaComponent} from './zglaszanie-uzytkownika/zglaszanie-uzytkownika.component';
-import {ZglaszanieOfertyComponent} from './zglaszanie-oferty/zglaszanie-oferty.component';
-import {ZglaszanieTransakcjiComponent} from './zglaszanie-transakcji/zglaszanie-transakcji.component';
-import {ZglaszanieUwagiComponent} from './zglaszanie-uwagi/zglaszanie-uwagi.component';
-import {EdytowaniaZapoznaniaComponent} from './edytowania-zapoznania/edytowania-zapoznania.component';
-import {EdycjaProfiluUzytkownikaComponent} from './edycja-profilu-uzytkownika/edycja-profilu-uzytkownika.component';
-import {DodawanieRegulaminuComponent} from './dodawanie-regulaminu/dodawanie-regulaminu.component';
-import {OcenaTransakcjiComponent} from './ocena-transakcji/ocena-transakcji.component';
-import {PanelAdministratoraComponent} from './panel-administratora/panel-administratora.component';
-import {PanelUzytkownikaComponent} from './panel-uzytkownika/panel-uzytkownika.component';
-import {EdytowanieOfertyComponent} from './edytowanie-oferty/edytowanie-oferty.component';
+import {DodawanieOfertyComponent} from './components/dodawanie-oferty/dodawanie-oferty.component';
+import {SzukanieZaawansowaneComponent} from './components/szukanie-zaawansowane/szukanie-zaawansowane.component';
+import {LogowanieComponent} from './components/logowanie/logowanie.component';
+import {RejestracjaComponent} from './components/rejestracja/rejestracja.component';
+import {PisanieWiadomosciComponent} from './components/pisanie-wiadomosci/pisanie-wiadomosci.component';
+import {ZglaszanieUzytkownikaComponent} from './components/zglaszanie-uzytkownika/zglaszanie-uzytkownika.component';
+import {ZglaszanieOfertyComponent} from './components/zglaszanie-oferty/zglaszanie-oferty.component';
+import {ZglaszanieTransakcjiComponent} from './components/zglaszanie-transakcji/zglaszanie-transakcji.component';
+import {ZglaszanieUwagiComponent} from './components/zglaszanie-uwagi/zglaszanie-uwagi.component';
+import {EdytowaniaZapoznaniaComponent} from './components/edytowania-zapoznania/edytowania-zapoznania.component';
+import {EdycjaProfiluUzytkownikaComponent} from './components/edycja-profilu-uzytkownika/edycja-profilu-uzytkownika.component';
+import {DodawanieRegulaminuComponent} from './components/dodawanie-regulaminu/dodawanie-regulaminu.component';
+import {OcenaTransakcjiComponent} from './components/ocena-transakcji/ocena-transakcji.component';
+import {PanelAdministratoraComponent} from './components/panel-administratora/panel-administratora.component';
+import {PanelUzytkownikaComponent} from './components/panel-uzytkownika/panel-uzytkownika.component';
+import {EdytowanieOfertyComponent} from './components/edytowanie-oferty/edytowanie-oferty.component';
 import {DatePipe} from '@angular/common';
 import {CustomFormsModule} from 'ng2-validation';
-import {AutentykacjaService} from "./autentykacja.service";
+import {AutentykacjaService} from './services/autentykacja.service';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -79,10 +79,11 @@ const appRoutes: Routes = [
     component: LogowanieComponent,
     data: {title: 'Fast Courier - Logowanie'}
   },
-  { path: '', redirectTo: 'powitanie', pathMatch: 'full' },
-  { path: 'powitanie',
+  {path: '', redirectTo: 'powitanie', pathMatch: 'full'},
+  {
+    path: 'powitanie',
     component: StronaGlownaComponent,
-    data: { title: 'Fast Courier' }
+    data: {title: 'Fast Courier'}
   },
   {
     path: 'transakcja/ocen',
@@ -137,7 +138,7 @@ const appRoutes: Routes = [
   {
     path: 'uzytkownik/zglos',
     component: ZglaszanieUzytkownikaComponent,
-    data: { title: 'Fast Courier - Zgłaszanie użytkownika' }
+    data: {title: 'Fast Courier - Zgłaszanie użytkownika'}
   },
   {
     path: 'transakcja/zglos',
@@ -159,7 +160,8 @@ const appRoutes: Routes = [
     component: PanelAdministratoraComponent,
     data: {title: 'Fast Courier - Panel administratora'}
   },
-  { path: '**',
+  {
+    path: '**',
     redirectTo: 'powitanie',
   }
 ];
@@ -233,7 +235,7 @@ const appRoutes: Routes = [
     CovalentMessageModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: false } // <-- debugging purposes only
+      {enableTracing: false} // <-- debugging purposes only
     )
   ],
   providers: [
@@ -247,4 +249,5 @@ const appRoutes: Routes = [
 /**
  * Główny moduł aplikacji w którym konfigurowane dołączane są zależności
  */
-export class AppModule { }
+export class AppModule {
+}

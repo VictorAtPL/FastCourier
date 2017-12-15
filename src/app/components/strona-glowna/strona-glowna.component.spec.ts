@@ -8,9 +8,9 @@ describe('StronaGlownaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StronaGlownaComponent ]
+      declarations: [StronaGlownaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

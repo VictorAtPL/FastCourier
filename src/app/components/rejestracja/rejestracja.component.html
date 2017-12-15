@@ -4,13 +4,13 @@
 </mat-card>
 <mat-card>
   <mat-card-content>
-    <form class="example-form">
+    <form class="example-form" [formGroup]="rejestracjaForm">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Login">
+        <input matInput placeholder="Login" formControlName="login">
         <mat-hint>Wpisz login!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput type="password" placeholder="Hasło">
+        <input matInput type="password" placeholder="Hasło" formControlName="haslo">
         <mat-hint>Wpisz hasło!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
@@ -18,39 +18,39 @@
         <mat-hint>Potwierdź hasło!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Adres e-mail">
+        <input matInput placeholder="Adres e-mail" formControlName="email">
         <mat-hint>Wpisz e-mail!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Imię">
+        <input matInput placeholder="Imię" formControlName="imie">
         <mat-hint>Wpisz imię!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nazwisko">
+        <input matInput placeholder="Nazwisko" formControlName="nazwisko">
         <mat-hint>Wpisz nazwisko!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Data urodzenia">
-        <mat-hint>Wpisz datę urodzenia!</mat-hint>
+        <input matInput placeholder="Data urodzenia" formControlName="dataUrodzenia">
+        <mat-hint>W formacie rrrr-mm-dd.</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Województwo">
+        <input matInput placeholder="Województwo" formControlName="wojewodztwo">
         <mat-hint>Wpisz województwo!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Miejscowość">
+        <input matInput placeholder="Miejscowość" formControlName="miejscowosc">
         <mat-hint>Wpisz miejscowość!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ulica">
+        <input matInput placeholder="Ulica" formControlName="ulica">
         <mat-hint>Wpisz ulicę!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nr telefonu">
+        <input matInput placeholder="Nr telefonu" formControlName="numerTelefonu">
         <mat-hint>Wpisz nr telefonu!</mat-hint>
       </mat-form-field>
       <br><br>
-      <button mat-raised-button color="accent">Zarejestruj</button>
+      <button mat-raised-button color="accent" (click)="zarejestruj(rejestracjaForm.value)">Zarejestruj</button>
     </form>
   </mat-card-content>
 </mat-card>

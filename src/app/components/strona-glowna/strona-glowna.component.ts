@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {AutentykacjaService} from "../../services/autentykacja.service";
 
 /**
  * Logika biznesowa dla strony głównej, na której jest formularz wyszukiwania
@@ -9,9 +10,11 @@ import {Component} from '@angular/core';
   styleUrls: ['./strona-glowna.component.css']
 })
 export class StronaGlownaComponent {
-  zalogowanyUzytkownik: any = {};
+  zalogowanyUzytkownik = {};
 
-  constructor() {
-    this.zalogowanyUzytkownik = JSON.parse(localStorage.getItem('zalogowanyUzytkownik'));
+  constructor(private autentykacjaService: AutentykacjaService) {
+    this.autentykacjaService.czyZalogowany().subscribe(next => {
+      this.zalogowanyUzytkownik = next;
+    });
   }
 }

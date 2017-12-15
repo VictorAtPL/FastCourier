@@ -2,8 +2,11 @@
   <td-navigation-drawer flex sidenavTitle="Menu">
     <mat-nav-list>
       <ng-container *ngFor="let link of navLinks">
-        <a *ngIf="link.enable" mat-list-item [routerLink]="link.path">{{ link.label }}</a>
+        <a
+          *ngIf="link.enable && ((zalogowanyUzytkownik?.rola && link.role.indexOf(zalogowanyUzytkownik.rola) > -1) || (!zalogowanyUzytkownik && link.role.indexOf('') > -1))"
+          mat-list-item [routerLink]="link.path">{{ link.label }}</a>
       </ng-container>
+      <a mat-list-item *ngIf="zalogowanyUzytkownik?.imie" (click)="wyloguj()">Wyloguj</a>
     </mat-nav-list>
   </td-navigation-drawer>
   <td-layout-nav color="primary">
@@ -19,11 +22,12 @@
       <nav mat-stretch-tabs mat-tab-nav-bar class="text-upper pad-bottom-xs pull-bottom-sm" flex>
         <ng-container *ngFor="let link of navLinks">
           <a mat-tab-link
-             *ngIf="link.enable"
+             *ngIf="link.enable && ((zalogowanyUzytkownik?.rola && link.role.indexOf(zalogowanyUzytkownik.rola) > -1) || (!zalogowanyUzytkownik && link.role.indexOf('') > -1))"
              [routerLink]="link.path">
             {{ link.label }}
           </a>
         </ng-container>
+        <a mat-tab-link *ngIf="zalogowanyUzytkownik?.imie" (click)="wyloguj()">Wyloguj</a>
         <br>
       </nav>
     </mat-toolbar>

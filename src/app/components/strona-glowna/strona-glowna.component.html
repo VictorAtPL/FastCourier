@@ -1,0 +1,59 @@
+<mat-card>
+  <mat-card-title>Witaj, <span
+    *ngIf="zalogowanyUzytkownik?.imie; else guestBlock">{{ zalogowanyUzytkownik.imie }}!</span>
+    <ng-template #guestBlock>gościu!</ng-template>
+    <mat-icon>android</mat-icon>
+  </mat-card-title>
+  <mat-card-content>Wybierz akcje z menu, którą chcesz wykonać.</mat-card-content>
+  <!--<mat-card-content>Ten formularz pozwala na wyszukiwanie oferty w serwisie.</mat-card-content>-->
+</mat-card>
+<!--<mat-card>-->
+<!--<mat-card-title>Formularz wyszukiwania</mat-card-title>-->
+<!--<mat-card-content>-->
+<!--<form>-->
+<!--<div layout-gt-xs="row">-->
+<!--<div flex-gt-xs="50">-->
+<!--<mat-form-field class="example-full-width">-->
+<!--<mat-select placeholder="Miasto początkowe">-->
+<!--<mat-option>Warszawa</mat-option>-->
+<!--<mat-option>Kraków</mat-option>-->
+<!--<mat-option>Pruszków</mat-option>-->
+<!--<mat-option>Halinów</mat-option>-->
+<!--<mat-option>Ostrów Mazowiecka</mat-option>-->
+<!--</mat-select>-->
+<!--</mat-form-field>-->
+<!--</div>-->
+<!--<div flex-gt-xs="50">-->
+
+<!--<mat-form-field class="example-full-width">-->
+<!--<mat-select placeholder="Miasto docelowe">-->
+<!--<mat-option>Warszawa</mat-option>-->
+<!--<mat-option>Kraków</mat-option>-->
+<!--<mat-option>Pruszków</mat-option>-->
+<!--<mat-option>Halinów</mat-option>-->
+<!--<mat-option>Ostrów Mazowiecka</mat-option>-->
+<!--</mat-select>-->
+<!--</mat-form-field>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div layout-gt-xs="row">-->
+<!--<div flex-gt-xs="50">-->
+<!--<mat-form-field class="example-full-width">-->
+<!--<input matInput [matDatepicker]="picker" placeholder="Data wyjazdu">-->
+<!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--<mat-datepicker #picker></mat-datepicker>-->
+<!--</mat-form-field>-->
+<!--</div>-->
+<!--<div flex-gt-xs="50">-->
+<!--<mat-form-field class="example-full-width">-->
+<!--<input matInput placeholder="Godzina wyjazdu" type="time">-->
+<!--</mat-form-field>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<button mat-raised-button color="primary">Szukaj</button>-->
+<!--<a mat-raised-button routerLink="/oferta/wyszukiwanie" color="accent">Wyszukiwanie zaawansowane</a>-->
+<!--</form>-->
+<!--</mat-card-content>-->
+<!--</mat-card>-->
