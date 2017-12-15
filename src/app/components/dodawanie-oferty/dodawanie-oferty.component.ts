@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {CustomValidators} from 'ng2-validation';
+import {OfertaService} from '../../services/oferta.service';
+import {MatSnackBar} from '@angular/material';
 
 /**
  * Logika biznesowa dla komponentu dodawania oferty
@@ -13,7 +15,8 @@ import {CustomValidators} from 'ng2-validation';
 @Component({
   selector: 'app-dodawanie-oferty',
   templateUrl: './dodawanie-oferty.component.html',
-  styleUrls: ['./dodawanie-oferty.component.css']
+  styleUrls: ['./dodawanie-oferty.component.css'],
+  viewProviders: [OfertaService]
 })
 export class DodawanieOfertyComponent {
   /**
@@ -29,11 +32,26 @@ export class DodawanieOfertyComponent {
    */
   dodawanieOfertyForm: FormGroup;
 
+  kategoriePaczek: string[] = [
+    'żywność',
+    'szkło',
+    'zwierzęta',
+    'elektronika',
+    'rośliny',
+    'sztuka'
+  ];
+
+  rozmiaryPaczek: string[] = [
+    'mała',
+    'średnia',
+    'duża'
+  ];
+
   /**
    * Konstruktor komponentu inicjalizujący grupę formatek
    * @param {DatePipe} datePipe
    */
-  constructor(private datePipe: DatePipe) {
+  constructor(private datePipe: DatePipe, private ofertaService: OfertaService, private snackBar: MatSnackBar) {
     this.cenaMinimalna = new FormControl('15');
     this.cenaMaksymalna = new FormControl('15', [Validators.required, Validators.min(0), CustomValidators.number,
       Validators.pattern(/^([^\\.]+|[0-9]+\.[0-9]{1,2})$/), this.czyWiekszaRownaOdCenyMinimalnej(this.cenaMinimalna)]);
@@ -95,5 +113,33 @@ export class DodawanieOfertyComponent {
    */
   weryfikujCeneMinimalna() {
     this.dodawanieOfertyForm.controls['cenaMinimalna'].updateValueAndValidity();
+  }
+
+  wystaw() {
+    const data = this.dodawanieOfertyForm.value;
+
+    const dataGodzinaWyjazdu = new Date(this.dodawanieOfertyForm.controls['dataWyjazdu'].value);
+    const godzina_a = data.godzinaWyjazdu.split(':');
+    dataGodzinaWyjazdu.setHours(godzina_a[0]);
+    dataGodzinaWyjazdu.setHours(godzina_a[1]);
+
+    data.dataWyjazdu = data.godzinaWyjazdu = dataGodzinaWyjazdu.toISOString();
+
+    data.kategoriePaczek = data.kategoriePaczek.join(',');
+    data.rozmiaryPaczek = data.rozmiaryPaczek.join(',');
+
+    this.ofertaService.postOferta(data).subscribe(result => {
+      const refSnackBar = this.snackBar.open('Dodano ofertę. Za chwile nastąpi przekierowanie.', null, {
+        duration: 2000,
+      });
+
+      console.log(result);
+
+      // refSnackBar.afterDismissed().subscribe()
+    }, error2 => {
+      this.snackBar.open('Wystąpił błąd. Upewnij się, czy format wprowadzonych danych jest poprawny.', null, {
+        duration: 2000,
+      });
+    });
   }
 }

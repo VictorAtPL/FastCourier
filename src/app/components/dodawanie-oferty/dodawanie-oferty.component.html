@@ -1,6 +1,6 @@
 <mat-card>
-  <mat-card-title>Formularz dodawania oferty</mat-card-title>
-  <mat-card-content>Ten formularz pozwala na dodanie oferty do serwisu.</mat-card-content>
+  <mat-card-title>Formularz wystawiania oferty</mat-card-title>
+  <mat-card-content>Ten formularz pozwala na wystawienie oferty do serwisu.</mat-card-content>
 </mat-card>
 <mat-card>
   <mat-card-content>
@@ -94,9 +94,9 @@
         <div flex-gt-xs="33.3">
           <mat-form-field class="example-full-width">
             <mat-select placeholder="Kategoria paczek" multiple required formControlName="kategoriePaczek">
-              <mat-option value="1">żywność</mat-option>
-              <mat-option value="2">szkło</mat-option>
-              <mat-option value="3">zwierzęta</mat-option>
+              <mat-option *ngFor="let kategoria of kategoriePaczek" [value]="kategoria">
+                {{ kategoria }}
+              </mat-option>
             </mat-select>
             <mat-hint>Wybierz co najmniej jedną kategorię paczki</mat-hint>
           </mat-form-field>
@@ -105,9 +105,9 @@
         <div flex-gt-xs="33.3">
           <mat-form-field class="example-full-width">
             <mat-select placeholder="Rozmiary paczek" multiple required formControlName="rozmiaryPaczek">
-              <mat-option value="1">mała</mat-option>
-              <mat-option value="2">średnia</mat-option>
-              <mat-option value="3">duża</mat-option>
+              <mat-option *ngFor="let rozmiar of rozmiaryPaczek" [value]="rozmiar">
+                {{ rozmiar }}
+              </mat-option>
             </mat-select>
             <mat-hint>Wybierz co najmniej jeden rozmiar paczki</mat-hint>
           </mat-form-field>
@@ -156,11 +156,11 @@
                   maxlength="200" required formControlName="opis" #textarea></textarea>
         <mat-error
           *ngIf="this.dodawanieOfertyForm.controls['opis'].invalid && this.dodawanieOfertyForm.controls['opis'].errors.minlength">
-          Długość tytułu musi wynosić co najmniej 40 znaków
+          Długość opisu musi wynosić co najmniej 40 znaków
         </mat-error>
         <mat-error
           *ngIf="this.dodawanieOfertyForm.controls['opis'].invalid && this.dodawanieOfertyForm.controls['opis'].errors.maxlength">
-          Długość tytułu musi wynosić najwyżej 200 znaków
+          Długość opisu musi wynosić najwyżej 200 znaków
         </mat-error>
         <mat-hint>Min. 20 znaków, maks. 200.</mat-hint>
         <mat-hint align="end">{{ textarea.value?.length || 0 }}/200</mat-hint>
@@ -168,7 +168,8 @@
 
       <mat-slide-toggle required formControlName="czyWyroznic">Czy wyróżnić ofertę?</mat-slide-toggle>
       <br><br>
-      <button mat-raised-button color="primary" [disabled]="this.dodawanieOfertyForm.invalid">Dodaj ofertę</button>
+      <!--<button mat-raised-button color="primary" [disabled]="this.dodawanieOfertyForm.invalid" (click)="wystaw()">Wystaw ofertę</button>-->
+      <button mat-raised-button color="primary" (click)="wystaw()">Wystaw ofertę</button>
     </form>
   </mat-card-content>
 </mat-card>
