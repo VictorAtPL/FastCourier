@@ -26,35 +26,38 @@ export class AppComponent {
     this.navLinks = [
       {
         'label': 'Strona główna',
-        'path': 'powitanie'
+        'path': 'powitanie',
+        'enable': true,
+        'role': ['']
       },
       {
         'label': 'Panel użytkownika',
-        'path': 'uzytkownik/panel'
+        'path': 'uzytkownik/panel',
+        'enable': true,
+        'role': ['', 'ROLE_USER']
       },
       {
         'label': 'Zgłoś użytkownika',
-        'path': 'uzytkownik/zglos'
+        'path': 'uzytkownik/zglos',
+        'enable': false,
       },
       {
         'label': 'Zgłoś ofertę',
-        'path': 'oferta/zglos'
+        'path': 'oferta/zglos',
+        'enable': false
       },
       {
         'label': 'Zgłoś uwagę',
-        'path': 'uwaga/zglos'
+        'path': 'uwaga/zglos',
+        'enable': true,
+        'role': ['', 'ROLE_USER']
       },
       {
         'label': 'Panel administratora',
-        'path': 'administrator/panel'
+        'path': 'administrator/panel',
+        'enable': true,
+        'role': ['ROLE_ADMIN']
       }
     ];
-
-    this._iconRegistry.addSvgIconInNamespace('assets', 'teradata-ux',
-      this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/teradata-ux.svg'));
-    this._iconRegistry.addSvgIconInNamespace('assets', 'covalent',
-      this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent.svg'));
-    this._iconRegistry.addSvgIconInNamespace('assets', 'covalent-mark',
-      this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/Teradata/covalent-quickstart/develop/src/assets/icons/covalent-mark.svg'));
   }
 }

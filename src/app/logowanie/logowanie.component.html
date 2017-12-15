@@ -4,17 +4,17 @@
 </mat-card>
 <mat-card>
   <mat-card-content>
-    <form class="example-form">
+    <form class="example-form" [formGroup]="logowanieForm">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Login">
-        <mat-hint>Wpisz login!</mat-hint>
+        <input matInput type="email" placeholder="Email" formControlName="email">
+        <mat-hint>Wpisz email!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput type="password" placeholder="Hasło">
+        <input matInput type="password" placeholder="Hasło" formControlName="haslo">
         <mat-hint>Wpisz hasło!</mat-hint>
       </mat-form-field>
       <br><br>
-      <button mat-raised-button color="accent">Zaloguj</button>
+      <button mat-raised-button color="accent" (click)="zaloguj()">Zaloguj</button>
       <a mat-raised-button routerLink="/rejestracja">Zarejestruj sie</a>
     </form>
   </mat-card-content>

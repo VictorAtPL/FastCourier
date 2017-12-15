@@ -1,5 +1,8 @@
 <mat-card>
-  <mat-card-title>Witaj, gościu!
+  <mat-card-title>Witaj, <span *ngIf="zalogowanyUzytkownik?.imie"
+                               ngIfElse="guestBlock">{{ zalogowanyUzytkownik.imie }}</span>
+    <ng-template #guestBlock>gościu</ng-template>
+    !
     <mat-icon>android</mat-icon>
   </mat-card-title>
   <mat-card-content>Ten formularz pozwala na wyszukiwanie oferty w serwisie.</mat-card-content>

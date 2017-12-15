@@ -67,6 +67,7 @@ import {PanelUzytkownikaComponent} from './panel-uzytkownika/panel-uzytkownika.c
 import {EdytowanieOfertyComponent} from './edytowanie-oferty/edytowanie-oferty.component';
 import {DatePipe} from '@angular/common';
 import {CustomFormsModule} from 'ng2-validation';
+import {AutentykacjaService} from "./autentykacja.service";
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -237,7 +238,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
-    DatePipe
+    DatePipe,
+    AutentykacjaService
   ],
   bootstrap: [AppComponent]
 })

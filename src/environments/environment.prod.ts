@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  restUrl: 'https://fastcourier-rest.azurewebsites.net'
 };

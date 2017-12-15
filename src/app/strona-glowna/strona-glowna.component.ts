@@ -9,4 +9,9 @@ import {Component} from '@angular/core';
   styleUrls: ['./strona-glowna.component.css']
 })
 export class StronaGlownaComponent {
+  zalogowanyUzytkownik: any = {};
+
+  constructor() {
+    this.zalogowanyUzytkownik = JSON.parse(localStorage.getItem('zalogowanyUzytkownik'));
+  }
 }
