@@ -12,4 +12,7 @@ export class OfertaService {
     return this.http.post<any>(environment.restUrl + '/oferty', data);
   }
 
+  getOferta(id: number) {
+    return this.http.get<any>(environment.restUrl + '/oferty/' + id);
+  }
 }

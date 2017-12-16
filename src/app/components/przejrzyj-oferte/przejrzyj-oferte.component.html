@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title>{{ oferta.tytul }}</mat-card-title>
+  <mat-card-content>
+    <span *ngFor="let entry of oferta | keys">
+      <ng-container>
+        <strong>{{ entry.key | capitalize }}</strong>: {{ entry.value }}<br/>
+      </ng-container>
+    </span><br/>
+    <button mat-raised-button color="warn" (click)="zglosOferte()">Zgłoś ofertę</button>
+  </mat-card-content>
+</mat-card>

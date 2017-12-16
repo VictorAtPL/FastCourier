@@ -73,6 +73,7 @@ import {PrzejrzyjProfilComponent} from './components/przejrzyj-profil/przejrzyj-
 import {KeysPipe} from "./pipes/keys.pipe";
 import {CapitalizePipe} from "./pipes/capitalize.pipe";
 import {PrzejrzyjZgloszeniaUzytkownikowComponent} from './components/przejrzyj-zgloszenia-uzytkownikow/przejrzyj-zgloszenia-uzytkownikow.component';
+import {PrzejrzyjOferteComponent} from './components/przejrzyj-oferte/przejrzyj-oferte.component';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -116,9 +117,9 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Zgłaszanie oferty'}
   },
   {
-    path: 'oferta/dodaj',
+    path: 'oferta/wystaw',
     component: DodawanieOfertyComponent,
-    data: {title: 'Fast Courier - Dodawanie oferty'}
+    data: {title: 'Fast Courier - Wystawianie oferty'}
   },
   {
     path: 'oferta/edytuj',
@@ -129,6 +130,11 @@ const appRoutes: Routes = [
     path: 'oferta/wyszukiwanie',
     component: SzukanieZaawansowaneComponent,
     data: {title: 'Fast Courier - Wyszukiwanie zaawnswoane'}
+  },
+  {
+    path: 'oferta/wyswietl/:id',
+    component: PrzejrzyjOferteComponent,
+    data: {title: 'Fast Courier - Przejrzyj szczegóły oferty'}
   },
   {
     path: 'rejestracja',
@@ -204,7 +210,8 @@ const appRoutes: Routes = [
     PrzejrzyjProfilComponent,
     KeysPipe,
     CapitalizePipe,
-    PrzejrzyjZgloszeniaUzytkownikowComponent
+    PrzejrzyjZgloszeniaUzytkownikowComponent,
+    PrzejrzyjOferteComponent
   ],
   imports: [
     BrowserModule,
