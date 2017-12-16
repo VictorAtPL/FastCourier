@@ -4,6 +4,7 @@ import {DatePipe} from '@angular/common';
 import {CustomValidators} from 'ng2-validation';
 import {OfertaService} from '../../services/oferta.service';
 import {MatSnackBar} from '@angular/material';
+import {Router} from "@angular/router";
 
 /**
  * Logika biznesowa dla komponentu dodawania oferty
@@ -51,7 +52,7 @@ export class DodawanieOfertyComponent {
    * Konstruktor komponentu inicjalizujący grupę formatek
    * @param {DatePipe} datePipe
    */
-  constructor(private datePipe: DatePipe, private ofertaService: OfertaService, private snackBar: MatSnackBar) {
+  constructor(private datePipe: DatePipe, private ofertaService: OfertaService, private snackBar: MatSnackBar, private router: Router) {
     this.cenaMinimalna = new FormControl('15');
     this.cenaMaksymalna = new FormControl('15', [Validators.required, Validators.min(0), CustomValidators.number,
       Validators.pattern(/^([^\\.]+|[0-9]+\.[0-9]{1,2})$/), this.czyWiekszaRownaOdCenyMinimalnej(this.cenaMinimalna)]);
@@ -133,9 +134,12 @@ export class DodawanieOfertyComponent {
         duration: 2000,
       });
 
-      console.log(result);
+      const selfUrl_a = result._links.self.href.split('/');
+      const id = selfUrl_a[selfUrl_a.length - 1];
 
-      // refSnackBar.afterDismissed().subscribe()
+      refSnackBar.afterDismissed().subscribe(() => {
+        this.router.navigate(['/oferta/wyswietl', id]);
+      });
     }, error2 => {
       this.snackBar.open('Wystąpił błąd. Upewnij się, czy format wprowadzonych danych jest poprawny.', null, {
         duration: 2000,

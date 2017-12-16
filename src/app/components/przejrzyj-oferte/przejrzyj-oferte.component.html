@@ -2,10 +2,13 @@
   <mat-card-title>{{ oferta.tytul }}</mat-card-title>
   <mat-card-content>
     <span *ngFor="let entry of oferta | keys">
-      <ng-container>
-        <strong>{{ entry.key | capitalize }}</strong>: {{ entry.value }}<br/>
+      <ng-container
+        *ngIf="entry.key != 'tytul' && entry.key != '_links' && entry.key != 'maksymalnaWagaPaczki' || entry.key == 'maksymalnaWagaPaczki' && entry.value">
+        <strong>{{ entry.key | capitalize }}</strong>: <span *ngIf="entry.key != 'czyWyroznic'; else elseBlock">{{ entry.value }}</span>
+        <ng-template #elseBlock><ng-container *ngIf="entry.value == 'true'; else elseBlock2">Tak</ng-container><ng-template
+          #elseBlock2>Nie</ng-template></ng-template><br/>
       </ng-container>
     </span><br/>
-    <button mat-raised-button color="warn" (click)="zglosOferte()">Zgłoś ofertę</button>
+    <!--<button mat-raised-button color="warn" (click)="zglosOferte()">Zgłoś oferte</button>-->
   </mat-card-content>
 </mat-card>

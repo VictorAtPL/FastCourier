@@ -14,7 +14,8 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
   uzytkownik: any = {};
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService,
+              private snackBar: MatSnackBar, private router: Router) {
   }
 
   ngOnInit() {
