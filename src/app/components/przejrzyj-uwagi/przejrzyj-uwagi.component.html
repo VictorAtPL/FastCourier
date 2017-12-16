@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-title>Przeglądanie uwag</mat-card-title>
+  <mat-card-content>
+    <mat-table #table [dataSource]="dataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="powod">
+        <mat-header-cell *matHeaderCellDef> Powód</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.powod }}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="tresc">
+        <mat-header-cell *matHeaderCellDef> Treść</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.tresc }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

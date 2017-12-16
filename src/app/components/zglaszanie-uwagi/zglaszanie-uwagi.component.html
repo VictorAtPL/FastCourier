@@ -1,23 +1,21 @@
 <mat-card>
   <mat-card-title class="example-full-width">Formularz zgłaszania uwagi</mat-card-title>
   <mat-card-content>
-    <form class="example-form">
-      <mat-form-field class="listaRozwijana" class="example-full-width">
-        <mat-select [(value)]="selected" placeholder="Typ zgłaszanej uwagi">
-          <mat-option value="opcja1">Brak funkcji aplikacji</mat-option>
-          <mat-option value="opcja2">Niewłaściwe funkcjonowanie aplikacji</mat-option>
-          <mat-option value="opcja3">Zmiana zawartości aplikacji</mat-option>
+    <form class="example-form" [formGroup]="zglosUwageForm">
+      <mat-form-field class="example-full-width">
+        <mat-select placeholder="Powód zgłoszenia" formControlName="powod">
+          <mat-option *ngFor="let powod of powody" [value]="powod">
+            {{ powod.value }}
+          </mat-option>
         </mat-select>
-        <mat-hint> Wybierz typ zgłaszanej uwagi</mat-hint>
+        <mat-hint>Wybierz typ zgłaszanej uwagi</mat-hint>
       </mat-form-field>
-      <p>Wybrałeś: {{selected}}</p>
 
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Treść uwagi:" rows="10"></textarea>
+        <textarea matInput placeholder="Treść uwagi" rows="10" formControlName="tresc"></textarea>
       </mat-form-field>
 
-      <button mat-raised-button>Anuluj</button>
-      <button mat-raised-button color="primary">Wyślij</button>
+      <button mat-raised-button color="primary" (click)="zglos()">Zgłoś</button>
     </form>
   </mat-card-content>
 </mat-card>

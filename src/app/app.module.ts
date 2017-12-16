@@ -74,6 +74,7 @@ import {KeysPipe} from "./pipes/keys.pipe";
 import {CapitalizePipe} from "./pipes/capitalize.pipe";
 import {PrzejrzyjZgloszeniaUzytkownikowComponent} from './components/przejrzyj-zgloszenia-uzytkownikow/przejrzyj-zgloszenia-uzytkownikow.component';
 import {PrzejrzyjOferteComponent} from './components/przejrzyj-oferte/przejrzyj-oferte.component';
+import {PrzejrzyjUwagiComponent} from './components/przejrzyj-uwagi/przejrzyj-uwagi.component';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -177,6 +178,11 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Zgłoszenia użytkowników'}
   },
   {
+    path: 'administrator/uwagi',
+    component: PrzejrzyjUwagiComponent,
+    data: {title: 'Fast Courier - Uwagi'}
+  },
+  {
     path: 'uzytkownik/profil/:login',
     component: PrzejrzyjProfilComponent,
     data: {title: 'Fast Courier - Profil użytkownika'}
@@ -211,7 +217,8 @@ const appRoutes: Routes = [
     KeysPipe,
     CapitalizePipe,
     PrzejrzyjZgloszeniaUzytkownikowComponent,
-    PrzejrzyjOferteComponent
+    PrzejrzyjOferteComponent,
+    PrzejrzyjUwagiComponent
   ],
   imports: [
     BrowserModule,
