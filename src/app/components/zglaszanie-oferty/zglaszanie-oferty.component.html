@@ -1,28 +1,24 @@
 <mat-card>
-  <mat-card-title class="example-full-width">Formularz zgłaszania oferty</mat-card-title>
+  <mat-card-title>Zgłoś ofertę</mat-card-title>
   <mat-card-content>
-
-    <form class="example-form">
-
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Numer oferty:" disabled value="328746">
+    <form class="example-form" [formGroup]="zglosOferteForm">
+      <mat-form-field>
+        <input matInput placeholder="Tytuł oferty" disabled [value]="oferta?.tytul"/>
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-select [(value)]="selected" placeholder="Typ zgłaszanej uwagi">
-          <mat-option value="opcja1">Błędny opis oferty</mat-option>
-          <mat-option value="opcja2">Oferta narusza zasady</mat-option>
-          <mat-option value="opcja3">Inne</mat-option>
+        <mat-select placeholder="Powód zgłoszenia" formControlName="powod">
+          <mat-option *ngFor="let powod of powody" [value]="powod">
+            {{ powod.value }}
+          </mat-option>
         </mat-select>
-        <mat-hint> Wybierz typ zgłaszanej uwagi</mat-hint>
       </mat-form-field>
-      <p>Wybrałeś: {{selected}}</p>
 
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Treść uwagi:" rows="10"></textarea>
+        <textarea matInput placeholder="Treść wiadomości" matTextareaAutosize matAutosizeMinRows="4"
+                  matAutosizeMaxRows="20" formControlName="tresc"></textarea>
       </mat-form-field>
-      <button mat-raised-button>Anuluj</button>
-      <button mat-raised-button color="primary">Wyślij</button>
+      <button mat-raised-button color="primary" (click)="zglos()">Zgłoś</button>
     </form>
   </mat-card-content>
 </mat-card>

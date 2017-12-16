@@ -33,6 +33,6 @@ export class PrzejrzyjOferteComponent implements OnInit {
   }
 
   zglosOferte() {
-    // this.router.navigate(['/uzytkownik/zglos', login]);
+    this.router.navigate(['/oferta/zglos', this.id]);
   }
 }

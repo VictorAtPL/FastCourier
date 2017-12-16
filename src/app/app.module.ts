@@ -75,6 +75,7 @@ import {CapitalizePipe} from "./pipes/capitalize.pipe";
 import {PrzejrzyjZgloszeniaUzytkownikowComponent} from './components/przejrzyj-zgloszenia-uzytkownikow/przejrzyj-zgloszenia-uzytkownikow.component';
 import {PrzejrzyjOferteComponent} from './components/przejrzyj-oferte/przejrzyj-oferte.component';
 import {PrzejrzyjUwagiComponent} from './components/przejrzyj-uwagi/przejrzyj-uwagi.component';
+import {PrzejrzyjZgloszeniaOfertComponent} from "./components/przejrzyj-zgloszenia-ofert/przejrzyj-zgloszenia-ofert.component";
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -153,6 +154,11 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Zgłaszanie użytkownika'}
   },
   {
+    path: 'oferta/zglos/:id',
+    component: ZglaszanieOfertyComponent,
+    data: {title: 'Fast Courier - Zgłaszanie ofert'}
+  },
+  {
     path: 'transakcja/zglos',
     component: ZglaszanieTransakcjiComponent,
     data: {title: 'Fast Courier - Zgłaszanie transakcji'}
@@ -176,6 +182,11 @@ const appRoutes: Routes = [
     path: 'administrator/zgloszeniauzytkownikow',
     component: PrzejrzyjZgloszeniaUzytkownikowComponent,
     data: {title: 'Fast Courier - Zgłoszenia użytkowników'}
+  },
+  {
+    path: 'administrator/zgloszeniaofert',
+    component: PrzejrzyjZgloszeniaOfertComponent,
+    data: {title: 'Fast Courier - Zgłoszenia ofert'}
   },
   {
     path: 'administrator/uwagi',
@@ -217,6 +228,7 @@ const appRoutes: Routes = [
     KeysPipe,
     CapitalizePipe,
     PrzejrzyjZgloszeniaUzytkownikowComponent,
+    PrzejrzyjZgloszeniaOfertComponent,
     PrzejrzyjOferteComponent,
     PrzejrzyjUwagiComponent
   ],
