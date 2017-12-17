@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-card-title>Przeglądanie zgłoszeń ofert</mat-card-title>
+  <mat-card-content>
+    <mat-table #table [dataSource]="dataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="tytul">
+        <mat-header-cell *matHeaderCellDef> Tytuł</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.tytul }} <a [routerLink]="['/oferta/wyswietl', element.id]"
+                                                                    color="accent">
+          <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
+        </a></mat-cell>
+
+      </ng-container>
+
+      <ng-container matColumnDef="wystawiajacy">
+        <mat-header-cell *matHeaderCellDef> Wystawiający</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.loginUzytkownika }} <a
+          [routerLink]="['/uzytkownik/profil', element.loginUzytkownika]" target="_blank"
+          title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
+          <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
+        </a></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="dataGodzina">
+        <mat-header-cell *matHeaderCellDef> Data i godzina wyjazdu</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.dataGodzinaWyjazdu | date:'short' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cena">
+        <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.cenaMinimalna }}-{{ element.cenaMaksymalna }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="kategoriePaczek">
+        <mat-header-cell *matHeaderCellDef> Kategorie paczek</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip-list>
+            <mat-chip color="primary" *ngFor="let kategoria of element.kategoriePaczek">{{ kategoria }}</mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="rozmiaryPaczek">
+        <mat-header-cell *matHeaderCellDef> Rozmiary paczek</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <mat-chip-list>
+            <mat-chip color="primary" *ngFor="let rozmiar of element.rozmiaryPaczek">{{ rozmiar }}</mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="maksymalnaWagaPaczki">
+        <mat-header-cell *matHeaderCellDef> Maksymalna waga paczki</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element?.maksymalnaWagaPaczki }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

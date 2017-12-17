@@ -37,6 +37,12 @@ export class AppComponent {
         'role': ['', 'ROLE_USER', 'ROLE_ADMIN']
       },
       {
+        'label': 'Przejrzyj dostepne oferty',
+        'path': 'oferta/lista',
+        'enable': true,
+        'role': ['', 'ROLE_USER', 'ROLE_ADMIN']
+      },
+      {
         'label': 'Panel użytkownika',
         'path': 'uzytkownik/panel',
         'enable': true,

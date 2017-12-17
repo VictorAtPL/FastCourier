@@ -33,7 +33,6 @@ export class PrzejrzyjZgloszeniaOfertComponent implements OnInit {
     this.ofertaService.getZgloszeniaOfert().subscribe(result => {
       const zgloszeniaUzytkownikow = result._embedded.zgloszenieOferties;
       zgloszeniaUzytkownikow.forEach((zgloszenieOferty, index) => {
-        console.log(zgloszenieOferty);
         data.push({
           powod: zgloszenieOferty.powod, tresc: zgloszenieOferty.tresc,
           zgloszonaOferta: {

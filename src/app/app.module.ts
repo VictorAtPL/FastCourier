@@ -11,6 +11,7 @@ import {
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
+  MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
   MatGridListModule,
@@ -76,6 +77,7 @@ import {PrzejrzyjZgloszeniaUzytkownikowComponent} from './components/przejrzyj-z
 import {PrzejrzyjOferteComponent} from './components/przejrzyj-oferte/przejrzyj-oferte.component';
 import {PrzejrzyjUwagiComponent} from './components/przejrzyj-uwagi/przejrzyj-uwagi.component';
 import {PrzejrzyjZgloszeniaOfertComponent} from "./components/przejrzyj-zgloszenia-ofert/przejrzyj-zgloszenia-ofert.component";
+import {PrzejrzyjDostepneOfertyComponent} from './components/przejrzyj-dostepne-oferty/przejrzyj-dostepne-oferty.component';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -137,6 +139,11 @@ const appRoutes: Routes = [
     path: 'oferta/wyswietl/:id',
     component: PrzejrzyjOferteComponent,
     data: {title: 'Fast Courier - Przejrzyj szczegóły oferty'}
+  },
+  {
+    path: 'oferta/lista',
+    component: PrzejrzyjDostepneOfertyComponent,
+    data: {title: 'Fast Courier - Przejrzyj dostępne oferty'}
   },
   {
     path: 'rejestracja',
@@ -230,7 +237,8 @@ const appRoutes: Routes = [
     PrzejrzyjZgloszeniaUzytkownikowComponent,
     PrzejrzyjZgloszeniaOfertComponent,
     PrzejrzyjOferteComponent,
-    PrzejrzyjUwagiComponent
+    PrzejrzyjUwagiComponent,
+    PrzejrzyjDostepneOfertyComponent,
   ],
   imports: [
     BrowserModule,
@@ -265,6 +273,7 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     MatSliderModule,
     MatAutocompleteModule,
+    MatChipsModule,
     /** Covalent Modules */
     CovalentCommonModule,
     CovalentLayoutModule,

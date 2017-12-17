@@ -27,4 +27,8 @@ export class OfertaService {
   getZgloszeniaOfert() {
     return this.http.get<any>(environment.restUrl + '/zgloszeniaofert?projection=verbose');
   }
+
+  getOferty() {
+    return this.http.get<any>(environment.restUrl + '/oferty?projection=verbose');
+  }
 }
