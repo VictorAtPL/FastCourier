@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
-import {UzytkownikService} from "../../services/uzytkownik.service";
-import {DataSource} from "@angular/cdk/collections";
+import {UzytkownikService} from '../../services/uzytkownik.service';
+import {DataSource} from '@angular/cdk/collections';
 
 export interface ZgloszenieUzytkownika {
   powod,
   tresc,
   zgloszonyUzytkownik
 }
+
 
 @Component({
   selector: 'app-przejrzyj-zgloszenia-uzytkownikow',
