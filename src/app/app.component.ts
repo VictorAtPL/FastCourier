@@ -22,9 +22,12 @@ export class AppComponent {
   public navLinks: any[];
 
   /**
-   *
+   * Konstruktor klasy app.components.ts
    * @param {MatIconRegistry} _iconRegistry
    * @param {DomSanitizer} _domSanitizer
+   * @param {Router} router
+   * @param {MatSnackBar} snackBar
+   * @param {AutentykacjaService} autentykacjaService
    */
   constructor(private _iconRegistry: MatIconRegistry,
               private _domSanitizer: DomSanitizer, private router: Router, public snackBar: MatSnackBar,
@@ -78,11 +81,17 @@ export class AppComponent {
       }
     ];
 
+    /**
+     * Metoda sprawdzająca poprawność zalogowania
+     */
     this.autentykacjaService.czyZalogowany().subscribe(next => {
       this.zalogowanyUzytkownik = next;
     });
   }
 
+  /**
+   * Metoda wylogowująca uzytkownika
+   */
   wyloguj() {
     this.autentykacjaService.wyloguj();
 
