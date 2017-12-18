@@ -2,22 +2,26 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
-/**
- * Klasa usługi odpowiedzialnej za kontakt z serwisem REST w dziedzinie ofert
- */
 @Injectable()
+
+/**
+ * Klasa odpowiedzialna za pobieranie oferty z REST
+ * @author Adrian Plichta
+ * @since 0.0.3
+ * @copyright Magical Solutions
+ * @licence Creative Commons Attribution NonCommercial (CC-BY-NC)
+ */
 export class OfertaService {
 
   /**
-   * Konstruktor wstrzykujący usługi z których można potem korzystać w komponencie.
+   * Konstruktor powołujący nową instancję serwisu odpowiedzialnego za pobieranie/wysyłanie oferty do REST.
    * @param {HttpClient} http
    */
   constructor(private http: HttpClient) {
   }
 
   /**
-   *
-   * @author Przemysław Proczek
+   * Metoda odpowiedzialna za wgranie nowej oferty do REST.
    * @param data
    * @returns {Observable<Object>}
    */
@@ -26,8 +30,7 @@ export class OfertaService {
   }
 
   /**
-   *
-   * @author Adrian Plichta
+   * Metoda odpowiedzialna za pobranie danej oferty z REST.
    * @param {number} id
    * @returns {Observable<Object>}
    */
