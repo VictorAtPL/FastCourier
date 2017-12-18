@@ -3,7 +3,11 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 /**
- * Klasa usługi odpowiedzialnej za kontakt z serwisem REST w dziedzinie ofert
+ * Klasa odpowiedzialna za pobieranie oferty z Rest
+ * @author Michał Pruchniewski
+ * @since 0.0.3
+ * @copyright Magical Solutions
+ * @licence Creative Commons Attribution NonCommercial (CC-BY-NC)
  */
 @Injectable()
 export class OfertaService {
@@ -16,7 +20,7 @@ export class OfertaService {
   }
 
   /**
-   *
+   * Metoda wstawiająca daną ofertę
    * @author Przemysław Proczek
    * @param data
    * @returns {Observable<Object>}
@@ -26,7 +30,7 @@ export class OfertaService {
   }
 
   /**
-   *
+   * Metoda pobierająca ofertę o danym numerze
    * @author Adrian Plichta
    * @param {number} id
    * @returns {Observable<Object>}
@@ -36,7 +40,7 @@ export class OfertaService {
   }
 
   /**
-   *
+   * Metoda wstawiająca zgłoszenie oferty
    * @author Michał Pruchniewski
    * @param data
    * @returns {Observable<Object>}
@@ -46,7 +50,7 @@ export class OfertaService {
   }
 
   /**
-   *
+   * Metoda zapisujące daną ofertę w zgłoszeniach ofert
    * @author Michał Pruchniewski
    * @param {string} url
    * @param data
@@ -57,7 +61,7 @@ export class OfertaService {
   }
 
   /**
-   *
+   * Metoda pobierająca zgłoszenia ofert
    * @author Michał Pruchniewski
    * @returns {Observable<Object>}
    */
