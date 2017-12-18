@@ -12,6 +12,10 @@ import {AutentykacjaService} from '../../services/autentykacja.service';
 export class PanelUzytkownikaComponent implements OnInit {
   zalogowanyUzytkownik: any;
 
+  /**
+   * Konstruktor klasy autentykacjaService
+   * @param {AutentykacjaService} autentykacjaService
+   */
   constructor(private autentykacjaService: AutentykacjaService) {
   }
 
