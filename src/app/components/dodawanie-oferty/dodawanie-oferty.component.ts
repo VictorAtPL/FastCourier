@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 
 /**
  * Logika biznesowa dla komponentu dodawania oferty
- * @author Piotr Podbielski
+ * @author Przemysław P.
  * @since 0.0.2
  * @copyright Magical Solutions
  * @license Creative Commons Attribution NonCommercial (CC-BY-NC)
@@ -24,15 +24,21 @@ export class DodawanieOfertyComponent {
    * Formatka do wpisywania ceny minimalnej
    */
   cenaMinimalna: FormControl;
+
   /**
    * Formatka do wpisywania ceny maksymalnej
    */
   cenaMaksymalna: FormControl;
+
   /**
-   * Grupa formatek dotyczacych dodawania oferty
+   * Grupa formatek dotyczących dodawania oferty
    */
   dodawanieOfertyForm: FormGroup;
 
+  /**
+   * Formatka do wybierania kategorii paczek
+   * @type {[string , string , string , string , string , string]}
+   */
   kategoriePaczek: string[] = [
     'żywność',
     'szkło',
@@ -42,6 +48,10 @@ export class DodawanieOfertyComponent {
     'sztuka'
   ];
 
+  /**
+   * Formatka do wybierania rozmiarów paczek
+   * @type {[string , string , string]}
+   */
   rozmiaryPaczek: string[] = [
     'mała',
     'średnia',
@@ -79,7 +89,7 @@ export class DodawanieOfertyComponent {
   }
 
   /**
-   * Walidator sprawdzajacy czy cena maksymalna jest większa bądź równa od ceny minimalnej
+   * Walidator sprawdzający czy cena maksymalna jest większa bądź równa od ceny minimalnej
    * @param {FormControl} cenaMinimalna
    * @returns {(input: FormControl) => {czyMniejszaOdCenyMinimalnej: boolean}}
    */
@@ -91,7 +101,7 @@ export class DodawanieOfertyComponent {
   }
 
   /**
-   * Walidator sprawdzajacy czy cena minimalna jest mniejsza bądź równa od ceny maksymalnej
+   * Walidator sprawdzający czy cena minimalna jest mniejsza bądź równa od ceny maksymalnej
    * @param {FormControl} cenaMaksymalna
    * @returns {(input: FormControl) => {czyWiekszaOdCenyMaksymalnej: boolean}}
    */
@@ -116,6 +126,9 @@ export class DodawanieOfertyComponent {
     this.dodawanieOfertyForm.controls['cenaMinimalna'].updateValueAndValidity();
   }
 
+  /**
+   * Funkcja wystawiająca ofertę
+   */
   wystaw() {
     const data = this.dodawanieOfertyForm.value;
 
