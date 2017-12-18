@@ -12,19 +12,43 @@ import {UwagaService} from "../../services/uwaga.service";
   styleUrls: ['./zglaszanie-uwagi.component.css'],
   viewProviders: [UwagaService]
 })
+
+/**
+ * Klasa odpwiedzialna za tworzenie obiektów zgłasznych uwag
+ * @author Michał Świerczewski
+ * @since 0.0.3
+ * @copyright Magical Solutions
+ * @licence Creative Commons Attribution NonCommercial (CC-BY-NC)
+ *
+ */
 export class ZglaszanieUwagiComponent implements OnInit {
+  /**
+   *  Obiekt przechowujacy zgrupupowane uwagi
+   */
   zglosUwageForm: FormGroup;
 
   selected: String;
+  /**
+   * Tabalica zawierająca powody zgłoszenia użytkownika
+   * @type {[{value: string} , {value: string} , {value: string}]}
+   */
   powody: any[] = [
     {value: 'Brak funkcji aplikacji'},
     {value: 'Niewłaściwe funkcjonowanie aplikacji'},
     {value: 'Zmiana zawartości aplikacji'}
   ];
 
+  /**
+   *  Konstruktor tworzący obiekt klasy ZglaszanieUwagiComponent
+   * @param {MatSnackBar} snackBar
+   * @param {UwagaService} uwagaService
+   */
   constructor(private snackBar: MatSnackBar, private uwagaService: UwagaService) {
   }
 
+  /**
+   * Tworzenie obiektu uwagi
+   */
   ngOnInit(): void {
     this.zglosUwageForm = new FormGroup({
       'powod': new FormControl(),
@@ -32,6 +56,9 @@ export class ZglaszanieUwagiComponent implements OnInit {
     });
   }
 
+  /**
+   * Metoda odpowiedzialna za przyjomawnie, tworzenie obiektów uwag i wyświetlenie komunikatów odnośnie czy udało się zarejestrować uwagę
+   */
   zglos() {
     const data = this.zglosUwageForm.value;
     data.powod = data.powod.value;
