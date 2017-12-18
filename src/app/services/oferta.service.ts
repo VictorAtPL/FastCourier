@@ -3,8 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 /**
- * Klasa odpowiedzialna za pobieranie oferty z Rest
- * @author Michał Pruchniewski
+ * Klasa odpowiedzialna za pobieranie oferty z REST
+ * @author Przemysław Proczek
  * @since 0.0.3
  * @copyright Magical Solutions
  * @licence Creative Commons Attribution NonCommercial (CC-BY-NC)
