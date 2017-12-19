@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {CustomValidators} from 'ng2-validation';
 import {OfertaService} from '../../services/oferta.service';
 import {MatSnackBar} from '@angular/material';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {AutentykacjaService} from '../../services/autentykacja.service';
 
 /**
  * Logika biznesowa dla komponentu dodawania oferty
@@ -19,7 +20,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./dodawanie-oferty.component.css'],
   viewProviders: [OfertaService]
 })
-export class DodawanieOfertyComponent {
+export class DodawanieOfertyComponent implements OnInit {
   /**
    * Formatka do wpisywania ceny minimalnej
    */
@@ -59,10 +60,23 @@ export class DodawanieOfertyComponent {
   ];
 
   /**
-   * Konstruktor komponentu inicjalizujący grupę formatek
+   * Zmienna przechowująca aktualnie zalogowanego użytkownika
+   */
+  zalogowanyUzytkownik: any;
+
+  /**
+   * Konstruktor komponentu wstrzykujący serwisy, które mogą być wykorzystane w klasie
    * @param {DatePipe} datePipe
    */
-  constructor(private datePipe: DatePipe, private ofertaService: OfertaService, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private datePipe: DatePipe, private ofertaService: OfertaService,
+              private snackBar: MatSnackBar, private router: Router,
+              private autentykacjaService: AutentykacjaService) {
+  }
+
+  /**
+   * Funkcja inicjalizująca formularz dodawania oferty i ładująca aktualnie zalogowanego użytkownika
+   */
+  ngOnInit() {
     this.cenaMinimalna = new FormControl('15');
     this.cenaMaksymalna = new FormControl('15', [Validators.required, Validators.min(0), CustomValidators.number,
       Validators.pattern(/^([^\\.]+|[0-9]+\.[0-9]{1,2})$/), this.czyWiekszaRownaOdCenyMinimalnej(this.cenaMinimalna)]);
@@ -85,6 +99,10 @@ export class DodawanieOfertyComponent {
         [Validators.required, Validators.pattern(/^[0-9]{2}:[0-9]{2}$/)]),
       opis: new FormControl('', [Validators.required, Validators.minLength(40), Validators.maxLength(200)]),
       czyWyroznic: new FormControl(false, [Validators.required])
+    });
+
+    this.autentykacjaService.czyZalogowany().subscribe(next => {
+      this.zalogowanyUzytkownik = next;
     });
   }
 
@@ -142,21 +160,27 @@ export class DodawanieOfertyComponent {
     data.kategoriePaczek = data.kategoriePaczek.join(',');
     data.rozmiaryPaczek = data.rozmiaryPaczek.join(',');
 
-    this.ofertaService.postOferta(data).subscribe(result => {
-      const refSnackBar = this.snackBar.open('Dodano ofertę. Za chwile nastąpi przekierowanie.', null, {
-        duration: 2000,
-      });
-
-      const selfUrl_a = result._links.self.href.split('/');
-      const id = selfUrl_a[selfUrl_a.length - 1];
-
-      refSnackBar.afterDismissed().subscribe(() => {
-        this.router.navigate(['/oferta/wyswietl', id]);
-      });
-    }, error2 => {
+    const wyswietlBlad = (x) => {
       this.snackBar.open('Wystąpił błąd. Upewnij się, czy format wprowadzonych danych jest poprawny.', null, {
         duration: 2000,
       });
-    });
+    };
+
+    this.ofertaService.postOferta(data).subscribe(oferta => {
+      const uzytkownikUrl = this.zalogowanyUzytkownik._links.self.href;
+
+      this.ofertaService.postUzytkownikOfertyOferta(oferta._links.uzytkownik.href, uzytkownikUrl).subscribe(result2 => {
+        const refSnackBar = this.snackBar.open('Dodano ofertę. Za chwile nastąpi przekierowanie.', null, {
+          duration: 2000,
+        });
+
+        const selfUrl_a = result2._links.self.href.split('/');
+        const id = selfUrl_a[selfUrl_a.length - 1];
+
+        refSnackBar.afterDismissed().subscribe(() => {
+          this.router.navigate(['/oferta/wyswietl', id]);
+        });
+      }, wyswietlBlad);
+    }, wyswietlBlad);
   }
 }

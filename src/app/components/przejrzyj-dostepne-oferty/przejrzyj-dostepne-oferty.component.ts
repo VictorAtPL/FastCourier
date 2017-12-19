@@ -85,7 +85,7 @@ export class PrzejrzyjDostepneOfertyComponent implements OnInit {
    * Lista kolumn, które mają być wyświetlone w tabeli.
    * @type {[string , string , string , string , string , string , string]}
    */
-  displayedColumns = ['dataGodzina', 'tytul', 'wystawiajacy', 'cena', 'kategoriePaczek', 'rozmiaryPaczek', 'maksymalnaWagaPaczki'];
+  displayedColumns = ['dataGodzina', 'tytul', 'cena', 'kategoriePaczek', 'rozmiaryPaczek'];
   /**
    * Źródło danych dla komponentu tabeli.
    */

@@ -1,11 +1,31 @@
 <mat-card>
-  <mat-card-title>Profil użytkownika {{ login }}</mat-card-title>
+  <mat-card-title>Profil użytkownika {{ login }}
+    <mat-chip *ngIf="uzytkownik && uzytkownik.rola === 'ROLE_ADMIN'" color="accent" selected="true">Administrator
+    </mat-chip>
+  </mat-card-title>
   <mat-card-content>
-    <span *ngFor="let entry of uzytkownik | keys">
-      <ng-container *ngIf="entry.key != 'haslo' && entry.key != '_links' && entry.key != '_embedded'">
-        <strong>{{entry.key | capitalize }}</strong>: {{entry.value}}<br/>
-      </ng-container>
-    </span><br/>
+    <mat-spinner *ngIf="!uzytkownik"></mat-spinner>
+    <div class="mat-table" *ngIf="uzytkownik">
+      <div class="mat-row">
+        <div class="mat-cell" flex-gt-xs="25"><strong>Imię i nazwisko</strong></div>
+        <div class="mat-cell">{{ uzytkownik.imie }} {{ uzytkownik.nazwisko }}</div>
+      </div>
+      <div class="mat-row">
+        <div class="mat-cell" flex-gt-xs="25"><strong>Data urodzenia</strong></div>
+        <div class="mat-cell"> {{ uzytkownik.dataUrodzenia | date: 'dd.MM.yyyy' }}</div>
+      </div>
+      <div class="mat-row">
+        <div class="mat-cell" flex-gt-xs="25"><strong>Adres zamieszkania</strong></div>
+        <div class="mat-cell" flex-gt-xs="25">{{ uzytkownik.ulica }}, {{ uzytkownik.miejscowosc }}, woj. {{
+          uzytkownik.wojewodztwo }}
+        </div>
+      </div>
+      <div class="mat-row">
+        <div class="mat-cell" flex-gt-xs="25"><strong>Numer telefonu</strong></div>
+        <div class="mat-cell">{{ uzytkownik.numerTelefonu }}</div>
+      </div>
+    </div>
+    <br/>
     <button mat-raised-button color="warn" (click)="zglosUzytkownika(login)">Zgłoś użytkownika</button>
   </mat-card-content>
 </mat-card>

@@ -1,61 +1,70 @@
 <mat-card>
-  <mat-card-title>Przeglądanie zgłoszeń ofert</mat-card-title>
+  <mat-card-title>Przeglądanie ofert</mat-card-title>
   <mat-card-content>
-    <mat-table #table [dataSource]="dataSource">
+    <mat-spinner *ngIf="!dataSource"></mat-spinner>
+    <mat-table *ngIf="dataSource" #table [dataSource]="dataSource">
 
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
       <!-- Position Column -->
-      <ng-container matColumnDef="tytul">
-        <mat-header-cell *matHeaderCellDef> Tytuł</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.tytul }} <a [routerLink]="['/oferta/wyswietl', element.id]"
-                                                                    color="accent">
-          <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
-        </a></mat-cell>
-
-      </ng-container>
-
-      <ng-container matColumnDef="wystawiajacy">
-        <mat-header-cell *matHeaderCellDef> Wystawiający</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.loginUzytkownika }} <a
-          [routerLink]="['/uzytkownik/profil', element.loginUzytkownika]" target="_blank"
-          title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
-          <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
-        </a></mat-cell>
-      </ng-container>
-
       <ng-container matColumnDef="dataGodzina">
-        <mat-header-cell *matHeaderCellDef> Data i godzina wyjazdu</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.dataGodzinaWyjazdu | date:'short' }}</mat-cell>
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="15"> Data i godzina wyjazdu</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="15"> {{ element.dataGodzinaWyjazdu | date:'short' }}</mat-cell>
       </ng-container>
+
+
+      <ng-container matColumnDef="tytul">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="35"> Tytuł</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="35"><a mat-icon-button
+                                                               [routerLink]="['/oferta/wyswietl', element.id]"
+                                                               color="accent">
+          <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
+        </a>
+          {{ element.tytul }} <br/><a [routerLink]="['/uzytkownik/profil', element.loginUzytkownika]" target="_blank"
+                                      title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
+            <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
+          </a> {{ element.loginUzytkownika }}
+        </mat-cell>
+      </ng-container>
+
 
       <ng-container matColumnDef="cena">
-        <mat-header-cell *matHeaderCellDef> Cena</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.cenaMinimalna }}-{{ element.cenaMaksymalna }}</mat-cell>
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="10"> Cena</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="10"> {{ element.cenaMinimalna }}-{{ element.cenaMaksymalna
+          }}zł
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="kategoriePaczek">
-        <mat-header-cell *matHeaderCellDef> Kategorie paczek</mat-header-cell>
-        <mat-cell *matCellDef="let element">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="20"> Kategorie paczek</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="20">
           <mat-chip-list>
-            <mat-chip color="primary" *ngFor="let kategoria of element.kategoriePaczek">{{ kategoria }}</mat-chip>
+            <ng-container *ngFor="let kategoria of element.kategoriePaczek; let i=index">
+              <mat-chip color="primary" *ngIf="i < 2">
+                {{ kategoria }}
+              </mat-chip>
+            </ng-container>
+            <mat-chip *ngIf="element.kategoriePaczek.length > 2">i {{ element.kategoriePaczek.length - 2 }} więcej...
+            </mat-chip>
           </mat-chip-list>
         </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="rozmiaryPaczek">
-        <mat-header-cell *matHeaderCellDef> Rozmiary paczek</mat-header-cell>
-        <mat-cell *matCellDef="let element">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="20"> Rozmiary paczek</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="20">
           <mat-chip-list>
-            <mat-chip color="primary" *ngFor="let rozmiar of element.rozmiaryPaczek">{{ rozmiar }}</mat-chip>
+            <ng-container *ngFor="let rozmiar of element.rozmiaryPaczek; let i=index">
+              <mat-chip color="primary" *ngIf="i < 2">
+                {{ rozmiar }}
+              </mat-chip>
+            </ng-container>
+            <mat-chip *ngIf="element.rozmiaryPaczek.length > 2">i {{ element.rozmiaryPaczek.length - 2 }} więcej...
+            </mat-chip>
           </mat-chip-list>
+          <!--<span *ngIf="element.maksymalnaWagaPaczki"><em>Maksymalna waga paczki</em> {{ element?.maksymalnaWagaPaczki }}kg</span>-->
         </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="maksymalnaWagaPaczki">
-        <mat-header-cell *matHeaderCellDef> Maksymalna waga paczki</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element?.maksymalnaWagaPaczki }}</mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -3,13 +3,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UzytkownikService} from "../../services/uzytkownik.service";
 import {MatSnackBar} from "@angular/material";
 
-@Component({
-  selector: 'app-przejrzyj-profil',
-  templateUrl: './przejrzyj-profil.component.html',
-  styleUrls: ['./przejrzyj-profil.component.css'],
-  viewProviders: [UzytkownikService]
-})
-
 /**
  * Klasa odpowiedzialna za widok strony Przejrzyj profil
  * @author Adrian Plichta
@@ -17,6 +10,12 @@ import {MatSnackBar} from "@angular/material";
  * @copyright Magical Solutions
  * @licence Creative Commons Attribution NonCommercial (CC-BY-NC)
  */
+@Component({
+  selector: 'app-przejrzyj-profil',
+  templateUrl: './przejrzyj-profil.component.html',
+  styleUrls: ['./przejrzyj-profil.component.css'],
+  viewProviders: [UzytkownikService]
+})
 export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
   /**
    * Zmienna przechowująca login użytkownika.
@@ -27,7 +26,7 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
    * Zmienna przechowująca nazwę użytkownika.
    * @type {{}}
    */
-  uzytkownik: any = {};
+  uzytkownik: any;
 
   /**
    * Obiekt przechowujący inny obiekt, który będziemy obserwować. Zawiera on stan parametrów URL aktualnie przeglądanej strony.
@@ -54,6 +53,8 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
 
       this.uzytkownikService.getUzytkownik(this.login).subscribe(uzytkownik => {
         this.uzytkownik = uzytkownik;
+
+        this.uzytkownik.dataUrodzenia = new Date(uzytkownik.dataUrodzenia);
       }, error2 => {
         this.snackBar.open('Wystąpił błąd. Upewnij się, czy użytkownik o podanym loginie istnieje.', null, {
           duration: 2000,
