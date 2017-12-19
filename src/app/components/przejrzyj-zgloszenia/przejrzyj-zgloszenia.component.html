@@ -1,0 +1,90 @@
+<mat-card>
+  <mat-card-title>Przeglądanie zgłoszeń ofert</mat-card-title>
+  <mat-card-content>
+    <mat-spinner *ngIf="!zgloszeniaOfertDataSource"></mat-spinner>
+    <mat-table #table *ngIf="zgloszeniaOfertDataSource" [dataSource]="zgloszeniaOfertDataSource">
+
+      <ng-container matColumnDef="dataDodania">
+        <mat-header-cell *matHeaderCellDef> Data i godzina</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.dataDodania | date: 'dd.MM.yyyy HH:mm' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="powod">
+        <mat-header-cell *matHeaderCellDef> Powód</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.powod }}</mat-cell>
+      </ng-container>
+      \
+      <ng-container matColumnDef="tresc">
+        <mat-header-cell *matHeaderCellDef> Treść</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.tresc }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="zgloszonaOferta">
+        <mat-header-cell *matHeaderCellDef> Zgloszona oferta</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.zgloszonaOferta.tytul }} <a
+          [routerLink]="['/oferta/wyswietl', element.zgloszonaOferta.id]" target="_blank"
+          title="Przejdź do oferty" mat-icon-button color="primary">
+          <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
+        </a></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="przeczytane">
+        <mat-header-cell *matHeaderCellDef> Przeczytane</mat-header-cell>
+        <mat-cell style="overflow: initial;" *matCellDef="let element">
+          <mat-checkbox [(ngModel)]="element.przeczytane"
+                        (change)="zmienPrzeczytaneZgloszenieOferty(element)"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['dataDodania', 'zgloszonaOferta', 'powod', 'tresc', 'przeczytane']"></mat-header-row>
+      <mat-row [ngClass]="{'bgc-pink-50': !row.przeczytane}"
+               *matRowDef="let row; columns: ['dataDodania', 'zgloszonaOferta', 'powod', 'tresc', 'przeczytane'];"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-title>Przeglądanie zgłoszeń użytkowników</mat-card-title>
+  <mat-card-content>
+    <mat-spinner *ngIf="!zgloszeniaUzytkownikowDataSource"></mat-spinner>
+    <mat-table #table *ngIf="zgloszeniaUzytkownikowDataSource" [dataSource]="zgloszeniaUzytkownikowDataSource">
+
+      <ng-container matColumnDef="dataDodania">
+        <mat-header-cell *matHeaderCellDef> Data i godzina</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.dataDodania | date: 'dd.MM.yyyy HH:mm' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="powod">
+        <mat-header-cell *matHeaderCellDef> Powód</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.powod }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tresc">
+        <mat-header-cell *matHeaderCellDef> Treść</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.tresc }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="zgloszonyUzytkownik">
+        <mat-header-cell *matHeaderCellDef> Zgloszony uzytkownik</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.zgloszonyUzytkownik }} <a
+          [routerLink]="['/uzytkownik/profil', element.zgloszonyUzytkownik]" target="_blank"
+          title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
+          <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
+        </a></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="przeczytane">
+        <mat-header-cell *matHeaderCellDef> Przeczytane</mat-header-cell>
+        <mat-cell style="overflow: initial;" *matCellDef="let element">
+          <mat-checkbox [(ngModel)]="element.przeczytane"
+                        (change)="zmienPrzeczytaneZgloszenieUzytkownika(element)"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['dataDodania', 'zgloszonyUzytkownik', 'powod', 'tresc', 'przeczytane']"></mat-header-row>
+      <mat-row [ngClass]="{'bgc-pink-50': !row.przeczytane}"
+               *matRowDef="let row; columns: ['dataDodania', 'zgloszonyUzytkownik', 'powod', 'tresc', 'przeczytane'];"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

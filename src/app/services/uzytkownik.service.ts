@@ -25,6 +25,10 @@ export class UzytkownikService {
     return this.http.post<any>(environment.restUrl + '/zgloszeniauzytkownikow', data);
   }
 
+  patchZgloszenieUzytkownika(id: number, data: any) {
+    return this.http.patch(environment.restUrl + '/zgloszeniauzytkownikow/' + id, data);
+  }
+
   /**
    * Metoda obsługująca dodanie zasobów za pomocą żądania PUT.
    * @param {string} url adres zasobu

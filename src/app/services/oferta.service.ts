@@ -67,6 +67,10 @@ export class OfertaService {
     return this.http.get<any>(environment.restUrl + '/zgloszeniaofert?projection=verbose');
   }
 
+  patchZgloszenieOferty(id: number, data: any) {
+    return this.http.patch(environment.restUrl + '/zgloszeniaofert/' + id, data);
+  }
+
   /**
    * Funkcja pobierająca oferty z usługi REST
    * @author Piotr Podbielski

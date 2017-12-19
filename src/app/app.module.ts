@@ -11,6 +11,7 @@ import {
   MatButtonModule,
   MatButtonToggleModule,
   MatCardModule,
+  MatCheckboxModule,
   MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
@@ -73,12 +74,11 @@ import {AutentykacjaService} from './services/autentykacja.service';
 import {PrzejrzyjProfilComponent} from './components/przejrzyj-profil/przejrzyj-profil.component';
 import {KeysPipe} from './pipes/keys.pipe';
 import {CapitalizePipe} from './pipes/capitalize.pipe';
-import {PrzejrzyjZgloszeniaUzytkownikowComponent} from './components/przejrzyj-zgloszenia-uzytkownikow/przejrzyj-zgloszenia-uzytkownikow.component';
 import {PrzejrzyjOferteComponent} from './components/przejrzyj-oferte/przejrzyj-oferte.component';
 import {PrzejrzyjUwagiComponent} from './components/przejrzyj-uwagi/przejrzyj-uwagi.component';
-import {PrzejrzyjZgloszeniaOfertComponent} from './components/przejrzyj-zgloszenia-ofert/przejrzyj-zgloszenia-ofert.component';
 import {PrzejrzyjDostepneOfertyComponent} from './components/przejrzyj-dostepne-oferty/przejrzyj-dostepne-oferty.component';
 import {ZapoznajSieZSerwisemComponent} from './components/zapoznaj-sie-z-serwisem/zapoznaj-sie-z-serwisem.component';
+import {PrzejrzyjZgloszeniaComponent} from './components/przejrzyj-zgloszenia/przejrzyj-zgloszenia.component';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -181,14 +181,9 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Panel administratora'}
   },
   {
-    path: 'administrator/zgloszeniauzytkownikow',
-    component: PrzejrzyjZgloszeniaUzytkownikowComponent,
-    data: {title: 'Fast Courier - Zgłoszenia użytkowników'}
-  },
-  {
-    path: 'administrator/zgloszeniaofert',
-    component: PrzejrzyjZgloszeniaOfertComponent,
-    data: {title: 'Fast Courier - Zgłoszenia ofert'}
+    path: 'administrator/zgloszenia',
+    component: PrzejrzyjZgloszeniaComponent,
+    data: {title: 'Fast Courier - Lista zgłoszeń'}
   },
   {
     path: 'administrator/uwagi',
@@ -233,12 +228,11 @@ const appRoutes: Routes = [
     PrzejrzyjProfilComponent,
     KeysPipe,
     CapitalizePipe,
-    PrzejrzyjZgloszeniaUzytkownikowComponent,
-    PrzejrzyjZgloszeniaOfertComponent,
     PrzejrzyjOferteComponent,
     PrzejrzyjUwagiComponent,
     PrzejrzyjDostepneOfertyComponent,
     ZapoznajSieZSerwisemComponent,
+    PrzejrzyjZgloszeniaComponent,
   ],
   imports: [
     BrowserModule,
@@ -275,6 +269,7 @@ const appRoutes: Routes = [
     MatAutocompleteModule,
     MatChipsModule,
     MatExpansionModule,
+    MatCheckboxModule,
     /** Covalent Modules */
     CovalentCommonModule,
     CovalentLayoutModule,
