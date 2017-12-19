@@ -66,10 +66,22 @@ export class OfertaService {
   }
 
   /**
+   * Funkcja pobierająca oferty z usługi REST
    * @author Piotr Podbielski
    * @returns {Observable<Object>} Obiekt typu observable zwracający wynik wykonania żądania HTTP, które pobiera listę ofert przez REST.
    */
   getOferty() {
     return this.http.get<any>(environment.restUrl + '/oferty?projection=verbose');
+  }
+
+  /**
+   * Funkcja łącząca ofertę z użytkownikiem poprzez usługę REST
+   * @author Piotr Podbielski
+   * @param {string} url adres url do endpointa któremu przekazujemy listę użytkowników, którzy mają być spięci z daną ofertą
+   * @param data lista użytkowników, którzy mają być spięci z daną ofertą
+   * @returns {Observable<Object>}
+   */
+  postUzytkownikOfertyOferta(url: string, data: any) {
+    return this.http.put<any>(url, data, {headers: {'Content-Type': 'text/uri-list'}});
   }
 }

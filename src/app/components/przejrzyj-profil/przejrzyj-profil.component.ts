@@ -11,7 +11,7 @@ import {MatSnackBar} from "@angular/material";
 })
 export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
   login: string;
-  uzytkownik: any = {};
+  uzytkownik: any;
   private sub: any;
 
   constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService,
@@ -24,6 +24,8 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
 
       this.uzytkownikService.getUzytkownik(this.login).subscribe(uzytkownik => {
         this.uzytkownik = uzytkownik;
+
+        this.uzytkownik.dataUrodzenia = new Date(uzytkownik.dataUrodzenia);
       }, error2 => {
         this.snackBar.open('Wystąpił błąd. Upewnij się, czy użytkownik o podanym loginie istnieje.', null, {
           duration: 2000,
