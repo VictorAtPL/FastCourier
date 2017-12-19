@@ -20,8 +20,7 @@ export class OfertaService {
   }
 
   /**
-   * Metoda wstawiająca daną ofertę
-   * @author Przemysław Proczek
+   * Metoda odpowiedzialna za wgranie nowej oferty do REST.
    * @param data
    * @returns {Observable<Object>}
    */
@@ -30,8 +29,7 @@ export class OfertaService {
   }
 
   /**
-   * Metoda pobierająca ofertę o danym numerze
-   * @author Adrian Plichta
+   * Metoda odpowiedzialna za pobranie danej oferty z REST.
    * @param {number} id
    * @returns {Observable<Object>}
    */
