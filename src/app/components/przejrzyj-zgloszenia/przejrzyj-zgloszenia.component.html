@@ -66,18 +66,24 @@
 
       <ng-container matColumnDef="zgloszonyUzytkownik">
         <mat-header-cell *matHeaderCellDef> Zgloszony uzytkownik</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{ element.zgloszonyUzytkownik }} <a
-          [routerLink]="['/uzytkownik/profil', element.zgloszonyUzytkownik]" target="_blank"
+        <mat-cell *matCellDef="let element"> {{ element.zgloszonyUzytkownik.login }} <a
+          [routerLink]="['/uzytkownik/profil', element.zgloszonyUzytkownik.login]" target="_blank"
           title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
           <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
         </a></mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="przeczytane">
-        <mat-header-cell *matHeaderCellDef> Przeczytane</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Akcje</mat-header-cell>
         <mat-cell style="overflow: initial;" *matCellDef="let element">
-          <mat-checkbox [(ngModel)]="element.przeczytane"
+          <mat-checkbox [disabled]="element.zgloszonyUzytkownik.zablokowany" matTooltip="Oznacz jako przeczytane"
+                        [(ngModel)]="element.przeczytane"
                         (change)="zmienPrzeczytaneZgloszenieUzytkownika(element)"></mat-checkbox>
+          <button matTooltip="Zablokuj użytkownika"
+                  [disabled]="element.zgloszonyUzytkownik.rola === 'ROLE_ADMIN' || element.zgloszonyUzytkownik.zablokowany"
+                  title="Zablokuj użytkownika" mat-icon-button color="warn" (click)="zablokujUzytkownika(element)">
+            <mat-icon aria-label="Zablokuj użytkownika">block</mat-icon>
+          </button>
         </mat-cell>
       </ng-container>
 

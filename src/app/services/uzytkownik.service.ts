@@ -16,6 +16,10 @@ export class UzytkownikService {
     return this.http.get<any>(environment.restUrl + '/uzytkownicy/' + login);
   }
 
+  patchUzytkownik(login: string, data: any) {
+    return this.http.patch(environment.restUrl + '/uzytkownicy/' + login, data);
+  }
+
   /**
    * Metody obsługujące żądanie POST zgłaszania użytkowników
    * @param data zawartość formularza

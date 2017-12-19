@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {OfertaService} from '../../services/oferta.service';
 import {UzytkownikService} from '../../services/uzytkownik.service';
 import {DataSource} from '@angular/cdk/collections';
-import {MatTableDataSource} from '@angular/material';
+import {MatSnackBar, MatTableDataSource} from '@angular/material';
+import {TdDialogService} from '@covalent/core';
 
 export interface ZgloszonaOferta {
   id: number;
@@ -22,9 +23,15 @@ export interface ZgloszenieUzytkownika {
   id: number;
   powod: string;
   tresc: string;
-  zgloszonyUzytkownik: string;
+  zgloszonyUzytkownik: ZgloszonyUzytkownik;
   dataDodania: Date;
   przeczytane: boolean;
+}
+
+export interface ZgloszonyUzytkownik {
+  login: string;
+  rola: string;
+  zablokowany: boolean;
 }
 
 /**
@@ -58,10 +65,15 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
    * @param {OfertaService} ofertaService
    * @param {UzytkownikService} uzytkownikService
    */
-  constructor(private ofertaService: OfertaService, private uzytkownikService: UzytkownikService) {
+  constructor(private ofertaService: OfertaService,
+              private uzytkownikService: UzytkownikService,
+              private snackBar: MatSnackBar,
+              private _dialogService: TdDialogService,
+              private _viewContainerRef: ViewContainerRef) {
   }
 
   ngOnInit() {
+
     this.ofertaService.getZgloszeniaOfert().subscribe(result => {
       const data: ZgloszenieOferty[] = [];
 
@@ -89,7 +101,7 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
           id: zgloszenieUzytkownika.id,
           powod: zgloszenieUzytkownika.powod, tresc: zgloszenieUzytkownika.tresc,
           dataDodania: new Date(zgloszenieUzytkownika.dataDodania), przeczytane: zgloszenieUzytkownika.przeczytane,
-          zgloszonyUzytkownik: zgloszenieUzytkownika.zgloszonyUzytkownik[0].login
+          zgloszonyUzytkownik: zgloszenieUzytkownika.zgloszonyUzytkownik[0]
         });
       });
       this.zgloszeniaUzytkownikowDataSource = new MatTableDataSource<ZgloszenieUzytkownika>(data);
@@ -103,6 +115,30 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
 
   zmienPrzeczytaneZgloszenieOferty(element: ZgloszenieOferty) {
     this.ofertaService.patchZgloszenieOferty(element.id, {'przeczytane': element.przeczytane}).subscribe(() => {
+    });
+  }
+
+  zablokujUzytkownika(element: ZgloszenieUzytkownika) {
+    this._dialogService.openConfirm({
+      message: 'Blokowanie użytkownika jest operacją, której nie można cofnąć. Czy na pewno chcesz zablokować użytkownika?',
+      disableClose: false,
+      viewContainerRef: this._viewContainerRef,
+      cancelButton: 'Anuluj',
+      acceptButton: 'Potwierdź',
+    }).afterClosed().subscribe((accept: boolean) => {
+      if (accept) {
+        element.przeczytane = true;
+
+        this.uzytkownikService.patchZgloszenieUzytkownika(element.id, {'przeczytane': element.przeczytane}).subscribe(() => {
+          this.uzytkownikService.patchUzytkownik(element.zgloszonyUzytkownik.login, {'zablokowany': true}).subscribe(() => {
+            element.zgloszonyUzytkownik.zablokowany = true;
+
+            this.snackBar.open('Zablokowano użytkownika.', null, {
+              duration: 2000,
+            });
+          });
+        });
+      }
     });
   }
 }

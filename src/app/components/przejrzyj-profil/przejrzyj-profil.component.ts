@@ -1,7 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewContainerRef} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UzytkownikService} from "../../services/uzytkownik.service";
 import {MatSnackBar} from "@angular/material";
+import {TdDialogService} from "@covalent/core";
+import {AutentykacjaService} from "../../services/autentykacja.service";
 
 /**
  * Klasa odpowiedzialna za widok strony Przejrzyj profil
@@ -33,21 +35,31 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
    */
   private sub: any;
 
+  zalogowanyUzytkownik: any;
+
   /**
    * Konstruktor odpowiedzialny za powołanie nowej instancji obiektu.
    * @param {ActivatedRoute} route
    * @param {UzytkownikService} uzytkownikService
    * @param {MatSnackBar} snackBar
    * @param {Router} router
+   * @param _dialogService
+   * @param _viewContainerRef
    */
   constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService,
-              private snackBar: MatSnackBar, private router: Router) {
+              private snackBar: MatSnackBar, private router: Router,
+              private _dialogService: TdDialogService, private _viewContainerRef: ViewContainerRef,
+              private autentykacjaService: AutentykacjaService) {
   }
 
   /**
    * Metoda odpowiedzialna za pobranie danych profilu z backendu.
    */
   ngOnInit() {
+    this.autentykacjaService.czyZalogowany().subscribe(next => {
+      this.zalogowanyUzytkownik = next;
+    });
+
     this.sub = this.route.params.subscribe(params => {
       this.login = params['login'];
 
@@ -77,5 +89,25 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
    */
   zglosUzytkownika(login: String) {
     this.router.navigate(['/uzytkownik/zglos', login]);
+  }
+
+  zablokujUzytkownika(login: string, uzytkownik: any) {
+    this._dialogService.openConfirm({
+      message: 'Blokowanie użytkownika jest operacją, której nie można cofnąć. Czy na pewno chcesz zablokować użytkownika?',
+      disableClose: false,
+      viewContainerRef: this._viewContainerRef,
+      cancelButton: 'Anuluj',
+      acceptButton: 'Potwierdź',
+    }).afterClosed().subscribe((accept: boolean) => {
+      if (accept) {
+        this.uzytkownikService.patchUzytkownik(login, {'zablokowany': true}).subscribe(() => {
+          uzytkownik.zablokowany = true;
+
+          this.snackBar.open('Zablokowano użytkownika.', null, {
+            duration: 2000,
+          });
+        });
+      }
+    });
   }
 }
