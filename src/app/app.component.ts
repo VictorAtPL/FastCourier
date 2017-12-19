@@ -78,6 +78,12 @@ export class AppComponent {
         'path': 'administrator/panel',
         'enable': true,
         'role': ['ROLE_ADMIN']
+      },
+      {
+        'label': 'Pomoc',
+        'path': 'serwis/informacje',
+        'enable': true,
+        'role': ['', 'ROLE_USER', 'ROLE_ADMIN']
       }
     ];
 

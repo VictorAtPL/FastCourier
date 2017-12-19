@@ -14,6 +14,7 @@ import {
   MatChipsModule,
   MatDatepickerModule,
   MatDialogModule,
+  MatExpansionModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
@@ -60,7 +61,6 @@ import {ZglaszanieUzytkownikaComponent} from './components/zglaszanie-uzytkownik
 import {ZglaszanieOfertyComponent} from './components/zglaszanie-oferty/zglaszanie-oferty.component';
 import {ZglaszanieTransakcjiComponent} from './components/zglaszanie-transakcji/zglaszanie-transakcji.component';
 import {ZglaszanieUwagiComponent} from './components/zglaszanie-uwagi/zglaszanie-uwagi.component';
-import {EdytowaniaZapoznaniaComponent} from './components/edytowania-zapoznania/edytowania-zapoznania.component';
 import {EdycjaProfiluUzytkownikaComponent} from './components/edycja-profilu-uzytkownika/edycja-profilu-uzytkownika.component';
 import {DodawanieRegulaminuComponent} from './components/dodawanie-regulaminu/dodawanie-regulaminu.component';
 import {OcenaTransakcjiComponent} from './components/ocena-transakcji/ocena-transakcji.component';
@@ -71,17 +71,17 @@ import {DatePipe} from '@angular/common';
 import {CustomFormsModule} from 'ng2-validation';
 import {AutentykacjaService} from './services/autentykacja.service';
 import {PrzejrzyjProfilComponent} from './components/przejrzyj-profil/przejrzyj-profil.component';
-import {KeysPipe} from "./pipes/keys.pipe";
-import {CapitalizePipe} from "./pipes/capitalize.pipe";
+import {KeysPipe} from './pipes/keys.pipe';
+import {CapitalizePipe} from './pipes/capitalize.pipe';
 import {PrzejrzyjZgloszeniaUzytkownikowComponent} from './components/przejrzyj-zgloszenia-uzytkownikow/przejrzyj-zgloszenia-uzytkownikow.component';
 import {PrzejrzyjOferteComponent} from './components/przejrzyj-oferte/przejrzyj-oferte.component';
 import {PrzejrzyjUwagiComponent} from './components/przejrzyj-uwagi/przejrzyj-uwagi.component';
-import {PrzejrzyjZgloszeniaOfertComponent} from "./components/przejrzyj-zgloszenia-ofert/przejrzyj-zgloszenia-ofert.component";
+import {PrzejrzyjZgloszeniaOfertComponent} from './components/przejrzyj-zgloszenia-ofert/przejrzyj-zgloszenia-ofert.component';
 import {PrzejrzyjDostepneOfertyComponent} from './components/przejrzyj-dostepne-oferty/przejrzyj-dostepne-oferty.component';
+import {ZapoznajSieZSerwisemComponent} from './components/zapoznaj-sie-z-serwisem/zapoznaj-sie-z-serwisem.component';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
- * @type {[{path: string; component: LogowanieComponent; data: {title: string}} , {path: string; redirectTo: string; pathMatch: string} , {path: string; component: StronaGlownaComponent; data: {title: string}} , {path: string; component: OcenaTransakcjiComponent; data: {title: string}} , {path: string; component: DodawanieRegulaminuComponent; data: {title: string}} , {path: string; component: EdycjaProfiluUzytkownikaComponent; data: {title: string}} , {path: string; component: ZglaszanieUwagiComponent; data: {title: string}} , {path: string; component: ZglaszanieOfertyComponent; data: {title: string}} , {path: string; component: DodawanieOfertyComponent; data: {title: string}} , {path: string; component: EdytowanieOfertyComponent; data: {title: string}} , {path: string; component: SzukanieZaawansowaneComponent; data: {title: string}} , {path: string; component: RejestracjaComponent; data: {title: string}} , {path: string; component: PisanieWiadomosciComponent; data: {title: string}} , {path: string; component: ZglaszanieUzytkownikaComponent; data: {title: string}} , {path: string; component: ZglaszanieTransakcjiComponent; data: {title: string}} , {path: string; component: EdytowaniaZapoznaniaComponent; data: {title: string}} , {path: string; component: PanelUzytkownikaComponent; data: {title: string}} , {path: string; component: PanelAdministratoraComponent; data: {title: string}} , {path: string; redirectTo: string}]}
  */
 const appRoutes: Routes = [
   {
@@ -171,11 +171,6 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Zgłaszanie transakcji'}
   },
   {
-    path: 'administrator/edytuj_opis',
-    component: EdytowaniaZapoznaniaComponent,
-    data: {title: 'Fast Courier - Edytuj zapoznanie się z serwisem'}
-  },
-  {
     path: 'uzytkownik/panel',
     component: PanelUzytkownikaComponent,
     data: {title: 'Fast Courier - Panel użytkownika'}
@@ -206,6 +201,11 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Profil użytkownika'}
   },
   {
+    path: 'serwis/informacje',
+    component: ZapoznajSieZSerwisemComponent,
+    data: {title: 'Fast Courier - Zapoznaj się z serwisem'}
+  },
+  {
     path: '**',
     redirectTo: 'powitanie',
   }
@@ -227,7 +227,6 @@ const appRoutes: Routes = [
     ZglaszanieUzytkownikaComponent,
     ZglaszanieOfertyComponent,
     ZglaszanieTransakcjiComponent,
-    EdytowaniaZapoznaniaComponent,
     PanelAdministratoraComponent,
     PanelUzytkownikaComponent,
     EdytowanieOfertyComponent,
@@ -239,6 +238,7 @@ const appRoutes: Routes = [
     PrzejrzyjOferteComponent,
     PrzejrzyjUwagiComponent,
     PrzejrzyjDostepneOfertyComponent,
+    ZapoznajSieZSerwisemComponent,
   ],
   imports: [
     BrowserModule,
@@ -274,6 +274,7 @@ const appRoutes: Routes = [
     MatSliderModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatExpansionModule,
     /** Covalent Modules */
     CovalentCommonModule,
     CovalentLayoutModule,
