@@ -37,6 +37,10 @@ export class OfertaService {
     return this.http.get<any>(environment.restUrl + '/oferty/' + id);
   }
 
+  patchOferta(id: number, data: any) {
+    return this.http.patch(environment.restUrl + '/oferty/' + id, data);
+  }
+
   /**
    * Metoda wstawiająca zgłoszenie oferty
    * @author Michał Pruchniewski

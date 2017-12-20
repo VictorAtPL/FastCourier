@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {OfertaService} from '../../services/oferta.service';
+import {TdDialogService} from "@covalent/core";
+import {AutentykacjaService} from "../../services/autentykacja.service";
 
 /**
  * Klasa odpowiedzialna za widok strony przeglądania oferty
@@ -33,6 +35,8 @@ export class PrzejrzyjOferteComponent implements OnInit {
    */
   private sub: any;
 
+  zalogowanyUzytkownik: any;
+
   /**
    * Konstruktor odpowiedzialny za powołanie nowej instancji oferty.
    * @param {ActivatedRoute} route
@@ -40,13 +44,20 @@ export class PrzejrzyjOferteComponent implements OnInit {
    * @param {MatSnackBar} snackBar
    * @param {Router} router
    */
-  constructor(private route: ActivatedRoute, private ofertaService: OfertaService, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private route: ActivatedRoute, private ofertaService: OfertaService,
+              private snackBar: MatSnackBar, private router: Router,
+              private _dialogService: TdDialogService, private _viewContainerRef: ViewContainerRef,
+              private autentykacjaService: AutentykacjaService) {
   }
 
   /**
    * Metoda odpowiedzialna za pobranie danych oferty z backendu.
    */
   ngOnInit() {
+    this.autentykacjaService.czyZalogowany().subscribe(next => {
+      this.zalogowanyUzytkownik = next;
+    });
+
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
 
@@ -72,16 +83,6 @@ export class PrzejrzyjOferteComponent implements OnInit {
     this.router.navigate(['/oferta/zglos', this.id]);
   }
 
-  czyOfertaWyrozniona() {
-    const oferta = this.oferta;
-    console.log(oferta.czyWyroznic);
-
-    if (oferta.czyWyroznic) {
-      return true;
-    }
-    return false;
-  }
-
   /**
    * Funkcja konwertująca ciągi znaków daty wyjazdu i godziny wyjazdu w obiekt JavaScript typu Date
    * @param {string} dataWyjazdu
@@ -91,5 +92,25 @@ export class PrzejrzyjOferteComponent implements OnInit {
   private fetchDataGodzinaWyjazdu(dataWyjazdu: string, godzinaWyjazdu: string): Date {
     const godzinaWyjazdu_a = godzinaWyjazdu.split(':');
     return new Date(new Date(dataWyjazdu).setHours(Number(godzinaWyjazdu_a[0]), Number(godzinaWyjazdu_a[1]), 0));
+  }
+
+  zablokujOferte(oferta: any) {
+    this._dialogService.openConfirm({
+      message: 'Blokowanie oferty jest operacją, której nie można cofnąć. Czy na pewno chcesz zablokować ofertę?',
+      disableClose: false,
+      viewContainerRef: this._viewContainerRef,
+      cancelButton: 'Anuluj',
+      acceptButton: 'Potwierdź',
+    }).afterClosed().subscribe((accept: boolean) => {
+      if (accept) {
+        this.ofertaService.patchOferta(this.id, {'zablokowana': true}).subscribe(() => {
+          oferta.zablokowana = true;
+
+          this.snackBar.open('Zablokowano ofertę.', null, {
+            duration: 2000,
+          });
+        });
+      }
+    });
   }
 }

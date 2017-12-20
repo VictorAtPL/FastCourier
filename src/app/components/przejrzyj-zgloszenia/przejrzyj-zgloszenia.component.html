@@ -29,16 +29,21 @@
       </ng-container>
 
       <ng-container matColumnDef="przeczytane">
-        <mat-header-cell *matHeaderCellDef> Przeczytane</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Akcje</mat-header-cell>
         <mat-cell style="overflow: initial;" *matCellDef="let element">
-          <mat-checkbox [(ngModel)]="element.przeczytane"
+          <mat-checkbox [disabled]="element.zgloszonaOferta.zablokowana" matTooltip="Oznacz jako przeczytane"
+                        [(ngModel)]="element.przeczytane"
                         (change)="zmienPrzeczytaneZgloszenieOferty(element)"></mat-checkbox>
+          <button matTooltip="Zablokuj ofertę" [disabled]="element.zgloszonaOferta.zablokowana"
+                  title="Zablokuj ofertę" mat-icon-button color="warn" (click)="zablokujOferte(element)">
+            <mat-icon aria-label="Zablokuj ofertę">block</mat-icon>
+          </button>
         </mat-cell>
       </ng-container>
 
       <mat-header-row
         *matHeaderRowDef="['dataDodania', 'zgloszonaOferta', 'powod', 'tresc', 'przeczytane']"></mat-header-row>
-      <mat-row [ngClass]="{'bgc-pink-50': !row.przeczytane}"
+      <mat-row [ngClass]="{'bgc-pink-50': (!row.przeczytane && !row.zgloszonaOferta.zablokowana)}"
                *matRowDef="let row; columns: ['dataDodania', 'zgloszonaOferta', 'powod', 'tresc', 'przeczytane'];"></mat-row>
     </mat-table>
   </mat-card-content>
@@ -89,7 +94,7 @@
 
       <mat-header-row
         *matHeaderRowDef="['dataDodania', 'zgloszonyUzytkownik', 'powod', 'tresc', 'przeczytane']"></mat-header-row>
-      <mat-row [ngClass]="{'bgc-pink-50': !row.przeczytane}"
+      <mat-row [ngClass]="{'bgc-pink-50': !row.przeczytane && !row.zgloszonyUzytkownik.zablokowany}"
                *matRowDef="let row; columns: ['dataDodania', 'zgloszonyUzytkownik', 'powod', 'tresc', 'przeczytane'];"></mat-row>
     </mat-table>
   </mat-card-content>

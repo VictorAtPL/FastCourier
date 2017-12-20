@@ -3,57 +3,63 @@
     <mat-chip *ngIf="oferta.czyWyroznic" color="accent" selected="true">Oferta wyróżniona</mat-chip>
   </mat-card-title>
   <mat-card-content>
-    <div class="mat-table">
-      <div class="mat-row">
-        <div class="mat-cell" flex-gt-xs="25"><strong>Trasa</strong></div>
-        <div class="mat-cell"><span>{{ oferta.miastoPoczatkowe }}</span>
-          <mat-icon aria-hidden="true" color="accent">arrow_forward</mat-icon>
-          <span>{{ oferta.miastoDocelowe }}</span></div>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell" flex-gt-xs="25"><strong>Data i godzina wyjazdu</strong></div>
-        <div class="mat-cell"> {{ oferta.dataGodzinaWyjazdu | date: 'dd.MM.yyyy HH:mm' }}</div>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell" flex-gt-xs="25"><strong>Wystawiający</strong></div>
-        <div class="mat-cell" flex-gt-xs="25">{{ oferta._embedded.uzytkownik.login }} <a
-          [routerLink]="['/uzytkownik/profil', oferta._embedded.uzytkownik.login]" target="_blank"
-          title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
-          <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
-        </a></div>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell" flex-gt-xs="25"><strong>Kategorie paczek</strong></div>
-        <div class="mat-cell">
-          <mat-chip-list>
-            <mat-chip color="primary" *ngFor="let kategoria of oferta.kategoriePaczek">{{ kategoria }}</mat-chip>
-          </mat-chip-list>
+    <ng-container *ngIf="!oferta.zablokowana; else elseBlock">
+      <div class="mat-table">
+        <div class="mat-row">
+          <div class="mat-cell" flex-gt-xs="25"><strong>Trasa</strong></div>
+          <div class="mat-cell"><span>{{ oferta.miastoPoczatkowe }}</span>
+            <mat-icon aria-hidden="true" color="accent">arrow_forward</mat-icon>
+            <span>{{ oferta.miastoDocelowe }}</span></div>
+        </div>
+        <div class="mat-row">
+          <div class="mat-cell" flex-gt-xs="25"><strong>Data i godzina wyjazdu</strong></div>
+          <div class="mat-cell"> {{ oferta.dataGodzinaWyjazdu | date: 'dd.MM.yyyy HH:mm' }}</div>
+        </div>
+        <div class="mat-row">
+          <div class="mat-cell" flex-gt-xs="25"><strong>Wystawiający</strong></div>
+          <div class="mat-cell" flex-gt-xs="25">{{ oferta._embedded.uzytkownik.login }} <a
+            [routerLink]="['/uzytkownik/profil', oferta._embedded.uzytkownik.login]" target="_blank"
+            title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
+            <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
+          </a></div>
+        </div>
+        <div class="mat-row">
+          <div class="mat-cell" flex-gt-xs="25"><strong>Kategorie paczek</strong></div>
+          <div class="mat-cell">
+            <mat-chip-list>
+              <mat-chip color="primary" *ngFor="let kategoria of oferta.kategoriePaczek">{{ kategoria }}</mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+        <div class="mat-row">
+          <div class="mat-cell" flex-gt-xs="25"><strong>Rozmiary paczek</strong></div>
+          <div class="mat-cell">
+            <mat-chip-list>
+              <mat-chip color="primary" *ngFor="let rozmiar of oferta.rozmiaryPaczek">{{ rozmiar }}</mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+        <div class="mat-row">
+          <div class="mat-cell" flex-gt-xs="25"><strong>Cena</strong></div>
+          <div class="mat-cell"> {{ oferta.cenaMinimalna }}-{{ oferta.cenaMaksymalna }}zł</div>
+        </div>
+        <div class="mat-row" *ngIf="oferta.maksymalnaWagaPaczki">
+          <div class="mat-cell" flex-gt-xs="25"><strong>Maksymalna waga</strong></div>
+          <div class="mat-cell"> {{ oferta.maksymalnaWagaPaczki }}kg</div>
+        </div>
+        <div class="mat-row">
+          <div class="mat-cell"><strong>Opis</strong></div>
+        </div>
+        <div class="mat-row">
+          <div class="mat-cell">{{ oferta.opis }}</div>
         </div>
       </div>
-      <div class="mat-row">
-        <div class="mat-cell" flex-gt-xs="25"><strong>Rozmiary paczek</strong></div>
-        <div class="mat-cell">
-          <mat-chip-list>
-            <mat-chip color="primary" *ngFor="let rozmiar of oferta.rozmiaryPaczek">{{ rozmiar }}</mat-chip>
-          </mat-chip-list>
-        </div>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell" flex-gt-xs="25"><strong>Cena</strong></div>
-        <div class="mat-cell"> {{ oferta.cenaMinimalna }}-{{ oferta.cenaMaksymalna }}zł</div>
-      </div>
-      <div class="mat-row" *ngIf="oferta.maksymalnaWagaPaczki">
-        <div class="mat-cell" flex-gt-xs="25"><strong>Maksymalna waga</strong></div>
-        <div class="mat-cell"> {{ oferta.maksymalnaWagaPaczki }}kg</div>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell"><strong>Opis</strong></div>
-      </div>
-      <div class="mat-row">
-        <div class="mat-cell">{{ oferta.opis }}</div>
-      </div>
-    </div>
-    <br/>
-    <button mat-raised-button color="warn" (click)="zglosOferte()">Zgłoś oferte</button>
+      <br/>
+      <button mat-raised-button color="warn" (click)="zglosOferte()">Zgłoś oferte</button>
+      <button *ngIf="zalogowanyUzytkownik && zalogowanyUzytkownik.rola === 'ROLE_ADMIN'" mat-raised-button
+              color="warn" (click)="zablokujOferte(oferta)">Zablokuj ofertę
+      </button>
+    </ng-container>
+    <ng-template #elseBlock>Oferta jest zablokowana.</ng-template>
   </mat-card-content>
 </mat-card>

@@ -8,6 +8,7 @@ import {TdDialogService} from '@covalent/core';
 export interface ZgloszonaOferta {
   id: number;
   tytul: string;
+  zablokowana: boolean;
 }
 
 export interface ZgloszenieOferty {
@@ -73,7 +74,6 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.ofertaService.getZgloszeniaOfert().subscribe(result => {
       const data: ZgloszenieOferty[] = [];
 
@@ -83,10 +83,7 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
           id: zgloszenieOferty.id,
           powod: zgloszenieOferty.powod, tresc: zgloszenieOferty.tresc,
           dataDodania: new Date(zgloszenieOferty.dataDodania), przeczytane: zgloszenieOferty.przeczytane,
-          zgloszonaOferta: {
-            id: zgloszenieOferty.zgloszonaOferta[0].id,
-            tytul: zgloszenieOferty.zgloszonaOferta[0].tytul
-          }
+          zgloszonaOferta: zgloszenieOferty.zgloszonaOferta[0]
         });
       });
       this.zgloszeniaOfertDataSource = new MatTableDataSource<ZgloszenieOferty>(data);
@@ -134,6 +131,30 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
             element.zgloszonyUzytkownik.zablokowany = true;
 
             this.snackBar.open('Zablokowano użytkownika.', null, {
+              duration: 2000,
+            });
+          });
+        });
+      }
+    });
+  }
+
+  zablokujOferte(element: ZgloszenieOferty) {
+    this._dialogService.openConfirm({
+      message: 'Blokowanie oferty jest operacją, której nie można cofnąć. Czy na pewno chcesz zablokować ofertę?',
+      disableClose: false,
+      viewContainerRef: this._viewContainerRef,
+      cancelButton: 'Anuluj',
+      acceptButton: 'Potwierdź',
+    }).afterClosed().subscribe((accept: boolean) => {
+      if (accept) {
+        element.przeczytane = true;
+
+        this.ofertaService.patchZgloszenieOferty(element.id, {'przeczytane': element.przeczytane}).subscribe(() => {
+          this.ofertaService.patchOferta(element.zgloszonaOferta.id, {'zablokowana': true}).subscribe(() => {
+            element.zgloszonaOferta.zablokowana = true;
+
+            this.snackBar.open('Zablokowano ofertę.', null, {
               duration: 2000,
             });
           });
