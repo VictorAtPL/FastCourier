@@ -9,3 +9,7 @@
 .example-full-width {
   width: 100%;
 }
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  min-height: 64px;
+}

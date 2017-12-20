@@ -79,6 +79,8 @@ import {PrzejrzyjUwagiComponent} from './components/przejrzyj-uwagi/przejrzyj-uw
 import {PrzejrzyjDostepneOfertyComponent} from './components/przejrzyj-dostepne-oferty/przejrzyj-dostepne-oferty.component';
 import {ZapoznajSieZSerwisemComponent} from './components/zapoznaj-sie-z-serwisem/zapoznaj-sie-z-serwisem.component';
 import {PrzejrzyjZgloszeniaComponent} from './components/przejrzyj-zgloszenia/przejrzyj-zgloszenia.component';
+import {UzytkownikService} from "./services/uzytkownik.service";
+import {OfertaService} from "./services/oferta.service";
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -106,7 +108,7 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier'}
   },
   {
-    path: 'uzytkownik/edytuj_profil',
+    path: 'uzytkownik/edytuj',
     component: EdycjaProfiluUzytkownikaComponent,
     data: {title: 'Fast Courier - Personalizowanie profilu użytkownika'}
   },
@@ -292,7 +294,9 @@ const appRoutes: Routes = [
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
     DatePipe,
-    AutentykacjaService
+    AutentykacjaService,
+    UzytkownikService,
+    OfertaService
   ],
   bootstrap: [AppComponent]
 })

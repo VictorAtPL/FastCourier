@@ -1,23 +1,24 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {environment} from '../../environments/environment';
+import {UzytkownikService} from './uzytkownik.service';
 
 @Injectable()
 export class AutentykacjaService {
   private zalogowanyUzytkownik = new BehaviorSubject<object>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private uzytkownikService: UzytkownikService) {
     if (localStorage.getItem('zalogowanyUzytkownik')) {
       const zalogowanyUzytkownik: any = JSON.parse(localStorage.getItem('zalogowanyUzytkownik'));
 
       this.weryfikuj(zalogowanyUzytkownik.login, zalogowanyUzytkownik.haslo).subscribe(uzytkownik => {
-        if (uzytkownik.haslo === zalogowanyUzytkownik.haslo) {
-          this.zalogowanyUzytkownik.next(zalogowanyUzytkownik);
+        if (String(uzytkownik.haslo) === String(zalogowanyUzytkownik.haslo)) {
+          uzytkownik.login = zalogowanyUzytkownik.login;
+          this.zalogowanyUzytkownik.next(uzytkownik);
         } else {
           this.wyloguj();
         }
-      }, err => this.wyloguj());
+      }, () => this.wyloguj());
     }
   }
 
@@ -25,8 +26,8 @@ export class AutentykacjaService {
     return this.zalogowanyUzytkownik.asObservable();
   }
 
-  weryfikuj(nazwaUzytkownika: String, haslo: String) {
-    return this.http.get<any>(environment.restUrl + '/uzytkownicy/' + nazwaUzytkownika);
+  weryfikuj(nazwaUzytkownika: string, haslo: string) {
+    return this.uzytkownikService.getUzytkownik(nazwaUzytkownika);
   }
 
   zaloguj(login: string, uzytkownik: any) {

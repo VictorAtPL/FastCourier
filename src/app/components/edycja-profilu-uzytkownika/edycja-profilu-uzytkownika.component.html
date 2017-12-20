@@ -1,38 +1,58 @@
 <mat-card>
-  <mat-card-title class="example-full-width">Formularz edycji profilu użytkownika</mat-card-title>
+  <mat-card-title>Formularz edycji profilu użytkownika</mat-card-title>
+  <mat-card-content>Zmień wartość pól, które chcesz zaktualizować.</mat-card-content>
+</mat-card>
+<mat-card *ngIf="zalogowanyUzytkownik">
   <mat-card-content>
-    <form class="example-form">
-
+    <form class="example-form" [formGroup]="edytujProfilUzytkownikaForm">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Imię">
+        <input matInput type="password" placeholder="Hasło" formControlName="haslo">
+        <mat-hint>Wpisz hasło!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nazwisko">
+        <input matInput type="password" placeholder="Powtórz Hasło">
+        <mat-hint>Potwierdź hasło!</mat-hint>
       </mat-form-field>
-
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Województwo">
+        <input matInput placeholder="Adres e-mail" formControlName="email" [value]="zalogowanyUzytkownik.email">
+        <mat-hint>Wpisz e-mail!</mat-hint>
       </mat-form-field>
-
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Miejscowość">
+        <input matInput placeholder="Imię" formControlName="imie" [value]="zalogowanyUzytkownik.imie">
+        <mat-hint>Wpisz imię!</mat-hint>
       </mat-form-field>
-
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ulica">
+        <input matInput placeholder="Nazwisko" formControlName="nazwisko" [value]="zalogowanyUzytkownik.nazwisko">
+        <mat-hint>Wpisz nazwisko!</mat-hint>
       </mat-form-field>
-
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Telefon" type="number">
+        <input matInput placeholder="Data urodzenia" formControlName="dataUrodzenia"
+               [value]="zalogowanyUzytkownik.dataUrodzenia | date: 'dd.MM.yyyy'">
+        <mat-hint>W formacie rrrr-mm-dd.</mat-hint>
       </mat-form-field>
-
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Data urodzenia" type="date">
+        <input matInput placeholder="Województwo" formControlName="wojewodztwo"
+               [value]="zalogowanyUzytkownik.wojewodztwo">
+        <mat-hint>Wpisz województwo!</mat-hint>
       </mat-form-field>
-
-      <button mat-raised-button>Anuluj</button>
-      <button mat-raised-button color="primary">Zatwierdź</button>
-
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Miejscowość" formControlName="miejscowosc"
+               [value]="zalogowanyUzytkownik.miejscowosc">
+        <mat-hint>Wpisz miejscowość!</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ulica" formControlName="ulica" [value]="zalogowanyUzytkownik.ulica">
+        <mat-hint>Wpisz ulicę!</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nr telefonu" formControlName="numerTelefonu"
+               [value]="zalogowanyUzytkownik.numerTelefonu">
+        <mat-hint>Wpisz nr telefonu!</mat-hint>
+      </mat-form-field>
+      <br><br>
+      <button mat-raised-button color="accent" (click)="edytujProfilUzytkownika(edytujProfilUzytkownikaForm.value)">
+        Zatwierdź
+      </button>
     </form>
   </mat-card-content>
 </mat-card>
