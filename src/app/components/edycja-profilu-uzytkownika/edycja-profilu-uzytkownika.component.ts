@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AutentykacjaService} from '../../services/autentykacja.service';
 import {UzytkownikService} from "../../services/uzytkownik.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -30,14 +30,14 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
 
     this.edytujProfilUzytkownikaForm = new FormGroup({
       haslo: new FormControl(),
-      email: new FormControl(),
-      imie: new FormControl(),
-      nazwisko: new FormControl(),
-      dataUrodzenia: new FormControl(),
+      email: new FormControl('', Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')),
+      imie: new FormControl('', Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')),
+      nazwisko: new FormControl('', Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')),
+      dataUrodzenia: new FormControl('', Validators.pattern('^(0?[1-9]|[12][0-9]|3[01])[.-](0?[1-9]|1[012])[.-]\\d{4}$')),
       wojewodztwo: new FormControl(),
       miejscowosc: new FormControl(),
       ulica: new FormControl(),
-      numerTelefonu: new FormControl()
+      numerTelefonu: new FormControl('', Validators.pattern('^[0-9\\-\\+]{9,15}$'))
     });
   }
 
