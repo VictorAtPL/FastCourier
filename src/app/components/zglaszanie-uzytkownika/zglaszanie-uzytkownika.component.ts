@@ -40,7 +40,7 @@ export class ZglaszanieUzytkownikaComponent implements OnInit, OnDestroy {
    */
   ngOnInit(): void {
     this.zglosUzytkownikaForm = new FormGroup({
-      'powod': new FormControl([Validators.required]),
+      'powod': new FormControl('', [Validators.required]),
       'tresc': new FormControl('', [Validators.required, Validators.minLength(40), Validators.maxLength(500)])
     });
 
