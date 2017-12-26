@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AutentykacjaService} from "../../services/autentykacja.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material";
@@ -18,8 +18,8 @@ export class LogowanieComponent {
 
   constructor(private autentykacjaService: AutentykacjaService, private router: Router, public snackBar: MatSnackBar) {
     this.logowanieForm = new FormGroup({
-      login: new FormControl(''),
-      haslo: new FormControl('')
+      login: new FormControl('', [Validators.required , Validators.maxLength(30)] ),
+      haslo: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
   }
 
