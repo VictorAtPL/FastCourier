@@ -1,9 +1,9 @@
 <mat-card>
   <mat-card-title>Napisz wiadomość</mat-card-title>
   <mat-card-content>
-    <form class="example-form">
+    <form class="example-form" [formGroup]="napiszWiadomoscForm">
 
-      <mat-form-field>
+      <mat-form-field> <!-- Potrzeba dodać logikę do wyboru/wprowadzania użytkowników ~Marcinexxx -->
         <mat-select placeholder="Do: adriik" disabled="disable">
           <mat-option>adrian</mat-option>
           <mat-option>michal</mat-option>
@@ -14,11 +14,21 @@
 
       <mat-form-field class="example-full-width">
         <textarea matInput placeholder="Treść wiadomości" matTextareaAutosize matAutosizeMinRows="4"
-                  matAutosizeMaxRows="20"></textarea>
+                  matAutosizeMaxRows="20" formControlName="tresc" #textarea required maxlength="1000"></textarea>
+        <mat-error
+          *ngIf="this.napiszWiadomoscForm.controls['tresc'].invalid && this.napiszWiadomoscForm.controls['tresc'].errors.minlength">
+          Długość wiadomości musi wynosić co najmniej 5 znaków
+        </mat-error>
+        <mat-error
+          *ngIf="this.napiszWiadomoscForm.controls['tresc'].invalid && this.napiszWiadomoscForm.controls['tresc'].errors.maxlength">
+          Długość wiadomości musi wynosić co najwyżej 1000 znaków
+        </mat-error>
+        <mat-hint>Wprowadź treść wiadomości (min. 5 znaków, max. 1000 znaków)</mat-hint>
+        <mat-hint align="end">{{ textarea.value?.length || 0 }}/1000</mat-hint>
       </mat-form-field>
+      <br><br>
+      <button mat-raised-button>Anuluj</button>
+      <button mat-raised-button color="primary" [disabled]="this.napiszWiadomoscForm.invalid">Wyślij</button>
     </form>
-
-    <button mat-raised-button>Anuluj</button>
-    <button mat-raised-button color="primary">Wyślij</button>
   </mat-card-content>
 </mat-card>
