@@ -12,10 +12,22 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Treść uwagi" rows="10" formControlName="tresc"></textarea>
+        <textarea matInput placeholder="Treść uwagi" matTextareaAutosize matAutosizeMinRows="4"
+                  matAutosizeMaxRows="20" formControlName="tresc" #textarea required maxlength="500"></textarea>
+        <mat-error
+          *ngIf="this.zglosUwageForm.controls['tresc'].invalid && this.zglosUwageForm.controls['tresc'].errors.minlength">
+          Długość opisu zgłoszenia musi wynosić co najmniej 40 znaków
+        </mat-error>
+        <mat-error
+          *ngIf="this.zglosUwageForm.controls['tresc'].invalid && this.zglosUwageForm.controls['tresc'].errors.maxlength">
+          Długość opisu zgłoszenia musi wynosić co najwyżej 500 znaków
+        </mat-error>
+        <mat-hint>Wprowadź opis (min. 40 znaków, max. 500 znaków)</mat-hint>
+        <mat-hint align="end">{{ textarea.value?.length || 0 }}/500</mat-hint>
       </mat-form-field>
-
-      <button mat-raised-button color="primary" (click)="zglos()">Zgłoś</button>
+      <br><br>
+      <button mat-raised-button color="primary" [disabled]="this.zglosUwageForm.invalid" (click)="zglos()">Zgłoś
+      </button>
     </form>
   </mat-card-content>
 </mat-card>
