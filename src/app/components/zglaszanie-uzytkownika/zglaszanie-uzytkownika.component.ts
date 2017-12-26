@@ -3,7 +3,7 @@ import {MatSnackBar} from '@angular/material';
 import {UzytkownikService} from '../../services/uzytkownik.service';
 import {ActivatedRoute} from '@angular/router';
 import {AutentykacjaService} from '../../services/autentykacja.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 /**
  * Logika biznesowa dla komponentu zgłaszania użytkownika
@@ -35,10 +35,13 @@ export class ZglaszanieUzytkownikaComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService, private snackBar: MatSnackBar, private autentykacjaService: AutentykacjaService) {
   }
 
+  /**
+   * Funkcja inicjalizująca formularz zgłaszania użytkownika i  ładująca aktualnie zalogowanego użytkownika
+   */
   ngOnInit(): void {
     this.zglosUzytkownikaForm = new FormGroup({
-      'powod': new FormControl(),
-      'tresc': new FormControl()
+      'powod': new FormControl([Validators.required]),
+      'tresc': new FormControl('', [Validators.required, Validators.minLength(40), Validators.maxLength(500)])
     });
 
     this.autentykacjaService.czyZalogowany().subscribe(next => {
