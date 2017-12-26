@@ -1,27 +1,37 @@
 <mat-card>
   <mat-card-title class="example-full-width">Formularz zgłaszania transakcji</mat-card-title>
   <mat-card-content>
-    <form class="example-form">
-
+    <form class="example-form" [formGroup]="zglosTransakcjeForm">
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Numer transakcji:" disabled value="15">
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-select [(value)]="selected" placeholder="Typ zgłaszanej uwagi">
-          <mat-option value="opcja1">Niezastosowanie się do warunków transakcji przez Kierowcę</mat-option>
-          <mat-option value="opcja2">Niezastosowanie się do warunków transakcji przez Nadawcę</mat-option>
-          <mat-option value="opcja3">Inne</mat-option>
+        <mat-select [(value)]="powod" placeholder="Powod zgloszenia" formControlName="powod" required>
+          <mat-option *ngFor="let powod of powody" [value]="powod">
+            {{ powod.value }}
+          </mat-option>
         </mat-select>
-        <mat-hint>Wybierz typ zgłaszanej uwagi:</mat-hint>
+        <mat-hint>Wybierz jeden z powodów zgłoszenia występujących na liście</mat-hint>
       </mat-form-field>
-      <p>Wybrałeś: {{selected}}</p>
 
       <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Treść uwagi:" rows="10"></textarea>
+        <textarea matInput placeholder="Treść uwagi:" matTextareaAutosize matAutosizeMinRows="4"
+                  matAutosizeMaxRows="20" formControlName="tresc" #textarea required maxlength="500"></textarea>
+        <mat-error
+          *ngIf="this.zglosTransakcjeForm.controls['tresc'].invalid && this.zglosTransakcjeForm.controls['tresc'].errors.minlength">
+          Długość opisu zgłoszenia musi wynosić co najmniej 40 znaków
+        </mat-error>
+        <mat-error
+          *ngIf="this.zglosTransakcjeForm.controls['tresc'].invalid && this.zglosTransakcjeForm.controls['tresc'].errors.maxlength">
+          Długość opisu zgłoszenia musi wynosić co najwyżej 500 znaków
+        </mat-error>
+        <mat-hint>Wprowadź opis (min. 40 znaków, max. 500 znaków)</mat-hint>
+        <mat-hint align="end">{{ textarea.value?.length || 0 }}/500</mat-hint>
       </mat-form-field>
+      <br><br>
       <button mat-raised-button>Anuluj</button>
-      <button mat-raised-button color="primary">Wyślij</button>
+      <button mat-raised-button color="primary" [disabled]="this.zglosTransakcjeForm.invalid">Wyślij</button>
     </form>
   </mat-card-content>
 </mat-card>
