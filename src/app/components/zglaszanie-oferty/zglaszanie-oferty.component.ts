@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
-import {MatSnackBar} from "@angular/material";
-import {OfertaService} from "../../services/oferta.service";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
+import {OfertaService} from '../../services/oferta.service';
 
 /**
  * Logika biznesowa dla komponentu zgłaszania oferty
@@ -65,8 +65,8 @@ export class ZglaszanieOfertyComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.zglosOferteForm = new FormGroup({
-      'powod': new FormControl(),
-      'tresc': new FormControl()
+      'powod': new FormControl('', [Validators.required]),
+      'tresc': new FormControl('', [Validators.required, Validators.minLength(40), Validators.maxLength(500)])
     });
 
     this.sub = this.route.params.subscribe(params => {
