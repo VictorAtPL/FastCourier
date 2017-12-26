@@ -6,7 +6,7 @@
     Tytuł oferty / Miasto początkowe - Miasto docelowe
   </mat-card-subtitle>
   <mat-card-content>
-    <form class="example-form">
+    <form class="example-form" formGroup="ocenaTransakcji">
       <p>Ocena</p>
       <div>
         <mat-icon class="rate rate_selected">star</mat-icon>
@@ -17,10 +17,14 @@
       </div>
       <mat-form-field class="example-full-width">
             <textarea matInput placeholder="Komentarz" matTextareaAutosize matAutosizeMinRows="2"
-                      matAutosizeMaxRows="5"></textarea>
+                      matAutosizeMaxRows="5" formControlName="koment"  #textarea maxlength="500">
+            </textarea>
+        <mat-hint align="end">{{ textarea.value?.length || 0 }}/500</mat-hint>
       </mat-form-field>
+
       <button mat-raised-button>Anuluj</button>
       <button mat-raised-button color="primary">Oceń</button>
     </form>
   </mat-card-content>
 </mat-card>
+
