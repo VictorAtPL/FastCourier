@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {MatSnackBar} from "@angular/material";
-import {UwagaService} from "../../services/uwaga.service";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
+import {UwagaService} from '../../services/uwaga.service';
 
 /**
  * Logika biznesowa dla komponentu zgłaszania uwagi
@@ -47,12 +47,12 @@ export class ZglaszanieUwagiComponent implements OnInit {
   }
 
   /**
-   * Tworzenie obiektu uwagi
+   * Funkcja inicjalizująca formularz zgłaszania uwagi
    */
   ngOnInit(): void {
     this.zglosUwageForm = new FormGroup({
-      'powod': new FormControl(),
-      'tresc': new FormControl()
+      'powod': new FormControl([Validators.required]),
+      'tresc': new FormControl('', [Validators.required, Validators.minLength(40), Validators.maxLength(500)])
     });
   }
 
