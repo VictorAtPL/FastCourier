@@ -34,7 +34,7 @@ export class DodawanieOfertyComponent implements OnInit {
   /**
    * Grupa formatek dotyczących dodawania oferty
    */
-  dodawanieOfertyForm: FormGroup;
+  edytowanieOfertyForm: FormGroup;
 
   /**
    * Formatka do wybierania kategorii paczek
@@ -84,7 +84,7 @@ export class DodawanieOfertyComponent implements OnInit {
     this.cenaMinimalna.setValidators([Validators.required, Validators.min(0), CustomValidators.number,
       Validators.pattern(/^([^\\.]+|[0-9]+\.[0-9]{1,2})$/), this.czyMniejszaRownaOdCenyMaksymalnej(this.cenaMaksymalna)]);
 
-    this.dodawanieOfertyForm = new FormGroup({
+    this.edytowanieOfertyForm = new FormGroup({
       tytul: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(40)]),
       cenaMinimalna: this.cenaMinimalna,
       cenaMaksymalna: this.cenaMaksymalna,
@@ -134,26 +134,26 @@ export class DodawanieOfertyComponent implements OnInit {
    * Funkcja uruchamiająca walidację kontrolki ceny maksymalnej
    */
   weryfikujCeneMaksymalna() {
-    this.dodawanieOfertyForm.controls['cenaMaksymalna'].updateValueAndValidity();
+    this.edytowanieOfertyForm.controls['cenaMaksymalna'].updateValueAndValidity();
   }
 
   /**
    * Funkcja uruchamiająca walidację kontrolki ceny minimalnej
    */
   weryfikujCeneMinimalna() {
-    this.dodawanieOfertyForm.controls['cenaMinimalna'].updateValueAndValidity();
+    this.edytowanieOfertyForm.controls['cenaMinimalna'].updateValueAndValidity();
   }
 
   /**
    * Funkcja wystawiająca ofertę
    */
   wystaw() {
-    const data = this.dodawanieOfertyForm.value;
+    const data = this.edytowanieOfertyForm.value;
 
-    const dataGodzinaWyjazdu = new Date(this.dodawanieOfertyForm.controls['dataWyjazdu'].value);
+    const dataGodzinaWyjazdu = new Date(this.edytowanieOfertyForm.controls['dataWyjazdu'].value);
     const godzina_a = data.godzinaWyjazdu.split(':');
     dataGodzinaWyjazdu.setHours(godzina_a[0]);
-    dataGodzinaWyjazdu.setHours(godzina_a[1]);
+    dataGodzinaWyjazdu.setMinutes(godzina_a[1]);
 
     data.dataWyjazdu = data.godzinaWyjazdu = dataGodzinaWyjazdu.toISOString();
 

@@ -84,6 +84,14 @@ export class OfertaService {
     return this.http.get<any>(environment.restUrl + '/oferty?projection=verbose');
   }
 
+  getOfertyUzytkownika(login: string) {
+    return this.http.get<any>(environment.restUrl + '/uzytkownicy/' + login + '/oferty', {
+      params: {
+        sort: ['dataWyjazdu,desc', 'godzinaWyjazdu,desc']
+      }
+    });
+  }
+
   /**
    * Funkcja łącząca ofertę z użytkownikiem poprzez usługę REST
    * @author Piotr Podbielski

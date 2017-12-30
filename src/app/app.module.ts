@@ -79,8 +79,9 @@ import {PrzejrzyjUwagiComponent} from './components/przejrzyj-uwagi/przejrzyj-uw
 import {PrzejrzyjDostepneOfertyComponent} from './components/przejrzyj-dostepne-oferty/przejrzyj-dostepne-oferty.component';
 import {ZapoznajSieZSerwisemComponent} from './components/zapoznaj-sie-z-serwisem/zapoznaj-sie-z-serwisem.component';
 import {PrzejrzyjZgloszeniaComponent} from './components/przejrzyj-zgloszenia/przejrzyj-zgloszenia.component';
-import {UzytkownikService} from "./services/uzytkownik.service";
-import {OfertaService} from "./services/oferta.service";
+import {UzytkownikService} from './services/uzytkownik.service';
+import {OfertaService} from './services/oferta.service';
+import {ZarzadzajOfertamiComponent} from './components/zarzadzaj-ofertami/zarzadzaj-ofertami.component';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -113,6 +114,11 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier - Personalizowanie profilu użytkownika'}
   },
   {
+    path: 'uzytkownik/oferty',
+    component: ZarzadzajOfertamiComponent,
+    data: {title: 'Fast Courier - Zarządzaj ofertami'}
+  },
+  {
     path: 'uwaga/zglos',
     component: ZglaszanieUwagiComponent,
     data: {title: 'Fast Courier - Zgłaszanie uwagi'}
@@ -126,11 +132,6 @@ const appRoutes: Routes = [
     path: 'oferta/wystaw',
     component: DodawanieOfertyComponent,
     data: {title: 'Fast Courier - Wystawianie oferty'}
-  },
-  {
-    path: 'oferta/edytuj',
-    component: EdytowanieOfertyComponent,
-    data: {title: 'Fast Courier - Edytowanie oferty'}
   },
   {
     path: 'oferta/wyszukiwanie',
@@ -166,6 +167,11 @@ const appRoutes: Routes = [
     path: 'oferta/zglos/:id',
     component: ZglaszanieOfertyComponent,
     data: {title: 'Fast Courier - Zgłaszanie ofert'}
+  },
+  {
+    path: 'oferta/edytuj/:id',
+    component: EdytowanieOfertyComponent,
+    data: {title: 'Fast Courier - Edytowanie oferty'}
   },
   {
     path: 'transakcja/zglos',
@@ -235,6 +241,7 @@ const appRoutes: Routes = [
     PrzejrzyjDostepneOfertyComponent,
     ZapoznajSieZSerwisemComponent,
     PrzejrzyjZgloszeniaComponent,
+    ZarzadzajOfertamiComponent
   ],
   imports: [
     BrowserModule,

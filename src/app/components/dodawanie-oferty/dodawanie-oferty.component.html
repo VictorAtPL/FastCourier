@@ -4,15 +4,15 @@
 </mat-card>
 <mat-card>
   <mat-card-content>
-    <form class="example-form" [formGroup]="dodawanieOfertyForm">
+    <form class="example-form" [formGroup]="edytowanieOfertyForm">
       <mat-form-field class="example-full-width" hintLabel="Min. 10 znaków, maks. 40 znaków">
         <input matInput #input maxlength="40" placeholder="Tytuł" required formControlName="tytul">
         <mat-error
-          *ngIf="this.dodawanieOfertyForm.controls['tytul'].invalid && this.dodawanieOfertyForm.controls['tytul'].errors.minlength">
+          *ngIf="this.edytowanieOfertyForm.controls['tytul'].invalid && this.edytowanieOfertyForm.controls['tytul'].errors.minlength">
           Długość tytułu musi wynosić co najmniej 10 znaków
         </mat-error>
         <mat-error
-          *ngIf="this.dodawanieOfertyForm.controls['tytul'].invalid && this.dodawanieOfertyForm.controls['tytul'].errors.maxlength">
+          *ngIf="this.edytowanieOfertyForm.controls['tytul'].invalid && this.edytowanieOfertyForm.controls['tytul'].errors.maxlength">
           Długość tytułu musi wynosić najwyżej 40 znaków
         </mat-error>
         <mat-hint align="end">{{ input.value?.length || 0 }}/40</mat-hint>
@@ -24,15 +24,15 @@
             <input matInput placeholder="Cena minimalna" required formControlName="cenaMinimalna"
                    (change)="weryfikujCeneMaksymalna()">
             <span matSuffix>zł</span>
-            <mat-error *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].invalid">
+            <mat-error *ngIf="this.edytowanieOfertyForm.controls['cenaMinimalna'].invalid">
               <span
-                *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].errors.czyWiekszaOdCenyMaksymalnej; else elseBlock1">Cena minimalna musi być mniejsza lub równa cenie maksymalnej</span>
+                *ngIf="this.edytowanieOfertyForm.controls['cenaMinimalna'].errors.czyWiekszaOdCenyMaksymalnej; else elseBlock1">Cena minimalna musi być mniejsza lub równa cenie maksymalnej</span>
               <ng-template #elseBlock1>
-                <span *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].errors.min; else elseBlock2">Cena minimalna musi być większa od 0</span>
+                <span *ngIf="this.edytowanieOfertyForm.controls['cenaMinimalna'].errors.min; else elseBlock2">Cena minimalna musi być większa od 0</span>
                 <ng-template #elseBlock2>
-                  <span *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].errors.number; else elseBlock3">Cena minimalna musi być liczbą</span>
+                  <span *ngIf="this.edytowanieOfertyForm.controls['cenaMinimalna'].errors.number; else elseBlock3">Cena minimalna musi być liczbą</span>
                   <ng-template #elseBlock3>
-                    <span *ngIf="this.dodawanieOfertyForm.controls['cenaMinimalna'].errors.pattern">Cena minimalna musi być zaokrąglona do dwóch miejsc po kropce</span>
+                    <span *ngIf="this.edytowanieOfertyForm.controls['cenaMinimalna'].errors.pattern">Cena minimalna musi być zaokrąglona do dwóch miejsc po kropce</span>
                   </ng-template>
                 </ng-template>
               </ng-template>
@@ -45,15 +45,15 @@
             <input matInput placeholder="Cena maksymalna" required formControlName="cenaMaksymalna"
                    (change)="weryfikujCeneMinimalna()">
             <span matSuffix>zł</span>
-            <mat-error *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].invalid">
+            <mat-error *ngIf="this.edytowanieOfertyForm.controls['cenaMaksymalna'].invalid">
               <span
-                *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].errors.czyMniejszaOdCenyMinimalnej; else elseBlock4">Cena maksymalna musi być większa lub równa cenie minimalnej</span>
+                *ngIf="this.edytowanieOfertyForm.controls['cenaMaksymalna'].errors.czyMniejszaOdCenyMinimalnej; else elseBlock4">Cena maksymalna musi być większa lub równa cenie minimalnej</span>
               <ng-template #elseBlock4>
-                <span *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].errors.min; else elseBlock5">Cena maksymalna musi być większa od 0</span>
+                <span *ngIf="this.edytowanieOfertyForm.controls['cenaMaksymalna'].errors.min; else elseBlock5">Cena maksymalna musi być większa od 0</span>
                 <ng-template #elseBlock5>
-                  <span *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].errors.number; else elseBlock6">Cena maksymalna musi być liczbą</span>
+                  <span *ngIf="this.edytowanieOfertyForm.controls['cenaMaksymalna'].errors.number; else elseBlock6">Cena maksymalna musi być liczbą</span>
                   <ng-template #elseBlock6>
-                    <span *ngIf="this.dodawanieOfertyForm.controls['cenaMaksymalna'].errors.pattern">Cena maksymalna musi być zaokrąglona do dwóch miejsc po kropce</span>
+                    <span *ngIf="this.edytowanieOfertyForm.controls['cenaMaksymalna'].errors.pattern">Cena maksymalna musi być zaokrąglona do dwóch miejsc po kropce</span>
                   </ng-template>
                 </ng-template>
               </ng-template>
@@ -118,7 +118,7 @@
             <input matInput placeholder="Maks. waga paczki" formControlName="maksymalnaWagaPaczki">
             <span matSuffix>kg</span>
             <mat-error
-              *ngIf="this.dodawanieOfertyForm.controls['maksymalnaWagaPaczki'].invalid && this.dodawanieOfertyForm.controls['maksymalnaWagaPaczki'].errors.pattern">
+              *ngIf="this.edytowanieOfertyForm.controls['maksymalnaWagaPaczki'].invalid && this.edytowanieOfertyForm.controls['maksymalnaWagaPaczki'].errors.pattern">
               Waga paczki musi być liczbą całkowitą
             </mat-error>
             <mat-hint>Podaj w jednostkach całkowitych</mat-hint>
@@ -133,7 +133,7 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error
-              *ngIf="this.dodawanieOfertyForm.controls['dataWyjazdu'].invalid && this.dodawanieOfertyForm.controls['dataWyjazdu'].errors.matDatepickerParse">
+              *ngIf="this.edytowanieOfertyForm.controls['dataWyjazdu'].invalid && this.edytowanieOfertyForm.controls['dataWyjazdu'].errors.matDatepickerParse">
               Data musi być wybrana z powyższego kalendarza
             </mat-error>
             <mat-hint align="end">Wybierz datę z powyższego kalendarza</mat-hint>
@@ -144,7 +144,7 @@
             <input matInput placeholder="Godzina wyjazdu" required formControlName="godzinaWyjazdu">
             <mat-hint>Podaj w formacie gg:mm</mat-hint>
             <mat-error
-              *ngIf="this.dodawanieOfertyForm.controls['godzinaWyjazdu'].invalid && this.dodawanieOfertyForm.controls['godzinaWyjazdu'].errors.pattern">
+              *ngIf="this.edytowanieOfertyForm.controls['godzinaWyjazdu'].invalid && this.edytowanieOfertyForm.controls['godzinaWyjazdu'].errors.pattern">
               Godzina musi być w formacie gg:mm
             </mat-error>
           </mat-form-field>
@@ -155,11 +155,11 @@
         <textarea matInput placeholder="Opis oferty" matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="10"
                   maxlength="200" required formControlName="opis" #textarea></textarea>
         <mat-error
-          *ngIf="this.dodawanieOfertyForm.controls['opis'].invalid && this.dodawanieOfertyForm.controls['opis'].errors.minlength">
+          *ngIf="this.edytowanieOfertyForm.controls['opis'].invalid && this.edytowanieOfertyForm.controls['opis'].errors.minlength">
           Długość opisu musi wynosić co najmniej 40 znaków
         </mat-error>
         <mat-error
-          *ngIf="this.dodawanieOfertyForm.controls['opis'].invalid && this.dodawanieOfertyForm.controls['opis'].errors.maxlength">
+          *ngIf="this.edytowanieOfertyForm.controls['opis'].invalid && this.edytowanieOfertyForm.controls['opis'].errors.maxlength">
           Długość opisu musi wynosić najwyżej 200 znaków
         </mat-error>
         <mat-hint>Min. 20 znaków, maks. 200.</mat-hint>
@@ -168,7 +168,7 @@
 
       <mat-slide-toggle required formControlName="czyWyroznic">Czy wyróżnić ofertę?</mat-slide-toggle>
       <br><br>
-      <button mat-raised-button color="primary" [disabled]="this.dodawanieOfertyForm.invalid" (click)="wystaw()">Wystaw
+      <button mat-raised-button color="primary" [disabled]="this.edytowanieOfertyForm.invalid" (click)="wystaw()">Wystaw
         ofertę
       </button>
     </form>

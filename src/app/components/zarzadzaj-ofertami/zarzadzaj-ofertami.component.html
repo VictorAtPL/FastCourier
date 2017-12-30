@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>Przeglądanie ofert</mat-card-title>
+  <mat-card-title>Zarządzanie ofertami</mat-card-title>
   <mat-card-content>
     <mat-spinner *ngIf="!dataSource"></mat-spinner>
     <mat-table *ngIf="dataSource" #table [dataSource]="dataSource">
@@ -17,24 +17,20 @@
 
 
       <ng-container matColumnDef="tytul">
-        <mat-header-cell *matHeaderCellDef flex-gt-xs="35"> Tytuł</mat-header-cell>
-        <mat-cell *matCellDef="let element" flex-gt-xs="35"><a mat-icon-button
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="25"> Tytuł</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="25"><a mat-icon-button
                                                                [routerLink]="['/oferta/wyswietl', element.id]"
-                                                               color="accent">
+                                                               color="accent" [disabled]="element.zablokowana">
           <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
         </a>
-          {{ element.tytul }} <br/><a [routerLink]="['/uzytkownik/profil', element.loginUzytkownika]" target="_blank"
-                                      title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
-            <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
-          </a> {{ element.loginUzytkownika }}
+          <span [style.text-decoration]="element.zablokowana ? 'line-through' : 'none'">{{ element.tytul }}</span>
         </mat-cell>
       </ng-container>
 
 
       <ng-container matColumnDef="cena">
         <mat-header-cell *matHeaderCellDef flex-gt-xs="10"> Cena</mat-header-cell>
-        <mat-cell *matCellDef="let element" flex-gt-xs="10"> {{ element.cenaMinimalna }}-{{ element.cenaMaksymalna
-          }}zł
+        <mat-cell *matCellDef="let element" flex-gt-xs="10"> {{ element.cenaMinimalna }}-{{ element.cenaMaksymalna }}zł
         </mat-cell>
       </ng-container>
 
@@ -69,8 +65,23 @@
         </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="akcje">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="10"> Akcje</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="10">
+          <a matTooltip="Edytuj ofertę" title="Edytuj ofertę" [routerLink]="['/oferta/edytuj', element.id]"
+             mat-icon-button color="accent" [disabled]="!element.aktywna || element.zablokowana">
+            <mat-icon aria-label="Edytuj ofertę">edit</mat-icon>
+          </a>
+          <button matTooltip="Zdejmij ofertę" title="Zdejmij ofertę" mat-icon-button color="warn"
+                  (click)="zdejmijOferte(element)" [disabled]="!element.aktywna || element.zablokowana">
+            <mat-icon aria-label="Zdejmij ofertę">visibility_off</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row [ngClass]="{'bgc-pink-50': !row.aktywna || row.zablokowana}"
+               *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </mat-card-content>
 </mat-card>
