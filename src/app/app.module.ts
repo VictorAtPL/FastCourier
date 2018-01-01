@@ -70,7 +70,7 @@ import {PanelUzytkownikaComponent} from './components/panel-uzytkownika/panel-uz
 import {EdytowanieOfertyComponent} from './components/edytowanie-oferty/edytowanie-oferty.component';
 import {DatePipe} from '@angular/common';
 import {CustomFormsModule} from 'ng2-validation';
-import {AutentykacjaService} from './services/autentykacja.service';
+import {UwierzytelnianieService} from './services/uwierzytelnianie.service';
 import {PrzejrzyjProfilComponent} from './components/przejrzyj-profil/przejrzyj-profil.component';
 import {KeysPipe} from './pipes/keys.pipe';
 import {CapitalizePipe} from './pipes/capitalize.pipe';
@@ -301,7 +301,7 @@ const appRoutes: Routes = [
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
     DatePipe,
-    AutentykacjaService,
+    UwierzytelnianieService,
     UzytkownikService,
     OfertaService
   ],

@@ -5,7 +5,7 @@ import {CustomValidators} from 'ng2-validation';
 import {OfertaService} from '../../services/oferta.service';
 import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
-import {AutentykacjaService} from '../../services/autentykacja.service';
+import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
 
 /**
  * Logika biznesowa dla komponentu dodawania oferty
@@ -70,7 +70,7 @@ export class DodawanieOfertyComponent implements OnInit {
    */
   constructor(private datePipe: DatePipe, private ofertaService: OfertaService,
               private snackBar: MatSnackBar, private router: Router,
-              private autentykacjaService: AutentykacjaService) {
+              private autentykacjaService: UwierzytelnianieService) {
   }
 
   /**

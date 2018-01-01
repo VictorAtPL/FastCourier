@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AutentykacjaService} from "../../services/autentykacja.service";
+import {UwierzytelnianieService} from "../../services/uwierzytelnianie.service";
 
 /**
  * Logika biznesowa dla strony głównej, na której jest formularz wyszukiwania
@@ -12,7 +12,7 @@ import {AutentykacjaService} from "../../services/autentykacja.service";
 export class StronaGlownaComponent {
   zalogowanyUzytkownik = {};
 
-  constructor(private autentykacjaService: AutentykacjaService) {
+  constructor(private autentykacjaService: UwierzytelnianieService) {
     this.autentykacjaService.czyZalogowany().subscribe(next => {
       this.zalogowanyUzytkownik = next;
     });

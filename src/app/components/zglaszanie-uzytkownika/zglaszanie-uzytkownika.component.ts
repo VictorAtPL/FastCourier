@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 import {UzytkownikService} from '../../services/uzytkownik.service';
 import {ActivatedRoute} from '@angular/router';
-import {AutentykacjaService} from '../../services/autentykacja.service';
+import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 /**
@@ -32,7 +32,7 @@ export class ZglaszanieUzytkownikaComponent implements OnInit, OnDestroy {
     {value: 'Kradzież'}];
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService, private snackBar: MatSnackBar, private autentykacjaService: AutentykacjaService) {
+  constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService, private snackBar: MatSnackBar, private autentykacjaService: UwierzytelnianieService) {
   }
 
   /**

@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {UzytkownikService} from "../../services/uzytkownik.service";
 import {MatSnackBar} from "@angular/material";
 import {TdDialogService} from "@covalent/core";
-import {AutentykacjaService} from "../../services/autentykacja.service";
+import {UwierzytelnianieService} from "../../services/uwierzytelnianie.service";
 
 /**
  * Klasa odpowiedzialna za widok strony Przejrzyj profil
@@ -49,7 +49,7 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private uzytkownikService: UzytkownikService,
               private snackBar: MatSnackBar, private router: Router,
               private _dialogService: TdDialogService, private _viewContainerRef: ViewContainerRef,
-              private autentykacjaService: AutentykacjaService) {
+              private autentykacjaService: UwierzytelnianieService) {
   }
 
   /**

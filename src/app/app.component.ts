@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {MatIconRegistry, MatSnackBar} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
-import {AutentykacjaService} from './services/autentykacja.service';
+import {UwierzytelnianieService} from './services/uwierzytelnianie.service';
 
 /**
  * Logika biznesowa dla głównego komponentu serwisu, ładującego inne komponenty w zależności od aktualnie przeglądanej strony
@@ -27,11 +27,11 @@ export class AppComponent {
    * @param {DomSanitizer} _domSanitizer
    * @param {Router} router
    * @param {MatSnackBar} snackBar
-   * @param {AutentykacjaService} autentykacjaService
+   * @param {UwierzytelnianieService} autentykacjaService
    */
   constructor(private _iconRegistry: MatIconRegistry,
               private _domSanitizer: DomSanitizer, private router: Router, public snackBar: MatSnackBar,
-              private autentykacjaService: AutentykacjaService) {
+              private autentykacjaService: UwierzytelnianieService) {
     this.navLinks = [
       {
         'label': 'Strona główna',

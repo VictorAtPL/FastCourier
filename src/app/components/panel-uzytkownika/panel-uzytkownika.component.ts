@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AutentykacjaService} from '../../services/autentykacja.service';
+import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
 
 /**
  * Logika biznesowa dla panelu administratora
@@ -14,9 +14,9 @@ export class PanelUzytkownikaComponent implements OnInit {
 
   /**
    * Konstruktor klasy autentykacjaService
-   * @param {AutentykacjaService} autentykacjaService
+   * @param {UwierzytelnianieService} autentykacjaService
    */
-  constructor(private autentykacjaService: AutentykacjaService) {
+  constructor(private autentykacjaService: UwierzytelnianieService) {
   }
 
   ngOnInit(): void {

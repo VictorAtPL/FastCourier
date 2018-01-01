@@ -3,7 +3,7 @@ import {DataSource} from '@angular/cdk/collections';
 import {Oferta} from '../../entities/Oferta.entity';
 import {OfertaService} from '../../services/oferta.service';
 import {MatSnackBar, MatTableDataSource} from '@angular/material';
-import {AutentykacjaService} from '../../services/autentykacja.service';
+import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
 import {TdDialogService} from '@covalent/core';
 
 @Component({
@@ -38,7 +38,7 @@ export class ZarzadzajOfertamiComponent implements OnInit {
    * @param _viewContainerRef
    */
   constructor(private ofertaService: OfertaService,
-              private autentykacjaService: AutentykacjaService,
+              private autentykacjaService: UwierzytelnianieService,
               private snackBar: MatSnackBar,
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef) {

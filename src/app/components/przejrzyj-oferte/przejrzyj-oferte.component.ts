@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {OfertaService} from '../../services/oferta.service';
 import {TdDialogService} from "@covalent/core";
-import {AutentykacjaService} from "../../services/autentykacja.service";
+import {UwierzytelnianieService} from "../../services/uwierzytelnianie.service";
 
 /**
  * Klasa odpowiedzialna za widok strony przeglądania oferty
@@ -47,7 +47,7 @@ export class PrzejrzyjOferteComponent implements OnInit {
   constructor(private route: ActivatedRoute, private ofertaService: OfertaService,
               private snackBar: MatSnackBar, private router: Router,
               private _dialogService: TdDialogService, private _viewContainerRef: ViewContainerRef,
-              private autentykacjaService: AutentykacjaService) {
+              private autentykacjaService: UwierzytelnianieService) {
   }
 
   /**

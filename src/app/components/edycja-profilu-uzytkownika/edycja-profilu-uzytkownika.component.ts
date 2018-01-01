@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {AutentykacjaService} from '../../services/autentykacja.service';
+import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
 import {UzytkownikService} from "../../services/uzytkownik.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
@@ -16,7 +16,7 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
   edytujProfilUzytkownikaForm: FormGroup;
   zalogowanyUzytkownik: any;
 
-  constructor(private autentykacjaService: AutentykacjaService, private uzytkownikService: UzytkownikService,
+  constructor(private autentykacjaService: UwierzytelnianieService, private uzytkownikService: UzytkownikService,
               public snackBar: MatSnackBar) {
   }
 

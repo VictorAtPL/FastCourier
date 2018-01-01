@@ -4,7 +4,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {UzytkownikService} from './uzytkownik.service';
 
 @Injectable()
-export class AutentykacjaService {
+export class UwierzytelnianieService {
   private zalogowanyUzytkownik = new BehaviorSubject<object>(null);
 
   constructor(private http: HttpClient, private uzytkownikService: UzytkownikService) {
@@ -12,7 +12,7 @@ export class AutentykacjaService {
       const zalogowanyUzytkownik: any = JSON.parse(localStorage.getItem('zalogowanyUzytkownik'));
 
       this.weryfikuj(zalogowanyUzytkownik.login, zalogowanyUzytkownik.haslo).subscribe(uzytkownik => {
-        if (String(uzytkownik.haslo) === String(zalogowanyUzytkownik.haslo)) {
+        if (String(uzytkownik.haslo) === String(zalogowanyUzytkownik.haslo) && !uzytkownik.zablokowany) {
           uzytkownik.login = zalogowanyUzytkownik.login;
           this.zalogowanyUzytkownik.next(uzytkownik);
         } else {
