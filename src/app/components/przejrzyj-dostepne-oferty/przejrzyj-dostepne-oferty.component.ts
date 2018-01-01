@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OfertaService} from '../../services/oferta.service';
 import {MatTableDataSource} from '@angular/material';
 import {DataSource} from '@angular/cdk/collections';
-import {Oferta} from "../../entities/Oferta.entity";
+import {Oferta} from '../../entities/Oferta.entity';
 
 /**
  * Definicja komponentu PrzejrzyjDostepneOferty, ktory odpowiada za wyswietlenie strony z tabela w ktorej znajduje sie lista ofert.
@@ -48,21 +48,34 @@ export class PrzejrzyjDostepneOfertyComponent implements OnInit {
       const oferty: any[] = result._embedded.ofertas;
 
       oferty.forEach(oferta => {
-        this.data.push({
-          tytul: oferta.tytul,
-          dataGodzinaWyjazdu: this.fetchDataGodzinaWyjazdu(oferta.dataWyjazdu, oferta.godzinaWyjazdu),
-          cenaMinimalna: oferta.cenaMinimalna,
-          cenaMaksymalna: oferta.cenaMaksymalna,
-          id: oferta.id,
-          kategoriePaczek: oferta.kategoriePaczek.split(','),
-          loginUzytkownika: oferta.ofertaUzytkownika[0].login,
-          maksymalnaWagaPaczki: oferta.maksymalnaWagaPaczki,
-          miastoDocelowe: oferta.miastoDocelowe,
-          miastoPoczatkowe: oferta.miastoPoczatkowe,
-          rozmiaryPaczek: oferta.rozmiaryPaczek.split(','),
-          aktywna: oferta.aktywna,
-          zablokowana: oferta.zablokowana
-        });
+        const dataGodzinaWyjazdu = this.fetchDataGodzinaWyjazdu(oferta.dataWyjazdu, oferta.godzinaWyjazdu);
+        if (oferta.aktywna && !oferta.zablokowana && dataGodzinaWyjazdu >= new Date()) {
+          this.data.push({
+            tytul: oferta.tytul,
+            dataGodzinaWyjazdu: dataGodzinaWyjazdu,
+            cenaMinimalna: oferta.cenaMinimalna,
+            cenaMaksymalna: oferta.cenaMaksymalna,
+            id: oferta.id,
+            kategoriePaczek: oferta.kategoriePaczek.split(','),
+            loginUzytkownika: oferta.ofertaUzytkownika[0].login,
+            maksymalnaWagaPaczki: oferta.maksymalnaWagaPaczki,
+            miastoDocelowe: oferta.miastoDocelowe,
+            miastoPoczatkowe: oferta.miastoPoczatkowe,
+            rozmiaryPaczek: oferta.rozmiaryPaczek.split(','),
+            aktywna: oferta.aktywna,
+            zablokowana: oferta.zablokowana
+          });
+        }
+      });
+
+      this.data.sort((a, b) => {
+        if (a.dataGodzinaWyjazdu > b.dataGodzinaWyjazdu) {
+          return 1;
+        } else if (a.dataGodzinaWyjazdu === b.dataGodzinaWyjazdu) {
+          return 0;
+        } else {
+          return -1;
+        }
       });
 
       this.dataSource = new MatTableDataSource<Oferta>(this.data);

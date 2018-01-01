@@ -10,8 +10,7 @@
       <!-- Position Column -->
       <ng-container matColumnDef="dataGodzina">
         <mat-header-cell *matHeaderCellDef flex-gt-xs="15"> Data i godzina wyjazdu</mat-header-cell>
-        <mat-cell *matCellDef="let element" flex-gt-xs="15"> {{ element.dataGodzinaWyjazdu | date:'dd.MM.yyyy HH:mm'
-          }}
+        <mat-cell *matCellDef="let element" flex-gt-xs="15"> {{ element.dataGodzinaWyjazdu | date:'dd.MM.yyyy HH:mm' }}
         </mat-cell>
       </ng-container>
 
@@ -33,8 +32,7 @@
 
       <ng-container matColumnDef="cena">
         <mat-header-cell *matHeaderCellDef flex-gt-xs="10"> Cena</mat-header-cell>
-        <mat-cell *matCellDef="let element" flex-gt-xs="10"> {{ element.cenaMinimalna }}-{{ element.cenaMaksymalna
-          }}zł
+        <mat-cell *matCellDef="let element" flex-gt-xs="10"> {{ element.cenaMinimalna }}-{{ element.cenaMaksymalna }}zł
         </mat-cell>
       </ng-container>
 
