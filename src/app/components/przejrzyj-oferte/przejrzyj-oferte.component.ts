@@ -68,7 +68,7 @@ export class PrzejrzyjOferteComponent implements OnInit {
         this.oferta.dataGodzinaWyjazdu = this.fetchDataGodzinaWyjazdu(oferta.dataWyjazdu, oferta.godzinaWyjazdu);
 
       }, () => {
-        this.snackBar.open('Wystąpił błąd. Upewnij się, czy użytkownik o podanym loginie istnieje.', null, {
+        this.snackBar.open('Wystąpił błąd. Upewnij się, czy oferta o podanym id istnieje.', null, {
           duration: 2000,
         });
       });

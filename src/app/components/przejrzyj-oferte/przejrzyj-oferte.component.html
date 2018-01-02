@@ -55,6 +55,7 @@
         </div>
       </div>
       <br/>
+      <a mat-raised-button color="primary" [routerLink]="['/oferta/zlec', id]">Zleć transport przesylki</a>
       <button mat-raised-button color="warn" (click)="zglosOferte()">Zgłoś oferte</button>
       <button *ngIf="zalogowanyUzytkownik && zalogowanyUzytkownik.rola === 'ROLE_ADMIN'" mat-raised-button
               color="warn" (click)="zablokujOferte(oferta)">Zablokuj ofertę

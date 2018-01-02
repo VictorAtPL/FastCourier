@@ -1,0 +1,72 @@
+<mat-card>
+  <mat-card-title>Formularz zlecania transportu przesylki</mat-card-title>
+  <mat-card-content>Ten formularz pozwala na zlecenie transportu przesylki.</mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <form class="example-form" [formGroup]="zlecanieTransportuForm" *ngIf="oferta">
+      <mat-form-field class="example-full-width">
+        <input matInput #input maxlength="40" placeholder="Tytuł" disabled [value]="oferta.tytul">
+      </mat-form-field>
+
+      <div layout-gt-xs="row">
+        <div flex-gt-xs="33.3">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Kategoria paczek" multiple required formControlName="kategoriaPaczki">
+              <mat-option *ngFor="let kategoria of oferta.kategoriePaczek" [value]="kategoria">
+                {{ kategoria }}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Wybierz kategorię paczki</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div flex-gt-xs="33.3">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="Rozmiary paczek" multiple required formControlName="rozmiarPaczki">
+              <mat-option *ngFor="let rozmiar of oferta.rozmiaryPaczek" [value]="rozmiar">
+                {{ rozmiar }}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Wybierz rozmiar paczki</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div flex-gt-xs="33.3">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Waga paczki" required formControlName="wagaPaczki">
+            <span matSuffix>kg</span>
+            <mat-error *ngIf="this.zlecanieTransportuForm.controls['wagaPaczki'].invalid">
+              <span
+                *ngIf="this.zlecanieTransportuForm.controls['wagaPaczki'].invalid && this.zlecanieTransportuForm.controls['wagaPaczki'].errors.pattern; else elseBlock1">Waga paczki musi być liczbą całkowitą</span>
+              <ng-template #elseBlock1>
+                <span *ngIf="this.zlecanieTransportuForm.controls['wagaPaczki'].errors.czyMniejszaOdMaksymalnejWagi">Waga paczki musi być mniejsza niz maksymalna waga paczki.</span>
+              </ng-template>
+            </mat-error>
+
+            <mat-error
+              *ngIf="">
+
+            </mat-error>
+            <mat-hint>Podaj w jednostkach całkowitych</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Komentarz" matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="10"
+                  maxlength="200" formControlName="komentarz" #textarea></textarea>
+        <mat-error
+          *ngIf="this.zlecanieTransportuForm.controls['komentarz'].invalid && this.zlecanieTransportuForm.controls['komentarz'].errors.maxlength">
+          Długość komentarza musi wynosić najwyżej 200 znaków
+        </mat-error>
+        <mat-hint>Maks. 200.</mat-hint>
+        <mat-hint align="end">{{ textarea.value?.length || 0 }}/200</mat-hint>
+      </mat-form-field>
+      <br><br>
+      <button mat-raised-button color="primary" [disabled]="this.zlecanieTransportuForm.invalid" (click)="zlec()">
+        Zleć transport
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
