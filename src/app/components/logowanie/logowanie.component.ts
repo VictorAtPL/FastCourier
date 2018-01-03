@@ -6,6 +6,10 @@ import {MatSnackBar} from '@angular/material';
 
 /**
  * Logika biznesowa dla komponentu logowania
+ * @author Adrian Plichta
+ * @since 0.0.3
+ * @copyright Magical Solutions
+ * @license Creative Commons Attribution NonCommercial (CC-BY-NC)
  */
 @Component({
   selector: 'app-logowanie',
@@ -16,6 +20,12 @@ export class LogowanieComponent {
 
   logowanieForm: FormGroup;
 
+  /**
+   * Konstruktor powołujący formularz, dodający możliwość stosowania dodatkowych serwisów.
+   * @param {UwierzytelnianieService} autentykacjaService
+   * @param {Router} router
+   * @param {MatSnackBar} snackBar
+   */
   constructor(private autentykacjaService: UwierzytelnianieService, private router: Router, public snackBar: MatSnackBar) {
     this.logowanieForm = new FormGroup({
       login: new FormControl(''),
@@ -23,7 +33,9 @@ export class LogowanieComponent {
     });
   }
 
-
+  /**
+   * Metoda odpowiedzialna za zalogowanie się.
+   */
   zaloguj() {
     this.autentykacjaService.weryfikuj(this.logowanieForm.controls['login'].value,
       this.logowanieForm.controls['haslo'].value).subscribe(uzytkownik => {
