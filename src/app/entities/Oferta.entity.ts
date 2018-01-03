@@ -64,4 +64,6 @@ export interface Oferta {
   aktywna: boolean;
 
   zablokowana: boolean;
+
+  zleceniaTransportu: any[];
 }

@@ -4,7 +4,8 @@
 </mat-card>
 <mat-card *ngIf="oferta">
   <mat-card-content>
-    <form class="example-form" [formGroup]="edytowanieOfertyForm">
+    <form class="example-form" [formGroup]="edytowanieOfertyForm"
+          *ngIf="oferta.aktywna && !oferta.zablokowana && oferta.zleceniaTransportu.length === 0; else elseBlockCannotEdit">
       <mat-form-field class="example-full-width" hintLabel="Min. 10 znaków, maks. 40 znaków">
         <input matInput #input maxlength="40" placeholder="Tytuł" required formControlName="tytul">
         <mat-error
@@ -171,5 +172,8 @@
         ofertę
       </button>
     </form>
+    <ng-template #elseBlockCannotEdit>Nie można edytować oferty, ponieważ jest zablokowana, nieaktywna lub złożono już
+      zlecenie przewozu.
+    </ng-template>
   </mat-card-content>
 </mat-card>

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {OfertaService} from '../../services/oferta.service';
 import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
+import {UzytkownikService} from "../../services/uzytkownik.service";
 
 @Component({
   selector: 'app-zlecanie-transportu-przesylki',
@@ -31,6 +32,7 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private ofertaService: OfertaService,
+              private uzytkownikService: UzytkownikService,
               private snackBar: MatSnackBar,
               private router: Router,
               private uwierzytelnianieService: UwierzytelnianieService) {
@@ -44,7 +46,7 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
     this.zlecanieTransportuForm = new FormGroup({
       kategoriaPaczki: new FormControl('', [Validators.required]),
       rozmiarPaczki: new FormControl('', [Validators.required]),
-      wagaPaczki: new FormControl('', [Validators.required, Validators.pattern(/^([1-9]|[0-9]{2,})$/)]),
+      wagaPaczki: new FormControl(''),
       komentarz: new FormControl('', [Validators.maxLength(200)]),
     });
 
@@ -55,7 +57,7 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
         this.oferta = oferta;
         this.oferta.rozmiaryPaczek = oferta.rozmiaryPaczek.split(',');
         this.oferta.kategoriePaczek = oferta.kategoriePaczek.split(',');
-        this.zlecanieTransportuForm.controls['wagaPaczki'].setValidators(this.czyWagaMniejszaodMaksymalnejWagi(this.oferta.maksymalnaWagaPaczki));
+        this.zlecanieTransportuForm.controls['wagaPaczki'].setValidators([Validators.required, Validators.pattern(/^([1-9]|[0-9]{2,})$/), this.czyWagaMniejszaodMaksymalnejWagi(this.oferta.maksymalnaWagaPaczki)]);
 
       }, () => {
         this.snackBar.open('Wystąpił błąd. Upewnij się, czy oferta o podanym id istnieje.', null, {
@@ -69,11 +71,33 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
 
   czyWagaMniejszaodMaksymalnejWagi(maksymalnaWagaPaczki) {
     return (input: FormControl) => {
+      if (!maksymalnaWagaPaczki) {
+        return null;
+      }
       const czyMniejszaOdMaksymalnejWagi = parseFloat(input.value) <= parseFloat(maksymalnaWagaPaczki);
       return czyMniejszaOdMaksymalnejWagi ? null : {czyMniejszaOdMaksymalnejWagi: true};
     };
   }
 
   zlec() {
+    const data = this.zlecanieTransportuForm.value;
+
+    this.ofertaService.postZlecenieTransportu(data).subscribe((result) => {
+      this.ofertaService.getOferta(this.id).subscribe((oferta) => {
+        this.ofertaService.putDotyczyOfertyZlecenieTransportu(result._links.oferta.href, oferta._links.self.href).subscribe((result2) => {
+          this.uzytkownikService.getUzytkownik(this.zalogowanyUzytkownik.login).subscribe((uzytkownik) => {
+            this.ofertaService.putZlecajacyUzytkownikZlecenieTransportu(result._links.uzytkownik.href, uzytkownik._links.self.href).subscribe((result3) => {
+              const refSnackBar = this.snackBar.open('Zlecono tansport przesyłki. Poczekaj na kontakt ze strony kierowcy.', null, {
+                duration: 2000,
+              });
+
+              refSnackBar.afterDismissed().subscribe(() => {
+                this.zlecanieTransportuForm.reset();
+              });
+            });
+          });
+        });
+      });
+    });
   }
 }

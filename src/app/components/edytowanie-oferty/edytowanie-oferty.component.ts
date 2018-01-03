@@ -81,10 +81,16 @@ export class EdytowanieOfertyComponent implements OnInit {
       this.id = params['id'];
 
       this.ofertaService.getOferta(this.id).subscribe(oferta => {
+        console.log(oferta);
         this.oferta = oferta;
         this.oferta.rozmiaryPaczek = oferta.rozmiaryPaczek.split(',');
         this.oferta.kategoriePaczek = oferta.kategoriePaczek.split(',');
         this.oferta.dataGodzinaWyjazdu = this.fetchDataGodzinaWyjazdu(oferta.dataWyjazdu, oferta.godzinaWyjazdu);
+        this.oferta.zleceniaTransportu = [];
+
+        if ('zleceniaTransportu' in oferta._embedded) {
+          this.oferta.zleceniaTransportu = oferta._embedded.zleceniaTransportu;
+        }
 
         this.edytowanieOfertyForm.controls['tytul'].setValue(this.oferta.tytul);
         this.edytowanieOfertyForm.controls['rozmiaryPaczek'].setValue(this.oferta.rozmiaryPaczek);

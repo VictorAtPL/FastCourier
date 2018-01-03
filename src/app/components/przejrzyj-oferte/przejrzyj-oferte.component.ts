@@ -35,6 +35,8 @@ export class PrzejrzyjOferteComponent implements OnInit {
    */
   private sub: any;
 
+  data: Date;
+
   zalogowanyUzytkownik: any;
 
   /**
@@ -54,6 +56,8 @@ export class PrzejrzyjOferteComponent implements OnInit {
    * Metoda odpowiedzialna za pobranie danych oferty z backendu.
    */
   ngOnInit() {
+    this.data = new Date();
+
     this.autentykacjaService.czyZalogowany().subscribe(next => {
       this.zalogowanyUzytkownik = next;
     });

@@ -12,7 +12,7 @@
       <div layout-gt-xs="row">
         <div flex-gt-xs="33.3">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Kategoria paczek" multiple required formControlName="kategoriaPaczki">
+            <mat-select placeholder="Kategoria paczki" required formControlName="kategoriaPaczki">
               <mat-option *ngFor="let kategoria of oferta.kategoriePaczek" [value]="kategoria">
                 {{ kategoria }}
               </mat-option>
@@ -23,7 +23,7 @@
 
         <div flex-gt-xs="33.3">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Rozmiary paczek" multiple required formControlName="rozmiarPaczki">
+            <mat-select placeholder="Rozmiar paczki" required formControlName="rozmiarPaczki">
               <mat-option *ngFor="let rozmiar of oferta.rozmiaryPaczek" [value]="rozmiar">
                 {{ rozmiar }}
               </mat-option>
@@ -42,11 +42,6 @@
               <ng-template #elseBlock1>
                 <span *ngIf="this.zlecanieTransportuForm.controls['wagaPaczki'].errors.czyMniejszaOdMaksymalnejWagi">Waga paczki musi być mniejsza niz maksymalna waga paczki.</span>
               </ng-template>
-            </mat-error>
-
-            <mat-error
-              *ngIf="">
-
             </mat-error>
             <mat-hint>Podaj w jednostkach całkowitych</mat-hint>
           </mat-form-field>

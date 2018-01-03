@@ -63,7 +63,8 @@ export class PrzejrzyjDostepneOfertyComponent implements OnInit {
             miastoPoczatkowe: oferta.miastoPoczatkowe,
             rozmiaryPaczek: oferta.rozmiaryPaczek.split(','),
             aktywna: oferta.aktywna,
-            zablokowana: oferta.zablokowana
+            zablokowana: oferta.zablokowana,
+            zleceniaTransportu: oferta.zleceniaTransportu
           });
         }
       });

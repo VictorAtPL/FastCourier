@@ -29,6 +29,8 @@ export class ZarzadzajOfertamiComponent implements OnInit {
 
   zalogowanyUzytkownik: any;
 
+  date: Date;
+
   /**
    * Konstruktor wstrzykujący usługi z których można potem korzystać w komponencie.
    * @param {OfertaService} ofertaService Komponent dostępu do ofert przez REST.
@@ -48,6 +50,8 @@ export class ZarzadzajOfertamiComponent implements OnInit {
    * Funkcja wywoływana przy inicjalizacji komponentu (ładowaniu strony przejrzenia dostępnych ofert).
    */
   ngOnInit() {
+    this.date = new Date();
+
     this.autentykacjaService.czyZalogowany().subscribe(next => {
 
       if (next != null) {
@@ -70,8 +74,19 @@ export class ZarzadzajOfertamiComponent implements OnInit {
               miastoPoczatkowe: oferta.miastoPoczatkowe,
               rozmiaryPaczek: oferta.rozmiaryPaczek.split(','),
               aktywna: oferta.aktywna,
-              zablokowana: oferta.zablokowana
+              zablokowana: oferta.zablokowana,
+              zleceniaTransportu: oferta.zleceniaTransportu
             });
+          });
+
+          this.data.sort((a, b) => {
+            if (a.dataGodzinaWyjazdu > b.dataGodzinaWyjazdu) {
+              return -1;
+            } else if (a.dataGodzinaWyjazdu === b.dataGodzinaWyjazdu) {
+              return 0;
+            } else {
+              return 1;
+            }
           });
 
           this.dataSource = new MatTableDataSource<Oferta>(this.data);

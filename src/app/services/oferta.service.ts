@@ -102,4 +102,16 @@ export class OfertaService {
   postUzytkownikOfertyOferta(url: string, data: any) {
     return this.http.put<any>(url, data, {headers: {'Content-Type': 'text/uri-list'}});
   }
+
+  postZlecenieTransportu(data: any) {
+    return this.http.post<any>(environment.restUrl + '/zleceniatransportu', data);
+  }
+
+  putDotyczyOfertyZlecenieTransportu(url: string, data: any) {
+    return this.http.put<any>(url, data, {headers: {'Content-Type': 'text/uri-list'}});
+  }
+
+  putZlecajacyUzytkownikZlecenieTransportu(url: string, data: any) {
+    return this.http.put<any>(url, data, {headers: {'Content-Type': 'text/uri-list'}});
+  }
 }
