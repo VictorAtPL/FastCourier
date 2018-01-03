@@ -19,7 +19,7 @@ export class LogowanieComponent {
   constructor(private autentykacjaService: AutentykacjaService, private router: Router, public snackBar: MatSnackBar) {
     this.logowanieForm = new FormGroup({
       login: new FormControl('', [Validators.required , Validators.maxLength(30)] ),
-      haslo: new FormControl('', [Validators.required, Validators.minLength(8)])
+      haslo: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
     });
   }
 

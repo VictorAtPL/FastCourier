@@ -8,10 +8,19 @@
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Login" formControlName="login" required>
         <mat-hint>Wpisz login!</mat-hint>
+        <mat-error
+          *ngIf="this.logowanieForm.controls['login'].invalid ">
+          Login ma za dużo znaków, maksymalna liczba znaków wynosi 30
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field class="example-full-width">
         <input matInput type="password" placeholder="Hasło" formControlName="haslo" required>
         <mat-hint>Wpisz hasło!</mat-hint>
+        <mat-error
+          *ngIf="this.logowanieForm.controls['haslo'].invalid ">
+          Hasło musi mieć od 8 do 30 znaków
+        </mat-error>
       </mat-form-field>
       <br><br>
       <button mat-raised-button color="accent" (click)="zaloguj()">Zaloguj</button>
