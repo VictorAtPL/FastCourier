@@ -83,6 +83,7 @@ import {UzytkownikService} from './services/uzytkownik.service';
 import {OfertaService} from './services/oferta.service';
 import {ZarzadzajOfertamiComponent} from './components/zarzadzaj-ofertami/zarzadzaj-ofertami.component';
 import {ZlecanieTransportuPrzesylkiComponent} from './components/zlecanie-transportu-przesylki/zlecanie-transportu-przesylki.component';
+import {PowiadomieniaService} from "./services/powiadomienia.service";
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -310,7 +311,8 @@ const appRoutes: Routes = [
     DatePipe,
     UwierzytelnianieService,
     UzytkownikService,
-    OfertaService
+    OfertaService,
+    PowiadomieniaService
   ],
   bootstrap: [AppComponent]
 })

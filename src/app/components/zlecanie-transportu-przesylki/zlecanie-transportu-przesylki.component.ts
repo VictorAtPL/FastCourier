@@ -4,7 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {OfertaService} from '../../services/oferta.service';
 import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
-import {UzytkownikService} from "../../services/uzytkownik.service";
+import {UzytkownikService} from '../../services/uzytkownik.service';
+import {PowiadomieniaService} from '../../services/powiadomienia.service';
+import {TypPowiadomienia} from "../../enums/typ-powiadomienia";
 
 @Component({
   selector: 'app-zlecanie-transportu-przesylki',
@@ -35,7 +37,8 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
               private uzytkownikService: UzytkownikService,
               private snackBar: MatSnackBar,
               private router: Router,
-              private uwierzytelnianieService: UwierzytelnianieService) {
+              private uwierzytelnianieService: UwierzytelnianieService,
+              private powiadomienieService: PowiadomieniaService) {
   }
 
   ngOnInit() {
@@ -94,6 +97,18 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
               refSnackBar.afterDismissed().subscribe(() => {
                 this.zlecanieTransportuForm.reset();
               });
+            });
+
+            const self = result._links.self.href;
+            console.log(self);
+            const self_a = self.split('/');
+            const id = self_a[self_a.length - 1];
+
+            this.powiadomienieService.postPowiadomienie({
+              typPowiadomienia: TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI,
+              idTypuPowiadomienia: id,
+            }).subscribe((powiadomienie) => {
+              this.powiadomienieService.putPowiadomienieUzytkownikaPowiadomienie(powiadomienie._links.uzytkownik, uzytkownik._links.self.href);
             });
           });
         });

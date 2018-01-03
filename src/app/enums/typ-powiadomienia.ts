@@ -1,0 +1,3 @@
+export enum TypPowiadomienia {
+  ZLECONO_TRANSPORT_PRZESYLKI = 'ZLECONO_TRANSPORT_PRZESYLKI'
+}

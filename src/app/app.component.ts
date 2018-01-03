@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatIconRegistry, MatSnackBar} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {UwierzytelnianieService} from './services/uwierzytelnianie.service';
+import {PowiadomieniaService} from "./services/powiadomienia.service";
 
 /**
  * Logika biznesowa dla głównego komponentu serwisu, ładującego inne komponenty w zależności od aktualnie przeglądanej strony
@@ -12,9 +13,10 @@ import {UwierzytelnianieService} from './services/uwierzytelnianie.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-
+export class AppComponent implements OnInit {
   zalogowanyUzytkownik: any;
+  powiadomienia: any[] = [];
+  nieprzeczytanychPowiadomien = 0;
 
   /**
    * Tablica z linkami dostępnymi w menu
@@ -31,7 +33,11 @@ export class AppComponent {
    */
   constructor(private _iconRegistry: MatIconRegistry,
               private _domSanitizer: DomSanitizer, private router: Router, public snackBar: MatSnackBar,
-              private autentykacjaService: UwierzytelnianieService) {
+              private autentykacjaService: UwierzytelnianieService,
+              private powiadomieniaService: PowiadomieniaService) {
+  }
+
+  ngOnInit(): void {
     this.navLinks = [
       {
         'label': 'Strona główna',
@@ -91,8 +97,34 @@ export class AppComponent {
      * Metoda sprawdzająca poprawność zalogowania
      */
     this.autentykacjaService.czyZalogowany().subscribe(next => {
-      this.zalogowanyUzytkownik = next;
+      if (next != null) {
+        this.zalogowanyUzytkownik = next;
+
+        this.powiadomieniaService.getPowiadomieniaUzytkownika(this.zalogowanyUzytkownik.login).subscribe((result) => {
+          this.powiadomienia = result._embedded.powiadomienies;
+
+          this.powiadomienia.sort((a, b) => {
+            if (a.dataDodania > b.dataDodania) {
+              return 1;
+            } else if (a.dataDodania === b.dataDodania) {
+              return 0;
+            } else {
+              return -1;
+            }
+          });
+
+          this.powiadomienia.forEach((value, index) => {
+            if (!value.przeczytane) {
+              this.nieprzeczytanychPowiadomien++;
+            }
+
+            this.powiadomienia[index].dataDodania = new Date(this.powiadomienia[index].dataDodania);
+          });
+        });
+      }
     });
+
+
   }
 
   /**

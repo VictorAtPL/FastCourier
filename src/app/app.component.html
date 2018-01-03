@@ -17,6 +17,27 @@
       <span>Fast Courier</span>
       <span flex></span>
       <span>Magical Solutions</span>
+      <button class="overflow-visible" mat-icon-button [matMenuTriggerFor]="notificationsMenu" *ngIf="powiadomienia">
+        <td-notification-count [notifications]="nieprzeczytanychPowiadomien">
+          <mat-icon>notifications</mat-icon>
+        </td-notification-count>
+      </button>
+      <mat-menu #notificationsMenu="matMenu" [overlapTrigger]="false">
+        <td-menu>
+          <div td-menu-header class="mat-subheading-1">Powiadomienia</div>
+          <mat-nav-list dense>
+            <ng-template let-last="last" ngFor let-item [ngForOf]="powiadomienia">
+              <a mat-list-item>
+                <mat-icon matListAvatar>today</mat-icon>
+                <h4 matLine><span class="text-wrap">Dla Twojej oferty zostało złożone nowe zlecenie transportu przesyłki.</span>
+                </h4>
+                <p matLine>{{ item.dataDodania | timeAgo:reference }}</p>
+              </a>
+              <mat-divider *ngIf="!last"></mat-divider>
+            </ng-template>
+          </mat-nav-list>
+        </td-menu>
+      </mat-menu>
     </div>
     <mat-toolbar class="pad-none" hide-sm hide-xs>
       <nav mat-stretch-tabs mat-tab-nav-bar class="text-upper pad-bottom-xs pull-bottom-sm" flex>
