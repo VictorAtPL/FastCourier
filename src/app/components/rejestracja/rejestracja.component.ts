@@ -5,7 +5,11 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material";
 
 /**
- * Logika biznesowa dla rejestracji użytkownika
+ * Logika biznesowa dla komponentu rejestracji
+ * @author Adrian Plichta
+ * @since 0.0.3
+ * @copyright Magical Solutions
+ * @license Creative Commons Attribution NonCommercial (CC-BY-NC)
  */
 @Component({
   selector: 'app-rejestracja',
@@ -19,6 +23,9 @@ export class RejestracjaComponent implements OnInit {
   constructor(private uzytkownikService: UzytkownikService, private router: Router, public snackBar: MatSnackBar) {
   }
 
+  /**
+   * Metoda wywoływana przy próbie załadowania formularza. Ustawia parametry walidatorów.
+   */
   ngOnInit(): void {
     this.rejestracjaForm = new FormGroup({
       login: new FormControl(),
@@ -34,6 +41,10 @@ export class RejestracjaComponent implements OnInit {
     });
   }
 
+  /**
+   * Metoda odpowiedzialna za zarejestrowanie nowego użytkownika, w systemie.
+   * @param model
+   */
   zarejestruj(model: any) {
     this.uzytkownikService.postUzytkownik(model).subscribe(result => {
         const refSnackBar = this.snackBar.open('Zarejestrowano w systemie. Następuje przekierowanie do strony logowania.', null, {
