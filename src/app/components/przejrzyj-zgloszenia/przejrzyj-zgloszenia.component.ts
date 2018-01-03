@@ -73,6 +73,9 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
               private _viewContainerRef: ViewContainerRef) {
   }
 
+  /**
+   * Metoda odpowiedzialna za ustawienie walidatorów. Wywoływana przy starcie formularza.
+   */
   ngOnInit() {
     this.ofertaService.getZgloszeniaOfert().subscribe(result => {
       const data: ZgloszenieOferty[] = [];
@@ -105,16 +108,28 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
     });
   }
 
+  /**
+   * Metoda zmieniająca status zgłoszenia - użytkownika na przeczytane.
+   * @param {ZgloszenieUzytkownika} element
+   */
   zmienPrzeczytaneZgloszenieUzytkownika(element: ZgloszenieUzytkownika) {
     this.uzytkownikService.patchZgloszenieUzytkownika(element.id, {'przeczytane': element.przeczytane}).subscribe(() => {
     });
   }
 
+  /**
+   * Metoda zmieniająca status zgłoszenia - oferty na przeczytane.
+   * @param {ZgloszenieOferty} element
+   */
   zmienPrzeczytaneZgloszenieOferty(element: ZgloszenieOferty) {
     this.ofertaService.patchZgloszenieOferty(element.id, {'przeczytane': element.przeczytane}).subscribe(() => {
     });
   }
 
+  /**
+   * Metoda blokująca użytkownika.
+   * @param {ZgloszenieUzytkownika} element
+   */
   zablokujUzytkownika(element: ZgloszenieUzytkownika) {
     this._dialogService.openConfirm({
       message: 'Blokowanie użytkownika jest operacją, której nie można cofnąć. Czy na pewno chcesz zablokować użytkownika?',
@@ -139,6 +154,10 @@ export class PrzejrzyjZgloszeniaComponent implements OnInit {
     });
   }
 
+  /**
+   * Metoda blokująca ofertę.
+   * @param {ZgloszenieOferty} element
+   */
   zablokujOferte(element: ZgloszenieOferty) {
     this._dialogService.openConfirm({
       message: 'Blokowanie oferty jest operacją, której nie można cofnąć. Czy na pewno chcesz zablokować ofertę?',
