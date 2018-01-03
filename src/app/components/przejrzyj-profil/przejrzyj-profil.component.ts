@@ -91,6 +91,11 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
     this.router.navigate(['/uzytkownik/zglos', login]);
   }
 
+  /**
+   * Metoda odpowiedzialna za zablokowanie użytkownika.
+   * @param {string} login
+   * @param uzytkownik
+   */
   zablokujUzytkownika(login: string, uzytkownik: any) {
     this._dialogService.openConfirm({
       message: 'Blokowanie użytkownika jest operacją, której nie można cofnąć. Czy na pewno chcesz zablokować użytkownika?',
