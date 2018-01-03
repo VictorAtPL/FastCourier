@@ -15,18 +15,20 @@
         <mat-hint align="end">{{ inputLogin.value?.length || 0 }}/30</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput type="password" #inputPassword minlength="8" placeholder="Hasło" required formControlName="haslo" (change)="weryfikujHaslo2()">
+        <input matInput type="password" #inputPassword minlength="8" maxlength="30" placeholder="Hasło" required formControlName="haslo" (change)="weryfikujHaslo2()">
         <mat-hint>Długość hasła musi wynosić minimum 8 znaków.</mat-hint>
         <mat-error *ngIf="this.rejestracjaForm.controls['haslo'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['haslo'].errors.required; else elseBlock1">Musisz wpisać hasło.</span>
           <ng-template #elseBlock1>
-            <span *ngIf="this.rejestracjaForm.controls['haslo'].errors.minlength">Za krótkie hasło.</span>
+            <span *ngIf="this.rejestracjaForm.controls['haslo'].errors.minlength; else elseBlock6">Za krótkie hasło.</span>
+          </ng-template>
+          <ng-template #elseBlock6>
+            <span *ngIf="this.rejestracjaForm.controls['haslo'].errors.maxlength">Za długie hasło.</span>
           </ng-template>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput type="password" placeholder="Powtórz Hasło" required formControlName="haslo2" (change)="weryfikujHaslo()">
-        <mat-hint>Potwierdź hasło!</mat-hint>
         <mat-error *ngIf="this.rejestracjaForm.controls['haslo2'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['haslo2'].errors.czyHasloJestTakieSamo; else elseBlock2">Podane hasło różni się od podanego wcześniej.</span>
           <ng-template #elseBlock2>
@@ -36,7 +38,7 @@
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Adres e-mail" formControlName="email">
-        <mat-hint>Wpisz e-mail!</mat-hint>
+        <mat-hint>Przykładowy e-mail: fastcourier@firma.pl</mat-hint>
         <mat-error *ngIf="this.rejestracjaForm.controls['email'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['email'].errors.required; else elseBlock3">Musisz podać maila.</span>
           <ng-template #elseBlock3>
@@ -46,7 +48,6 @@
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Imię" formControlName="imie">
-        <mat-hint>Wpisz imię!</mat-hint>
         <mat-error *ngIf="this.rejestracjaForm.controls['imie'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['imie'].errors.required; else elseBlock4">Musisz podać imię.</span>
           <ng-template #elseBlock4>
@@ -56,7 +57,6 @@
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Nazwisko" formControlName="nazwisko">
-        <mat-hint>Wpisz nazwisko!</mat-hint>
         <mat-error *ngIf="this.rejestracjaForm.controls['nazwisko'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['nazwisko'].errors.required; else elseBlock5">Musisz podać nazwisko.</span>
           <ng-template #elseBlock5>
@@ -65,27 +65,27 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Data urodzenia" formControlName="dataUrodzenia">
-        <mat-hint>W formacie rrrr-mm-dd.</mat-hint>
-        <mat-error *ngIf="this.rejestracjaForm.controls['dataUrodzenia'].invalid">
-          <span *ngIf="this.rejestracjaForm.controls['dataUrodzenia'].errors.pattern">Niepoprawna data.</span>
+        <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" required formControlName="dataUrodzenia">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error
+          *ngIf="this.rejestracjaForm.controls['dataUrodzenia'].invalid && this.rejestracjaForm.controls['dataUrodzenia'].errors.matDatepickerParse">
+          Data musi być wybrana z powyższego kalendarza
         </mat-error>
+        <mat-hint align="end">Wybierz datę z powyższego kalendarza</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Województwo" formControlName="wojewodztwo">
-        <mat-hint>Wpisz województwo!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Miejscowość" formControlName="miejscowosc">
-        <mat-hint>Wpisz miejscowość!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Ulica" formControlName="ulica">
-        <mat-hint>Wpisz ulicę!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Nr telefonu" formControlName="numerTelefonu">
-        <mat-hint>Wpisz nr telefonu!</mat-hint>
+        <mat-hint>Przykładowy numer telefonu: 555666777</mat-hint>
         <mat-error *ngIf="this.rejestracjaForm.controls['numerTelefonu'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['numerTelefonu'].errors.pattern">Niepoprawny numer telefonu.</span>
         </mat-error>

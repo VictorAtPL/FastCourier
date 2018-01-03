@@ -30,13 +30,14 @@ export class RejestracjaComponent implements OnInit {
    */
   haslo2: FormControl;
 
-  constructor(private uzytkownikService: UzytkownikService, private router: Router, public snackBar: MatSnackBar) {
+  constructor(private uzytkownikService: UzytkownikService,
+              private router: Router, public snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
 
     this.haslo2 = new FormControl('');
-    this.haslo = new FormControl('', [Validators.required, Validators.minLength(8)]);
+    this.haslo = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]);
     this.haslo2.setValidators([Validators.required, this.czyHasloTakieSamo(this.haslo)]);
 
     this.rejestracjaForm = new FormGroup({
@@ -47,8 +48,7 @@ export class RejestracjaComponent implements OnInit {
         's@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]),
       imie: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')]),
       nazwisko: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')]),
-      dataUrodzenia: new FormControl('', [Validators.pattern('^(0?[1-9]|[12][0-9]|3[01])' +
-        '[.-](0?[1-9]|1[012])[.-]\\d{4}$')]),
+      dataUrodzenia: new FormControl(new Date(), [Validators.required]),
       wojewodztwo: new FormControl(''),
       miejscowosc: new FormControl(''),
       ulica: new FormControl(''),
