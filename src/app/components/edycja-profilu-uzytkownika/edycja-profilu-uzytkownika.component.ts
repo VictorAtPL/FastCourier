@@ -5,7 +5,11 @@ import {UzytkownikService} from "../../services/uzytkownik.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 /**
- * Logika biznesowa dla komponentu edycji profilu użytkownika
+ * Logika biznesowa dla komponentu edycji profilu użytkownika.
+ * @author Adrian Plichta
+ * @since 0.0.3
+ * @copyright Magical Solutions
+ * @license Creative Commons Attribution NonCommercial (CC-BY-NC)
  */
 @Component({
   selector: 'app-edycja-profilu-uzytkownika',
@@ -13,13 +17,29 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./edycja-profilu-uzytkownika.component.css']
 })
 export class EdycjaProfiluUzytkownikaComponent implements OnInit {
+  /**
+   * Obiekt przechowujący formualrz edycji użytkownika.
+   */
   edytujProfilUzytkownikaForm: FormGroup;
+
+  /**
+   * Obiekt przechowujący aktualnie zalogowanego użytkownika.
+   */
   zalogowanyUzytkownik: any;
 
+  /**
+   * Konstruktor formularza, umożliwiający użycie dodatkowych serwisów.
+   * @param {UwierzytelnianieService} autentykacjaService
+   * @param {UzytkownikService} uzytkownikService
+   * @param {MatSnackBar} snackBar
+   */
   constructor(private autentykacjaService: UwierzytelnianieService, private uzytkownikService: UzytkownikService,
               public snackBar: MatSnackBar) {
   }
 
+  /**
+   * Metoda inicjująca formualrz. Ustawia parametry walidacji.
+   */
   ngOnInit() {
     this.autentykacjaService.czyZalogowany().subscribe((uzytkownik: any) => {
       if (uzytkownik != null) {
@@ -41,6 +61,10 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
     });
   }
 
+  /**
+   * Metoda odpowiedzialna za edycje danych użytkownika.
+   * @param data
+   */
   edytujProfilUzytkownika(data: any) {
     for (const key in data) {
       if (data[key] == null) {
