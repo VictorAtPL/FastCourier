@@ -98,6 +98,10 @@ export class PrzejrzyjOferteComponent implements OnInit {
     return new Date(new Date(dataWyjazdu).setHours(Number(godzinaWyjazdu_a[0]), Number(godzinaWyjazdu_a[1]), 0));
   }
 
+  /**
+   * Metoda odpowiedzialna za zablokowanie oferty.
+   * @param oferta
+   */
   zablokujOferte(oferta: any) {
     this._dialogService.openConfirm({
       message: 'Blokowanie oferty jest operacją, której nie można cofnąć. Czy na pewno chcesz zablokować ofertę?',
