@@ -100,7 +100,6 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
             });
 
             const self = result._links.self.href;
-            console.log(self);
             const self_a = self.split('/');
             const id = self_a[self_a.length - 1];
 
@@ -108,7 +107,10 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
               typPowiadomienia: TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI,
               idTypuPowiadomienia: id,
             }).subscribe((powiadomienie) => {
-              this.powiadomienieService.putPowiadomienieUzytkownikaPowiadomienie(powiadomienie._links.uzytkownik.href, uzytkownik._links.self.href).subscribe(() => {
+              this.powiadomienieService.putPowiadomienieUzytkownikaPowiadomienie(
+                powiadomienie._links.uzytkownik.href,
+                oferta._embedded.uzytkownik._links.self.href.replace('{?projection}', '')
+              ).subscribe(() => {
               });
             });
           });

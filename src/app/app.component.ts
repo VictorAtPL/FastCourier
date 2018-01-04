@@ -126,11 +126,11 @@ export class AppComponent implements OnInit {
   wyloguj() {
     this.autentykacjaService.wyloguj();
 
-    const snackBarRef = this.snackBar.open('Pomyślnie wylogowano. Poczekaj chwilę.', null, {
+    this.snackBar.open('Pomyślnie wylogowano. Poczekaj chwilę.', null, {
       duration: 2000,
     });
 
-    snackBarRef.afterDismissed().subscribe(next => this.router.navigate(['']));
+    this.router.navigate(['']);
   }
 
   subscribeNotifications() {

@@ -43,7 +43,8 @@
                 {{ kategoria }}
               </mat-chip>
             </ng-container>
-            <mat-chip *ngIf="element.kategoriePaczek.length > 2">i {{ element.kategoriePaczek.length - 2 }} więcej...
+            <mat-chip *ngIf="element.kategoriePaczek && element.kategoriePaczek.length > 2">i {{
+              element.kategoriePaczek.length - 2 }} więcej...
             </mat-chip>
           </mat-chip-list>
         </mat-cell>
@@ -58,7 +59,8 @@
                 {{ rozmiar }}
               </mat-chip>
             </ng-container>
-            <mat-chip *ngIf="element.rozmiaryPaczek.length > 2">i {{ element.rozmiaryPaczek.length - 2 }} więcej...
+            <mat-chip *ngIf="element.rozmiaryPaczek && element.rozmiaryPaczek.length > 2">i {{
+              element.rozmiaryPaczek.length - 2 }} więcej...
             </mat-chip>
           </mat-chip-list>
         </mat-cell>
@@ -69,7 +71,7 @@
         <mat-cell *matCellDef="let element" flex-gt-xs="10">
           <a matTooltip="Edytuj ofertę" title="Edytuj ofertę" [routerLink]="['/oferta/edytuj', element.id]"
              mat-icon-button color="accent"
-             [disabled]="!element.aktywna || element.zablokowana || element.zleceniaTransportu.length > 0">
+             [disabled]="!element.aktywna || element.zablokowana || element.zleceniaTransportu?.length > 0">
             <mat-icon aria-label="Edytuj ofertę">edit</mat-icon>
           </a>
           <button matTooltip="Zdejmij ofertę" title="Zdejmij ofertę" mat-icon-button color="warn"

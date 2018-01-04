@@ -34,13 +34,13 @@ export class LogowanieComponent {
             });
           } else {
             this.autentykacjaService.zaloguj(this.logowanieForm.controls['login'].value, uzytkownik);
-            const refSnackBar = this.snackBar.open('Zalogowano do systemu. Poczekaj chwilę.', null, {
+            this.snackBar.open('Zalogowano do systemu. Poczekaj chwilę.', null, {
               duration: 2000,
             });
 
-            refSnackBar.afterDismissed().subscribe(next => {
-              this.router.navigate(['']);
-            });
+
+            this.router.navigate(['']);
+
           }
         } else {
           this.snackBar.open('Hasło jest nie prawidłowe.', null, {

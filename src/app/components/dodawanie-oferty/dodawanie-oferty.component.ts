@@ -95,14 +95,16 @@ export class DodawanieOfertyComponent implements OnInit {
       maksymalnaWagaPaczki: new FormControl('', [Validators.pattern(/^(|[1-9]|[0-9]{2,})$/)]),
       // TODO: Zbadać problem przy wpisywaniu daty ręcznie
       dataWyjazdu: new FormControl(new Date(), [Validators.required]),
-      godzinaWyjazdu: new FormControl(this.datePipe.transform(new Date(), 'hh:mm'),
+      godzinaWyjazdu: new FormControl(this.datePipe.transform(new Date(), 'HH:mm'),
         [Validators.required, Validators.pattern(/^[0-9]{2}:[0-9]{2}$/)]),
       opis: new FormControl('', [Validators.required, Validators.minLength(40), Validators.maxLength(200)]),
       czyWyroznic: new FormControl(false, [Validators.required])
     });
 
     this.autentykacjaService.czyZalogowany().subscribe(next => {
-      this.zalogowanyUzytkownik = next;
+      if (next != null) {
+        this.zalogowanyUzytkownik = next;
+      }
     });
   }
 
@@ -169,13 +171,13 @@ export class DodawanieOfertyComponent implements OnInit {
     this.ofertaService.postOferta(data).subscribe(oferta => {
       const uzytkownikUrl = this.zalogowanyUzytkownik._links.self.href;
 
-      this.ofertaService.postUzytkownikOfertyOferta(oferta._links.uzytkownik.href, uzytkownikUrl).subscribe(result2 => {
+      this.ofertaService.postUzytkownikOfertyOferta(oferta._links.uzytkownik.href, uzytkownikUrl).subscribe(result => {
         const refSnackBar = this.snackBar.open('Dodano ofertę. Za chwile nastąpi przekierowanie.', null, {
           duration: 2000,
         });
 
-        const selfUrl_a = result2._links.self.href.split('/');
-        const id = selfUrl_a[selfUrl_a.length - 1];
+        const self_a = oferta._links.self.href.split('/');
+        const id = self_a[self_a.length - 1];
 
         refSnackBar.afterDismissed().subscribe(() => {
           this.router.navigate(['/oferta/wyswietl', id]);
