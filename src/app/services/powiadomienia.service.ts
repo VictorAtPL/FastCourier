@@ -23,4 +23,8 @@ export class PowiadomieniaService {
       }
     });
   }
+
+  patchPowiadomienia(id: number, data: any) {
+    return this.http.patch(environment.restUrl + '/powiadomienia/' + id, data);
+  }
 }

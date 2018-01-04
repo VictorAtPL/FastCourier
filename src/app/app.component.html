@@ -17,19 +17,20 @@
       <span>Fast Courier</span>
       <span flex></span>
       <span>Magical Solutions</span>
-      <button class="overflow-visible" mat-icon-button [matMenuTriggerFor]="notificationsMenu" *ngIf="powiadomienia">
+      <button class="overflow-visible" mat-icon-button [matMenuTriggerFor]="notificationsMenu"
+              *ngIf="zalogowanyUzytkownik && powiadomienia" (click)="unsubscribeNotifications()">
         <td-notification-count [notifications]="nieprzeczytanychPowiadomien">
           <mat-icon>notifications</mat-icon>
         </td-notification-count>
       </button>
-      <mat-menu #notificationsMenu="matMenu" [overlapTrigger]="false">
+      <mat-menu #notificationsMenu="matMenu" [overlapTrigger]="false" (closed)="subscribeNotifications()">
         <td-menu>
           <div td-menu-header class="mat-subheading-1">Powiadomienia</div>
           <mat-nav-list dense>
             <ng-template let-last="last" ngFor let-item [ngForOf]="powiadomienia">
-              <a mat-list-item>
-                <mat-icon matListAvatar>today</mat-icon>
-                <h4 matLine><span class="text-wrap">Dla Twojej oferty zostało złożone nowe zlecenie transportu przesyłki.</span>
+              <a mat-list-item [ngClass]="{'bgc-purple-50': !item.przeczytane}" (click)="przeczytaj(item)">
+                <mat-icon matListAvatar>shopping_cart</mat-icon>
+                <h4 matLine><span class="text-wrap">Dla Twojej oferty <em>{{ item.obiekt?._embedded.oferta.tytul }}</em> zostało złożone nowe zlecenie transportu przesyłki przez <em>{{ item.obiekt?._embedded.uzytkownik.login }}</em>.</span>
                 </h4>
                 <p matLine>{{ item.dataDodania | timeAgo:reference }}</p>
               </a>

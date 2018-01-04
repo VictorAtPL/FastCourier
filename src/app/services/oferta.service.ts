@@ -114,4 +114,12 @@ export class OfertaService {
   putZlecajacyUzytkownikZlecenieTransportu(url: string, data: any) {
     return this.http.put<any>(url, data, {headers: {'Content-Type': 'text/uri-list'}});
   }
+
+  getZlecenie(id: number) {
+    return this.http.get<any>(environment.restUrl + '/zleceniatransportu/' + id);
+  }
+
+  patchZlecenie(id: number, data: any) {
+    return this.http.patch(environment.restUrl + '/zleceniatransportu/' + id, data);
+  }
 }

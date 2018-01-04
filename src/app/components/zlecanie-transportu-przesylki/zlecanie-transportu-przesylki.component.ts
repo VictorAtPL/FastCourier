@@ -108,7 +108,8 @@ export class ZlecanieTransportuPrzesylkiComponent implements OnInit {
               typPowiadomienia: TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI,
               idTypuPowiadomienia: id,
             }).subscribe((powiadomienie) => {
-              this.powiadomienieService.putPowiadomienieUzytkownikaPowiadomienie(powiadomienie._links.uzytkownik, uzytkownik._links.self.href);
+              this.powiadomienieService.putPowiadomienieUzytkownikaPowiadomienie(powiadomienie._links.uzytkownik.href, uzytkownik._links.self.href).subscribe(() => {
+              });
             });
           });
         });

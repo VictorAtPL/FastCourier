@@ -4,6 +4,10 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {UwierzytelnianieService} from './services/uwierzytelnianie.service';
 import {PowiadomieniaService} from "./services/powiadomienia.service";
+import {TypPowiadomienia} from "./enums/typ-powiadomienia";
+import {OfertaService} from "./services/oferta.service";
+import {Subscription} from "rxjs/Subscription";
+import {TimerObservable} from 'rxjs/observable/TimerObservable';
 
 /**
  * Logika biznesowa dla głównego komponentu serwisu, ładującego inne komponenty w zależności od aktualnie przeglądanej strony
@@ -23,6 +27,10 @@ export class AppComponent implements OnInit {
    */
   public navLinks: any[];
 
+  powiadomieniaSubscription: Subscription = null;
+
+  timer = TimerObservable.create(0, 2000);
+
   /**
    * Konstruktor klasy app.components.ts
    * @param {MatIconRegistry} _iconRegistry
@@ -34,7 +42,8 @@ export class AppComponent implements OnInit {
   constructor(private _iconRegistry: MatIconRegistry,
               private _domSanitizer: DomSanitizer, private router: Router, public snackBar: MatSnackBar,
               private autentykacjaService: UwierzytelnianieService,
-              private powiadomieniaService: PowiadomieniaService) {
+              private powiadomieniaService: PowiadomieniaService,
+              private ofertaService: OfertaService) {
   }
 
   ngOnInit(): void {
@@ -97,30 +106,14 @@ export class AppComponent implements OnInit {
      * Metoda sprawdzająca poprawność zalogowania
      */
     this.autentykacjaService.czyZalogowany().subscribe(next => {
+      this.zalogowanyUzytkownik = next;
+
       if (next != null) {
-        this.zalogowanyUzytkownik = next;
-
-        this.powiadomieniaService.getPowiadomieniaUzytkownika(this.zalogowanyUzytkownik.login).subscribe((result) => {
-          this.powiadomienia = result._embedded.powiadomienies;
-
-          this.powiadomienia.sort((a, b) => {
-            if (a.dataDodania > b.dataDodania) {
-              return 1;
-            } else if (a.dataDodania === b.dataDodania) {
-              return 0;
-            } else {
-              return -1;
-            }
-          });
-
-          this.powiadomienia.forEach((value, index) => {
-            if (!value.przeczytane) {
-              this.nieprzeczytanychPowiadomien++;
-            }
-
-            this.powiadomienia[index].dataDodania = new Date(this.powiadomienia[index].dataDodania);
-          });
-        });
+        this.subscribeNotifications();
+      } else {
+        if (this.powiadomieniaSubscription) {
+          this.unsubscribeNotifications();
+        }
       }
     });
 
@@ -138,5 +131,57 @@ export class AppComponent implements OnInit {
     });
 
     snackBarRef.afterDismissed().subscribe(next => this.router.navigate(['']));
+  }
+
+  subscribeNotifications() {
+    this.powiadomieniaSubscription = this.timer.subscribe(() => {
+      this.powiadomieniaService.getPowiadomieniaUzytkownika(this.zalogowanyUzytkownik.login).subscribe((result) => {
+        this.powiadomienia = [];
+        this.nieprzeczytanychPowiadomien = 0;
+
+        this.powiadomienia = result._embedded.powiadomienies;
+
+        this.powiadomienia.sort((a, b) => {
+          if (a.dataDodania > b.dataDodania) {
+            return -1;
+          } else if (a.dataDodania === b.dataDodania) {
+            return 0;
+          } else {
+            return 1;
+          }
+        });
+
+        this.powiadomienia.forEach((value, index) => {
+          if (!value.przeczytane) {
+            this.nieprzeczytanychPowiadomien++;
+          }
+
+          this.powiadomienia[index].dataDodania = new Date(this.powiadomienia[index].dataDodania);
+
+          let obiektObservable;
+          if (this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI) {
+            obiektObservable = this.ofertaService.getZlecenie(Number(this.powiadomienia[index].idTypuPowiadomienia));
+          }
+
+          obiektObservable.subscribe((obiekt) => {
+            this.powiadomienia[index].obiekt = obiekt;
+          });
+        });
+      });
+    });
+  }
+
+  unsubscribeNotifications() {
+    this.powiadomieniaSubscription.unsubscribe();
+  }
+
+  przeczytaj(item: any) {
+    item.przeczytane = true;
+
+    const self = item._links.self.href;
+    const self_a = self.split('/');
+    const id = self_a[self_a.length - 1];
+    this.powiadomieniaService.patchPowiadomienia(id, {przeczytane: item.przeczytane}).subscribe(() => {
+    });
   }
 }
