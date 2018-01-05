@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UzytkownikService} from '../../services/uzytkownik.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
+import {OfertaService} from "../../services/oferta.service";
 
 /**
  * Logika biznesowa dla komponentu edycji profilu użytkownika.
@@ -30,6 +31,8 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
   haslo: FormControl;
   phaslo: FormControl;
 
+  miejscowosciFetchUrl: string;
+
   wojewodztwa: string[] = ['dolnośląskie',
     'kujawsko-pomorskie',
     'lubelskie',
@@ -53,7 +56,9 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
    * @param {UzytkownikService} uzytkownikService
    * @param {MatSnackBar} snackBar
    */
-  constructor(private autentykacjaService: UwierzytelnianieService, private uzytkownikService: UzytkownikService,
+  constructor(private autentykacjaService: UwierzytelnianieService,
+              private uzytkownikService: UzytkownikService,
+              private ofertaService: OfertaService,
               public snackBar: MatSnackBar) {
   }
 
@@ -61,7 +66,9 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
    * Metoda inicjująca formualrz. Ustawia parametry walidacji.
    */
   ngOnInit() {
-    this.phaslo = new FormControl('',);
+    this.miejscowosciFetchUrl = this.ofertaService.getMiejscowosciFetchUrl();
+
+    this.phaslo = new FormControl('');
     this.haslo = new FormControl('', [Validators.minLength(8), Validators.maxLength(30)]);
     this.phaslo.setValidators([this.czyHasloTakieSamo(this.haslo)]);
     this.autentykacjaService.czyZalogowany().subscribe((uzytkownik: any) => {
@@ -92,7 +99,7 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
    */
   edytujProfilUzytkownika(data: any) {
     for (const key in data) {
-      if (data[key] == null || data[key].length == 0) {
+      if (data[key] == null || data[key].length === 0) {
         delete data[key];
       }
     }

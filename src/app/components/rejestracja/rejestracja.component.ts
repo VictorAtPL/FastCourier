@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UzytkownikService} from '../../services/uzytkownik.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import {OfertaService} from "../../services/oferta.service";
 
 /**
  * Logika biznesowa dla komponentu rejestracji
@@ -47,14 +48,19 @@ export class RejestracjaComponent implements OnInit {
     'wielkopolskie',
     'zachodniopomorskie'];
 
+  miejscowosciFetchUrl: string;
+
   constructor(private uzytkownikService: UzytkownikService,
-              private router: Router, public snackBar: MatSnackBar) {
+              private router: Router,
+              public snackBar: MatSnackBar,
+              private ofertaService: OfertaService) {
   }
 
   /**
    * Metoda wywoływana przy próbie załadowania formularza. Ustawia parametry walidatorów.
    */
   ngOnInit(): void {
+    this.miejscowosciFetchUrl = this.ofertaService.getMiejscowosciFetchUrl();
 
     this.haslo2 = new FormControl('');
     this.haslo = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]);

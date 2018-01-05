@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/schematics": "0.0.40",
     "@angular/animations": "^5.0.0",
     "@angular/cdk": "^5.0.0-rc.2",
     "@angular/cli": "^1.5.5",
@@ -30,6 +31,7 @@
     "@covalent/highlight": "^1.0.0-rc.0",
     "@covalent/http": "^1.0.0-rc.0",
     "@covalent/markdown": "^1.0.0-rc.0",
+    "@ngui/auto-complete": "^0.16.1",
     "body-parser": "^1.18.2",
     "connect-busboy": "0.0.2",
     "core-js": "^2.4.1",

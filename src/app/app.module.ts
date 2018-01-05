@@ -83,8 +83,10 @@ import {UzytkownikService} from './services/uzytkownik.service';
 import {OfertaService} from './services/oferta.service';
 import {ZarzadzajOfertamiComponent} from './components/zarzadzaj-ofertami/zarzadzaj-ofertami.component';
 import {ZlecanieTransportuPrzesylkiComponent} from './components/zlecanie-transportu-przesylki/zlecanie-transportu-przesylki.component';
-import {PowiadomieniaService} from "./services/powiadomienia.service";
+import {PowiadomieniaService} from './services/powiadomienia.service';
 import {ZarzadzajTransakcjamiComponent} from './components/zarzadzaj-transakcjami/zarzadzaj-transakcjami.component';
+import {NguiAutoCompleteModule} from '@ngui/auto-complete';
+import {HttpModule} from '@angular/http';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -266,6 +268,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     HttpClientJsonpModule,
+    NguiAutoCompleteModule,
     /** Material Modules */
     MatButtonModule,
     MatListModule,
@@ -294,6 +297,7 @@ const appRoutes: Routes = [
     MatChipsModule,
     MatExpansionModule,
     MatCheckboxModule,
+    HttpModule,
     /** Covalent Modules */
     CovalentCommonModule,
     CovalentLayoutModule,

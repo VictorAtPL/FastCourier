@@ -126,4 +126,8 @@ export class OfertaService {
   getZlecenia() {
     return this.http.get<any>(environment.restUrl + '/zleceniatransportu');
   }
+
+  getMiejscowosciFetchUrl() {
+    return environment.restUrl + '/simc.json?s=:keyword';
+  }
 }

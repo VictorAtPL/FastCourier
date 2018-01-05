@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
   powiadomieniaSubscription: Subscription = null;
 
-  timer = TimerObservable.create(0, 2000);
+  timer = TimerObservable.create(0, 5000);
 
   /**
    * Konstruktor klasy app.components.ts
