@@ -49,7 +49,7 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
 
   edytujProfilUzytkownika(data: any) {
     for (const key in data) {
-      if (data[key] == null) {
+      if (data[key] == null || data[key].length == 0) {
         delete data[key];
       }
     }
