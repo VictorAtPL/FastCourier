@@ -66,6 +66,11 @@ export class PrzejrzyjProfilComponent implements OnInit, OnDestroy {
       this.uzytkownikService.getUzytkownik(this.login).subscribe(uzytkownik => {
         this.uzytkownik = uzytkownik;
 
+        this.uzytkownik.srednia = 0;
+        if (this.uzytkownik.liczbaOcen > 0) {
+          this.uzytkownik.srednia = Math.round(this.uzytkownik.sumaOcen / this.uzytkownik.liczbaOcen);
+        }
+
         this.uzytkownik.dataUrodzenia = new Date(uzytkownik.dataUrodzenia);
       }, error2 => {
         this.snackBar.open('Wystąpił błąd. Upewnij się, czy użytkownik o podanym loginie istnieje.', null, {

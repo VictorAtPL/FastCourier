@@ -22,6 +22,33 @@
               uzytkownik.wojewodztwo }}
             </div>
           </div>
+          <div class="mat-row" *ngIf="uzytkownik.srednia > 0">
+            <div class="mat-cell" flex-gt-xs="25"><strong>Średnia ocen</strong></div>
+            <div class="mat-cell" flex-gt-xs="25">
+              <mat-icon class="rate" [ngClass]="{'rate_selected': uzytkownik.srednia >= 1}"
+                        (mouseenter)="liczbaGwiazdek=1"
+                        (click)="wystawOcene(1)">star
+              </mat-icon>
+              <mat-icon class="rate" [ngClass]="{'rate_selected': uzytkownik.srednia >= 2}"
+                        (mouseenter)="liczbaGwiazdek=2"
+                        (click)="wystawOcene(2)">star
+              </mat-icon>
+              <mat-icon class="rate" [ngClass]="{'rate_selected': uzytkownik.srednia >= 3}"
+                        (mouseenter)="liczbaGwiazdek=3"
+                        (click)="wystawOcene(3)">star
+              </mat-icon>
+              <mat-icon class="rate" [ngClass]="{'rate_selected': uzytkownik.srednia >= 4}"
+                        (mouseenter)="liczbaGwiazdek=4"
+                        (click)="wystawOcene(4)">star
+              </mat-icon>
+              <mat-icon class="rate" [ngClass]="{'rate_selected': uzytkownik.srednia >= 5}"
+                        (mouseenter)="liczbaGwiazdek=5"
+                        (click)="wystawOcene(5)">star
+              </mat-icon>
+
+              {{ uzytkownik.srednia }} z {{ uzytkownik.liczbaOcen }} ocen
+            </div>
+          </div>
           <div class="mat-row">
             <div class="mat-cell" flex-gt-xs="25"><strong>Numer telefonu</strong></div>
             <div class="mat-cell">{{ uzytkownik.numerTelefonu }}</div>

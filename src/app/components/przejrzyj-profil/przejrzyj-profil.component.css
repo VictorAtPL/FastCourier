@@ -22,3 +22,8 @@
 .mat-progress-spinner {
   margin: 0 auto;
 }
+
+mat-icon.material-icons, mat-icon.material-icons.mat-icon {
+  vertical-align: middle;
+}
+
