@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
 
 /**
  * Logika biznesowa dla komponentu logowania
