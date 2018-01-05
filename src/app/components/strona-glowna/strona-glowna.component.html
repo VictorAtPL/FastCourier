@@ -4,56 +4,122 @@
     <ng-template #guestBlock>gościu!</ng-template>
     <mat-icon>android</mat-icon>
   </mat-card-title>
-  <mat-card-content>Wybierz akcje z menu, którą chcesz wykonać.</mat-card-content>
-  <!--<mat-card-content>Ten formularz pozwala na wyszukiwanie oferty w serwisie.</mat-card-content>-->
+  <mat-card-content>Wybierz akcje z menu, którą chcesz wykonać lub skorzystaj z formularza poniżej aby wyszukać
+    ofertę.
+  </mat-card-content>
 </mat-card>
-<!--<mat-card>-->
-<!--<mat-card-title>Formularz wyszukiwania</mat-card-title>-->
-<!--<mat-card-content>-->
-<!--<form>-->
-<!--<div layout-gt-xs="row">-->
-<!--<div flex-gt-xs="50">-->
-<!--<mat-form-field class="example-full-width">-->
-<!--<mat-select placeholder="Miasto początkowe">-->
-<!--<mat-option>Warszawa</mat-option>-->
-<!--<mat-option>Kraków</mat-option>-->
-<!--<mat-option>Pruszków</mat-option>-->
-<!--<mat-option>Halinów</mat-option>-->
-<!--<mat-option>Ostrów Mazowiecka</mat-option>-->
-<!--</mat-select>-->
-<!--</mat-form-field>-->
-<!--</div>-->
-<!--<div flex-gt-xs="50">-->
+<mat-card>
+  <mat-card-title>Formularz wyszukiwania</mat-card-title>
+  <mat-card-content *ngIf="pokazWyniki">
+    <mat-spinner *ngIf="!dataSource"></mat-spinner>
+    <span *ngIf="dataSource && data.length == 0">Brak wyników wyszukiwania.<br/></span>
+    <mat-table *ngIf="dataSource && data.length > 0" #table [dataSource]="dataSource">
 
-<!--<mat-form-field class="example-full-width">-->
-<!--<mat-select placeholder="Miasto docelowe">-->
-<!--<mat-option>Warszawa</mat-option>-->
-<!--<mat-option>Kraków</mat-option>-->
-<!--<mat-option>Pruszków</mat-option>-->
-<!--<mat-option>Halinów</mat-option>-->
-<!--<mat-option>Ostrów Mazowiecka</mat-option>-->
-<!--</mat-select>-->
-<!--</mat-form-field>-->
-<!--</div>-->
-<!--</div>-->
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
 
-<!--<div layout-gt-xs="row">-->
-<!--<div flex-gt-xs="50">-->
-<!--<mat-form-field class="example-full-width">-->
-<!--<input matInput [matDatepicker]="picker" placeholder="Data wyjazdu">-->
-<!--<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-<!--<mat-datepicker #picker></mat-datepicker>-->
-<!--</mat-form-field>-->
-<!--</div>-->
-<!--<div flex-gt-xs="50">-->
-<!--<mat-form-field class="example-full-width">-->
-<!--<input matInput placeholder="Godzina wyjazdu" type="time">-->
-<!--</mat-form-field>-->
-<!--</div>-->
-<!--</div>-->
+      <!-- Position Column -->
+      <ng-container matColumnDef="dataGodzina">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="15"> Data i godzina wyjazdu</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="15"> {{ element.dataGodzinaWyjazdu | date:'dd.MM.yyyy HH:mm' }}
+        </mat-cell>
+      </ng-container>
 
-<!--<button mat-raised-button color="primary">Szukaj</button>-->
-<!--<a mat-raised-button routerLink="/oferta/wyszukiwanie" color="accent">Wyszukiwanie zaawansowane</a>-->
-<!--</form>-->
-<!--</mat-card-content>-->
-<!--</mat-card>-->
+
+      <ng-container matColumnDef="tytul">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="35"> Tytuł</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="35">
+          <div style="margin: 3px 8px;">
+            <mat-icon style="margin-right: 8px;" color="accent" aria-label="Kierunek">card_travel</mat-icon>
+            <span>{{ element.miastoPoczatkowe }}</span>
+            <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+            <span>{{ element.miastoDocelowe }}</span></div>
+          <a mat-icon-button [routerLink]="['/oferta/wyswietl', element.id]" color="accent">
+            <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
+          </a>
+          {{ element.tytul }} <br/><a [routerLink]="['/uzytkownik/profil', element.loginUzytkownika]" target="_blank"
+                                      title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
+          <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
+        </a> {{ element.loginUzytkownika }}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="cena">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="10"> Cena</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="10"> {{ element.cenaMinimalna }}-{{ element.cenaMaksymalna }}zł
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="kategoriePaczek">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="20"> Kategorie paczek</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="20">
+          <mat-chip-list>
+            <ng-container *ngFor="let kategoria of element.kategoriePaczek; let i=index">
+              <mat-chip color="primary" *ngIf="i < 2">
+                {{ kategoria }}
+              </mat-chip>
+            </ng-container>
+            <mat-chip *ngIf="element.kategoriePaczek.length > 2">i {{ element.kategoriePaczek.length - 2 }} więcej...
+            </mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="rozmiaryPaczek">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="20"> Rozmiary paczek</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="20">
+          <mat-chip-list>
+            <ng-container *ngFor="let rozmiar of element.rozmiaryPaczek; let i=index">
+              <mat-chip color="primary" *ngIf="i < 2">
+                {{ rozmiar }}
+              </mat-chip>
+            </ng-container>
+            <mat-chip *ngIf="element.rozmiaryPaczek.length > 2">i {{ element.rozmiaryPaczek.length - 2 }} więcej...
+            </mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <br>
+    <button mat-raised-button color="accent" (click)="powrot()">Powrót do wyszukiwania</button>
+  </mat-card-content>
+  <mat-card-content *ngIf="!pokazWyniki">
+    <form [formGroup]="wyszukiwanieOfertForm">
+      <div layout-gt-xs="row">
+        <div flex-gt-xs="33">
+          <mat-form-field class="example-full-width">
+            <input matInput ngui-auto-complete required placeholder="Miasto początkowe"
+                   formControlName="miastoPoczatkowe"
+                   [source]="miejscowosciFetchUrl" min-chars="3">
+            <mat-hint>Wpisz przynajmniej trzy litery i wybierz jedno z miasto występujących na liście</mat-hint>
+          </mat-form-field>
+        </div>
+        <div flex-gt-xs="33">
+          <mat-form-field class="example-full-width">
+            <input matInput ngui-auto-complete required placeholder="Miasto docelowe" formControlName="miastoDocelowe"
+                   [source]="miejscowosciFetchUrl" min-chars="3">
+            <mat-hint>Wpisz przynajmniej trzy litery i wybierz jedno z miasto występujących na liście</mat-hint>
+          </mat-form-field>
+        </div>
+        <div flex-gt-xs="33">
+          <mat-form-field class="example-full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Data wyjazdu" formControlName="dataWyjazdu">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error
+              *ngIf="this.wyszukiwanieOfertForm.controls['dataWyjazdu'].invalid && this.wyszukiwanieOfertForm.controls['dataWyjazdu'].errors.matDatepickerParse">
+              Data musi być wybrana z powyższego kalendarza
+            </mat-error>
+            <mat-hint align="end">Wybierz datę z powyższego kalendarza</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <br>
+      <button mat-raised-button color="accent" (click)="szukaj()">Szukaj</button>
+    </form>
+  </mat-card-content>
+</mat-card>

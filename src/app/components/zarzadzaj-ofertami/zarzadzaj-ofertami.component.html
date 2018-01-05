@@ -18,9 +18,14 @@
 
       <ng-container matColumnDef="tytul">
         <mat-header-cell *matHeaderCellDef flex-gt-xs="25"> Tytuł</mat-header-cell>
-        <mat-cell *matCellDef="let element" flex-gt-xs="25"><a mat-icon-button
-                                                               [routerLink]="['/oferta/wyswietl', element.id]"
-                                                               color="accent" [disabled]="element.zablokowana">
+        <mat-cell *matCellDef="let element" flex-gt-xs="25">
+          <div style="margin: 3px 8px;">
+            <mat-icon style="margin-right: 8px;" color="accent" aria-label="Kierunek">card_travel</mat-icon>
+            <span>{{ element.miastoPoczatkowe }}</span>
+            <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+            <span>{{ element.miastoDocelowe }}</span></div>
+          <a mat-icon-button [routerLink]="['/oferta/wyswietl', element.id]" color="accent"
+             [disabled]="element.zablokowana">
           <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
         </a>
           <span [style.text-decoration]="element.zablokowana ? 'line-through' : 'none'">{{ element.tytul }}</span>
