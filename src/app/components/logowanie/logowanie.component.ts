@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
+import {OfertaService} from "../../services/oferta.service";
 
 /**
  * Logika biznesowa dla komponentu logowania
@@ -26,7 +27,10 @@ export class LogowanieComponent {
    * @param {Router} router
    * @param {MatSnackBar} snackBar
    */
-  constructor(private autentykacjaService: UwierzytelnianieService, private router: Router, public snackBar: MatSnackBar) {
+  constructor(private autentykacjaService: UwierzytelnianieService,
+              private router: Router,
+              public snackBar: MatSnackBar,
+              private ofertaService: OfertaService) {
     this.logowanieForm = new FormGroup({
       login: new FormControl(''),
       haslo: new FormControl('')
@@ -50,9 +54,9 @@ export class LogowanieComponent {
               duration: 2000,
             });
 
-
             this.router.navigate(['']);
 
+            this.sprawdzNoweWystawieniaOcen();
           }
         } else {
           this.snackBar.open('Hasło jest nie prawidłowe.', null, {
@@ -65,5 +69,9 @@ export class LogowanieComponent {
           duration: 2000,
         });
       });
+  }
+
+  sprawdzNoweWystawieniaOcen() {
+
   }
 }

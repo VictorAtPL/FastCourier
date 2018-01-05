@@ -38,6 +38,12 @@
                 <h4 matLine *ngIf="item.typPowiadomienia == typPowiadomienia.ZMIANA_STATUSU_ZLECENIA"><span
                   class="text-wrap">W Twoim zleceniu do oferty <em>{{ item.obiekt?._embedded.oferta.tytul }}</em> zmienił się status. Kliknij i zobacz na jaki.</span>
                 </h4>
+                <h4 matLine *ngIf="item.typPowiadomienia == typPowiadomienia.WYSTAW_OCENE_ZLECENIOBIORCY"><span
+                  class="text-wrap">Twoje zlecenie do oferty <em>{{ item.obiekt?._embedded.oferta.tytul }}</em> zostało oznaczone jako dostarczone. Kliknij, aby wystawić ocenę użytkownikowi.</span>
+                </h4>
+                <h4 matLine *ngIf="item.typPowiadomienia == typPowiadomienia.WYSTAW_OCENE_ZLECENIODAWCY"><span
+                  class="text-wrap">Zlecenie przypisane do Twojej oferty <em>{{ item.obiekt?._embedded.oferta.tytul }}</em> oznaczyłeś jako dostarczone. Kliknij, aby wystawić ocenę użytkownikowi.</span>
+                </h4>
                 <p matLine>{{ item.dataDodania | timeAgo:reference }}</p>
               </a>
               <mat-divider *ngIf="!last"></mat-divider>

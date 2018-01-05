@@ -100,14 +100,33 @@ export class ZarzadzajTransakcjamiComponent implements OnInit {
     element.statusZlecenia = nowyStatus;
     this.ofertaService.patchZlecenie(element.id, {statusZlecenia: element.statusZlecenia}).subscribe((result) => {
 
+      let typNowegoPowiadomienia;
+      if (nowyStatus === StatusZlecenia.DOSTARCZONO) {
+        typNowegoPowiadomienia = TypPowiadomienia.WYSTAW_OCENE_ZLECENIOBIORCY;
+      } else {
+        typNowegoPowiadomienia = TypPowiadomienia.ZMIANA_STATUSU_ZLECENIA;
+      }
+
       this.powiadomieniaService.postPowiadomienie({
-        typPowiadomienia: TypPowiadomienia.ZMIANA_STATUSU_ZLECENIA,
+        typPowiadomienia: typNowegoPowiadomienia,
         idTypuPowiadomienia: element.id,
       }).subscribe((powiadomienie) => {
         this.powiadomieniaService.putPowiadomienieUzytkownikaPowiadomienie(
           powiadomienie._links.uzytkownik.href,
           element.zlecajacyUzytkownik._links.self.href.replace('{?projection}', '')
         ).subscribe(() => {
+          if (typNowegoPowiadomienia === TypPowiadomienia.WYSTAW_OCENE_ZLECENIOBIORCY) {
+            this.powiadomieniaService.postPowiadomienie({
+              typPowiadomienia: TypPowiadomienia.WYSTAW_OCENE_ZLECENIODAWCY,
+              idTypuPowiadomienia: element.id,
+            }).subscribe((powiadomienie2) => {
+              this.powiadomieniaService.putPowiadomienieUzytkownikaPowiadomienie(
+                powiadomienie._links.uzytkownik.href,
+                element.dotyczyOferty.ofertaUzytkownika[0]._links.self.href.replace('{?projection}', '')
+              ).subscribe(() => {
+              });
+            });
+          }
         });
       });
     });

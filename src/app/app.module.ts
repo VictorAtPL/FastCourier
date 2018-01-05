@@ -104,11 +104,6 @@ const appRoutes: Routes = [
     data: {title: 'Fast Courier'}
   },
   {
-    path: 'transakcja/ocen',
-    component: OcenaTransakcjiComponent,
-    data: {title: 'Fast Courier'}
-  },
-  {
     path: 'regulamin/dodaj',
     component: DodawanieRegulaminuComponent,
     data: {title: 'Fast Courier'}
@@ -217,6 +212,11 @@ const appRoutes: Routes = [
     path: 'uzytkownik/profil/:login',
     component: PrzejrzyjProfilComponent,
     data: {title: 'Fast Courier - Profil użytkownika'}
+  },
+  {
+    path: 'uzytkownik/wystaw_ocene/:login',
+    component: OcenaTransakcjiComponent,
+    data: {title: 'Fast Courier - Wystaw ocenę'}
   },
   {
     path: 'serwis/informacje',

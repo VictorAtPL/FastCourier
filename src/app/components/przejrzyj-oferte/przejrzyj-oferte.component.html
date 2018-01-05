@@ -56,7 +56,7 @@
       </div>
       <br/>
       <a mat-raised-button color="primary" [routerLink]="['/oferta/zlec', id]"
-         *ngIf="zalogowanyUzytkownik && !oferta.zablokowana && oferta.aktywna && oferta.dataGodzinaWyjazdu >= data">Zleć
+         *ngIf="zalogowanyUzytkownik && zalogowanyUzytkownik.login !== oferta._embedded.uzytkownik.login && !oferta.zablokowana && oferta.aktywna && oferta.dataGodzinaWyjazdu >= data">Zleć
         transport przesylki</a>
       <button mat-raised-button color="warn" (click)="zglosOferte()"
               *ngIf="!zalogowanyUzytkownik || zalogowanyUzytkownik === null || zalogowanyUzytkownik.login !== oferta._embedded.uzytkownik.login">

@@ -2,25 +2,29 @@
   <mat-card-title>
     Oceń transakcję
   </mat-card-title>
-  <mat-card-subtitle class="example-full-width">
-    Tytuł oferty / Miasto początkowe - Miasto docelowe
+  <mat-card-subtitle *ngIf="login">
+    Oceniasz użytkownika {{ login }}
   </mat-card-subtitle>
   <mat-card-content>
-    <form class="example-form">
-      <p>Ocena</p>
-      <div>
-        <mat-icon class="rate rate_selected">star</mat-icon>
-        <mat-icon class="rate rate_selected">star</mat-icon>
-        <mat-icon class="rate rate_selected">star</mat-icon>
-        <mat-icon class="rate">star</mat-icon>
-        <mat-icon class="rate">star</mat-icon>
+    <form>
+      <p>Wybierz liczbę gwiazdek na którą oceniasz użytkownika:</p>
+      <div style="cursor:pointer;">
+        <mat-icon class="rate" [ngClass]="{'rate_selected': liczbaGwiazdek >= 1}" (mouseenter)="liczbaGwiazdek=1"
+                  (click)="wystawOcene(1)">star
+        </mat-icon>
+        <mat-icon class="rate" [ngClass]="{'rate_selected': liczbaGwiazdek >= 2}" (mouseenter)="liczbaGwiazdek=2"
+                  (click)="wystawOcene(2)">star
+        </mat-icon>
+        <mat-icon class="rate" [ngClass]="{'rate_selected': liczbaGwiazdek >= 3}" (mouseenter)="liczbaGwiazdek=3"
+                  (click)="wystawOcene(3)">star
+        </mat-icon>
+        <mat-icon class="rate" [ngClass]="{'rate_selected': liczbaGwiazdek >= 4}" (mouseenter)="liczbaGwiazdek=4"
+                  (click)="wystawOcene(4)">star
+        </mat-icon>
+        <mat-icon class="rate" [ngClass]="{'rate_selected': liczbaGwiazdek >= 5}" (mouseenter)="liczbaGwiazdek=5"
+                  (click)="wystawOcene(5)">star
+        </mat-icon>
       </div>
-      <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="Komentarz" matTextareaAutosize matAutosizeMinRows="2"
-                      matAutosizeMaxRows="5"></textarea>
-      </mat-form-field>
-      <button mat-raised-button>Anuluj</button>
-      <button mat-raised-button color="primary">Oceń</button>
     </form>
   </mat-card-content>
 </mat-card>

@@ -162,7 +162,10 @@ export class AppComponent implements OnInit {
 
           let obiektObservable;
           if (this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI ||
-            this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.ZMIANA_STATUSU_ZLECENIA) {
+            this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.ZMIANA_STATUSU_ZLECENIA ||
+            this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.WYSTAW_OCENE_ZLECENIODAWCY ||
+            this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.WYSTAW_OCENE_ZLECENIOBIORCY
+          ) {
             obiektObservable = this.ofertaService.getZlecenie(Number(this.powiadomienia[index].idTypuPowiadomienia));
           }
 
@@ -179,17 +182,24 @@ export class AppComponent implements OnInit {
   }
 
   przeczytaj(item: any) {
+    const self = item._links.self.href;
+    const self_a = self.split('/');
+    const id = self_a[self_a.length - 1];
+
     if (!item.przeczytane) {
       item.przeczytane = true;
 
-      const self = item._links.self.href;
-      const self_a = self.split('/');
-      const id = self_a[self_a.length - 1];
       this.powiadomieniaService.patchPowiadomienia(id, {przeczytane: item.przeczytane}).subscribe(() => {
+        if (item.typPowiadomienia === TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI ||
+          item.typPowiadomienia === TypPowiadomienia.ZMIANA_STATUSU_ZLECENIA) {
+          this.router.navigate(['uzytkownik/transakcje']);
+        } else if (item.typPowiadomienia === TypPowiadomienia.WYSTAW_OCENE_ZLECENIOBIORCY) {
+          this.router.navigate(['uzytkownik/wystaw_ocene', item.obiekt._embedded.uzytkownik.login]);
+        } else if (item.typPowiadomienia === TypPowiadomienia.WYSTAW_OCENE_ZLECENIODAWCY) {
+          this.router.navigate(['uzytkownik/wystaw_ocene', item.obiekt._embedded.oferta.ofertaUzytkownika[0].login]);
+        }
       });
-    }
-
-    if (item.typPowiadomienia === TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI ||
+    } else if (item.typPowiadomienia === TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI ||
       item.typPowiadomienia === TypPowiadomienia.ZMIANA_STATUSU_ZLECENIA) {
       this.router.navigate(['uzytkownik/transakcje']);
     }
