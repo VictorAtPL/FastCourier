@@ -24,7 +24,8 @@
         </mat-error>
       </mat-form-field>
       <br><br>
-      <button mat-raised-button color="accent" (click)="zaloguj()">Zaloguj</button>
+      <button mat-raised-button color="accent" (click)="zaloguj()" [disabled]="this.logowanieForm.invalid">Zaloguj
+      </button>
       <a mat-raised-button routerLink="/rejestracja">Zarejestruj sie</a>
     </form>
   </mat-card-content>
