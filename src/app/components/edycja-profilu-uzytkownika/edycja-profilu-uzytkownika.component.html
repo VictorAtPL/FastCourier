@@ -67,9 +67,9 @@
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-select matInput placeholder="Województwo" formControlName="wojewodztwo" [value]="zalogowanyUzytkownik.wojewodztwo">
-          <mat-option value="Mazowieckie">Mazowieckie</mat-option>
-          <mat-option value="Lubelskie">Lubelskie</mat-option>
-          <mat-option value="Wielkopolskie">Wielkopolskie</mat-option>
+          <mat-option *ngFor="let wojewodztwo of wojewodztwa" [value]="wojewodztwo">
+            {{ wojewodztwo }}
+          </mat-option>
         </mat-select>
         <mat-hint>Wybierz jedno z województw występujących na liście</mat-hint>
       </mat-form-field>

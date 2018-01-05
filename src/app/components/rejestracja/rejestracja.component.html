@@ -37,7 +37,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Adres e-mail" formControlName="email">
+        <input matInput placeholder="Adres e-mail" formControlName="email" required>
         <mat-hint>Przykładowy e-mail: fastcourier@firma.pl</mat-hint>
         <mat-error *ngIf="this.rejestracjaForm.controls['email'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['email'].errors.required; else elseBlock3">Musisz podać maila.</span>
@@ -47,7 +47,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Imię" formControlName="imie">
+        <input matInput placeholder="Imię" formControlName="imie" required>
         <mat-error *ngIf="this.rejestracjaForm.controls['imie'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['imie'].errors.required; else elseBlock4">Musisz podać imię.</span>
           <ng-template #elseBlock4>
@@ -56,7 +56,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nazwisko" formControlName="nazwisko">
+        <input matInput placeholder="Nazwisko" formControlName="nazwisko" required>
         <mat-error *ngIf="this.rejestracjaForm.controls['nazwisko'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['nazwisko'].errors.required; else elseBlock5">Musisz podać nazwisko.</span>
           <ng-template #elseBlock5>
@@ -65,7 +65,8 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" required formControlName="dataUrodzenia">
+        <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" required formControlName="dataUrodzenia"
+               required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error
@@ -75,16 +76,20 @@
         <mat-hint align="end">Wybierz datę z powyższego kalendarza</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Województwo" formControlName="wojewodztwo">
+        <mat-select matInput placeholder="Województwo" formControlName="wojewodztwo" required>
+          <mat-option *ngFor="let wojewodztwo of wojewodztwa" [value]="wojewodztwo">
+            {{ wojewodztwo }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Miejscowość" formControlName="miejscowosc">
+        <input matInput placeholder="Miejscowość" formControlName="miejscowosc" required>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ulica" formControlName="ulica">
+        <input matInput placeholder="Ulica" formControlName="ulica" required>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nr telefonu" formControlName="numerTelefonu">
+        <input matInput placeholder="Nr telefonu" formControlName="numerTelefonu" required>
         <mat-hint>Przykładowy numer telefonu: 555666777</mat-hint>
         <mat-error *ngIf="this.rejestracjaForm.controls['numerTelefonu'].invalid">
           <span *ngIf="this.rejestracjaForm.controls['numerTelefonu'].errors.pattern">Niepoprawny numer telefonu.</span>

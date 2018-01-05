@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AutentykacjaService} from '../../services/autentykacja.service';
 import {UzytkownikService} from '../../services/uzytkownik.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {UwierzytelnianieService} from "../../services/uwierzytelnianie.service";
+import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
 
 /**
  * Logika biznesowa dla komponentu edycji profilu użytkownika.
@@ -31,6 +30,23 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
   haslo: FormControl;
   phaslo: FormControl;
 
+  wojewodztwa: string[] = ['dolnośląskie',
+    'kujawsko-pomorskie',
+    'lubelskie',
+    'lubuskie',
+    'łódzkie',
+    'małopolskie',
+    'mazowieckie',
+    'opolskie',
+    'podkarpackie',
+    'podlaskie',
+    'pomorskie',
+    'śląskie',
+    'świętokrzyskie',
+    'warmińsko-mazurskie',
+    'wielkopolskie',
+    'zachodniopomorskie'];
+
   /**
    * Konstruktor formularza, umożliwiający użycie dodatkowych serwisów.
    * @param {UwierzytelnianieService} autentykacjaService
@@ -52,20 +68,21 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
       if (uzytkownik != null) {
         uzytkownik.dataUrodzenia = new Date(uzytkownik.dataUrodzenia);
         this.zalogowanyUzytkownik = uzytkownik;
-      }
-    });
 
-    this.edytujProfilUzytkownikaForm = new FormGroup({
-      haslo: this.haslo,
-      phaslo: this.phaslo,
-      email: new FormControl('', Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')),
-      imie: new FormControl('', Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')),
-      nazwisko: new FormControl('', Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')),
-      dataUrodzenia: new FormControl(new Date()),
-      wojewodztwo: new FormControl(),
-      miejscowosc: new FormControl(),
-      ulica: new FormControl(),
-      numerTelefonu: new FormControl('', Validators.pattern('^[0-9\\-\\+]{9,15}$'))
+        this.edytujProfilUzytkownikaForm = new FormGroup({
+          haslo: this.haslo,
+          phaslo: this.phaslo,
+          email: new FormControl('', Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]' +
+            '\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')),
+          imie: new FormControl('', Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')),
+          nazwisko: new FormControl('', Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')),
+          dataUrodzenia: new FormControl(new Date()),
+          wojewodztwo: new FormControl(this.zalogowanyUzytkownik.wojewodztwo),
+          miejscowosc: new FormControl(this.zalogowanyUzytkownik.miejscowosc),
+          ulica: new FormControl(),
+          numerTelefonu: new FormControl('', Validators.pattern('^[0-9\\-\\+]{9,15}$'))
+        });
+      }
     });
   }
 

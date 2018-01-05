@@ -30,6 +30,23 @@ export class RejestracjaComponent implements OnInit {
    */
   haslo2: FormControl;
 
+  wojewodztwa: string[] = ['dolnośląskie',
+    'kujawsko-pomorskie',
+    'lubelskie',
+    'lubuskie',
+    'łódzkie',
+    'małopolskie',
+    'mazowieckie',
+    'opolskie',
+    'podkarpackie',
+    'podlaskie',
+    'pomorskie',
+    'śląskie',
+    'świętokrzyskie',
+    'warmińsko-mazurskie',
+    'wielkopolskie',
+    'zachodniopomorskie'];
+
   constructor(private uzytkownikService: UzytkownikService,
               private router: Router, public snackBar: MatSnackBar) {
   }
@@ -51,7 +68,7 @@ export class RejestracjaComponent implements OnInit {
         's@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]),
       imie: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')]),
       nazwisko: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')]),
-      dataUrodzenia: new FormControl(new Date(), [Validators.required]),
+      dataUrodzenia: new FormControl(null, [Validators.required]),
       wojewodztwo: new FormControl(''),
       miejscowosc: new FormControl(''),
       ulica: new FormControl(''),
