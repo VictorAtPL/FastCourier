@@ -67,26 +67,16 @@
       <div layout-gt-xs="row">
         <div flex-gt-xs="50">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Miasto początkowe" required formControlName="miastoPoczatkowe">
-              <mat-option value="Warszawa">Warszawa</mat-option>
-              <mat-option value="Kraków">Kraków</mat-option>
-              <mat-option value="Pruszków">Pruszków</mat-option>
-              <mat-option value="Halinów">Halinów</mat-option>
-              <mat-option value="Ostrów Mazowiecka">Ostrów Mazowiecka</mat-option>
-            </mat-select>
-            <mat-hint>Wybierz jedno z miast występujących na liście</mat-hint>
+            <input matInput ngui-auto-complete placeholder="Miasto początkowe" formControlName="miastoPoczatkowe"
+                   [source]="miejscowosciFetchUrl" min-chars="3">
+            <mat-hint>Wpisz przynajmniej trzy litery i wybierz jedno z miasto występujących na liście</mat-hint>
           </mat-form-field>
         </div>
         <div flex-gt-xs="50">
           <mat-form-field class="example-full-width">
-            <mat-select placeholder="Miasto docelowe" required formControlName="miastoDocelowe">
-              <mat-option value="Warszawa">Warszawa</mat-option>
-              <mat-option value="Kraków">Kraków</mat-option>
-              <mat-option value="Pruszków">Pruszków</mat-option>
-              <mat-option value="Halinów">Halinów</mat-option>
-              <mat-option value="Ostrów Mazowiecka">Ostrów Mazowiecka</mat-option>
-            </mat-select>
-            <mat-hint>Wybierz jedno z miast występujących na liście</mat-hint>
+            <input matInput ngui-auto-complete placeholder="Miasto docelowe" formControlName="miastoDocelowe"
+                   [source]="miejscowosciFetchUrl" min-chars="3">
+            <mat-hint>Wpisz przynajmniej trzy litery i wybierz jedno z miasto występujących na liście</mat-hint>
           </mat-form-field>
         </div>
       </div>

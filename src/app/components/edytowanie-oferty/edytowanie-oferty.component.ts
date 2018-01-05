@@ -62,6 +62,8 @@ export class EdytowanieOfertyComponent implements OnInit {
   oferta: any;
   private sub: any;
 
+  miejscowosciFetchUrl: string;
+
   /**
    * Konstruktor komponentu wstrzykujący serwisy, które mogą być wykorzystane w klasie
    * @param {DatePipe} datePipe
@@ -77,6 +79,8 @@ export class EdytowanieOfertyComponent implements OnInit {
    * Funkcja inicjalizująca formularz dodawania oferty i ładująca aktualnie zalogowanego użytkownika
    */
   ngOnInit() {
+    this.miejscowosciFetchUrl = this.ofertaService.getMiejscowosciFetchUrl();
+
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
 

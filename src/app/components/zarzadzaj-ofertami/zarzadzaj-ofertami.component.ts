@@ -97,7 +97,7 @@ export class ZarzadzajOfertamiComponent implements OnInit {
 
   zdejmijOferte(element: Oferta) {
     this._dialogService.openConfirm({
-      message: 'Dezaktywacja oferty jest operacją, której nie można cofnąć. Czy na pewno chcesz zdjąć ofertę z portalu?',
+      message: 'Dezaktywacja oferty jest operacją, której nie można cofnąć. Nadal będziesz musiał zrealizować zlecenia, które do tej pory zostały dodane. Czy na pewno chcesz zdjąć ofertę z portalu?',
       disableClose: false,
       viewContainerRef: this._viewContainerRef,
       cancelButton: 'Anuluj',

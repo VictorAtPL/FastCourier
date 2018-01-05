@@ -64,6 +64,8 @@ export class DodawanieOfertyComponent implements OnInit {
    */
   zalogowanyUzytkownik: any;
 
+  miejscowosciFetchUrl: string;
+
   /**
    * Konstruktor komponentu wstrzykujący serwisy, które mogą być wykorzystane w klasie
    * @param {DatePipe} datePipe
@@ -77,6 +79,8 @@ export class DodawanieOfertyComponent implements OnInit {
    * Funkcja inicjalizująca formularz dodawania oferty i ładująca aktualnie zalogowanego użytkownika
    */
   ngOnInit() {
+    this.miejscowosciFetchUrl = this.ofertaService.getMiejscowosciFetchUrl();
+
     this.cenaMinimalna = new FormControl('15');
     this.cenaMaksymalna = new FormControl('15', [Validators.required, Validators.min(0), CustomValidators.number,
       Validators.pattern(/^([^\\.]+|[0-9]+\.[0-9]{1,2})$/), this.czyWiekszaRownaOdCenyMinimalnej(this.cenaMinimalna)]);
