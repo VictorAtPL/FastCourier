@@ -3,10 +3,10 @@ import {MatIconRegistry, MatSnackBar} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {UwierzytelnianieService} from './services/uwierzytelnianie.service';
-import {PowiadomieniaService} from "./services/powiadomienia.service";
-import {TypPowiadomienia} from "./enums/typ-powiadomienia";
-import {OfertaService} from "./services/oferta.service";
-import {Subscription} from "rxjs/Subscription";
+import {PowiadomieniaService} from './services/powiadomienia.service';
+import {TypPowiadomienia} from './enums/typ-powiadomienia';
+import {OfertaService} from './services/oferta.service';
+import {Subscription} from 'rxjs/Subscription';
 import {TimerObservable} from 'rxjs/observable/TimerObservable';
 
 /**
@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
    */
   public navLinks: any[];
 
+  public typPowiadomienia = TypPowiadomienia;
+
   powiadomieniaSubscription: Subscription = null;
 
   timer = TimerObservable.create(0, 2000);
@@ -39,8 +41,8 @@ export class AppComponent implements OnInit {
    * @param {MatSnackBar} snackBar
    * @param {UwierzytelnianieService} autentykacjaService
    */
-  constructor(private _iconRegistry: MatIconRegistry,
-              private _domSanitizer: DomSanitizer, private router: Router, public snackBar: MatSnackBar,
+  constructor(private router: Router,
+              public snackBar: MatSnackBar,
               private autentykacjaService: UwierzytelnianieService,
               private powiadomieniaService: PowiadomieniaService,
               private ofertaService: OfertaService) {
@@ -159,7 +161,8 @@ export class AppComponent implements OnInit {
           this.powiadomienia[index].dataDodania = new Date(this.powiadomienia[index].dataDodania);
 
           let obiektObservable;
-          if (this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI) {
+          if (this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI ||
+            this.powiadomienia[index].typPowiadomienia === TypPowiadomienia.ZMIANA_STATUSU_ZLECENIA) {
             obiektObservable = this.ofertaService.getZlecenie(Number(this.powiadomienia[index].idTypuPowiadomienia));
           }
 
@@ -176,12 +179,19 @@ export class AppComponent implements OnInit {
   }
 
   przeczytaj(item: any) {
-    item.przeczytane = true;
+    if (!item.przeczytane) {
+      item.przeczytane = true;
 
-    const self = item._links.self.href;
-    const self_a = self.split('/');
-    const id = self_a[self_a.length - 1];
-    this.powiadomieniaService.patchPowiadomienia(id, {przeczytane: item.przeczytane}).subscribe(() => {
-    });
+      const self = item._links.self.href;
+      const self_a = self.split('/');
+      const id = self_a[self_a.length - 1];
+      this.powiadomieniaService.patchPowiadomienia(id, {przeczytane: item.przeczytane}).subscribe(() => {
+      });
+    }
+
+    if (item.typPowiadomienia === TypPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI ||
+      item.typPowiadomienia === TypPowiadomienia.ZMIANA_STATUSU_ZLECENIA) {
+      this.router.navigate(['uzytkownik/transakcje']);
+    }
   }
 }

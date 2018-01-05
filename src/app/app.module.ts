@@ -84,6 +84,7 @@ import {OfertaService} from './services/oferta.service';
 import {ZarzadzajOfertamiComponent} from './components/zarzadzaj-ofertami/zarzadzaj-ofertami.component';
 import {ZlecanieTransportuPrzesylkiComponent} from './components/zlecanie-transportu-przesylki/zlecanie-transportu-przesylki.component';
 import {PowiadomieniaService} from "./services/powiadomienia.service";
+import {ZarzadzajTransakcjamiComponent} from './components/zarzadzaj-transakcjami/zarzadzaj-transakcjami.component';
 
 /**
  * Tablica określająca jakiemu url-owi odpowiada który komponent aplikacji
@@ -119,6 +120,11 @@ const appRoutes: Routes = [
     path: 'uzytkownik/oferty',
     component: ZarzadzajOfertamiComponent,
     data: {title: 'Fast Courier - Zarządzaj ofertami'}
+  },
+  {
+    path: 'uzytkownik/transakcje',
+    component: ZarzadzajTransakcjamiComponent,
+    data: {title: 'Fast Courier - Zarządzaj transkcjami'}
   },
   {
     path: 'uwaga/zglos',
@@ -249,7 +255,8 @@ const appRoutes: Routes = [
     ZapoznajSieZSerwisemComponent,
     PrzejrzyjZgloszeniaComponent,
     ZarzadzajOfertamiComponent,
-    ZlecanieTransportuPrzesylkiComponent
+    ZlecanieTransportuPrzesylkiComponent,
+    ZarzadzajTransakcjamiComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,141 @@
+<mat-card>
+  <mat-card-title>Przeglądanie Twoich zleceń przesyłek</mat-card-title>
+  <mat-card-content>
+    <mat-spinner *ngIf="!jaZlecilemDataSource"></mat-spinner>
+    <mat-table #table *ngIf="jaZlecilemDataSource" [dataSource]="jaZlecilemDataSource">
+
+      <ng-container matColumnDef="dataZlecenia">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="15"> Data i godzina</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="15"> {{ element.dataZlecenia | date: 'dd.MM.yyyy HH:mm' }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tytul">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="40"> Tytuł oferty</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="40"><a mat-icon-button
+                                                               [routerLink]="['/oferta/wyswietl', element.dotyczyOferty.id]"
+                                                               color="accent">
+          <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
+        </a>
+          {{ element.dotyczyOferty.tytul }} <br/><a
+            [routerLink]="['/uzytkownik/profil', element.dotyczyOferty.ofertaUzytkownika[0].login]" target="_blank"
+            title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
+            <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
+          </a> {{ element.dotyczyOferty.ofertaUzytkownika[0].login }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="szczegoly">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="25"> Szczegóły zlecenia</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="25">
+          <mat-chip-list>
+            <mat-chip>{{ element.kategoriaPaczki }}</mat-chip>
+            <mat-chip>{{ element.rozmiarPaczki }}</mat-chip>
+            <mat-chip>{{ element.wagaPaczki }}kg</mat-chip>
+          </mat-chip-list>
+          <span *ngIf="element.komentarz.length > 0"><strong>Uwagi:</strong> {{ element.komentarz }}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="20"> Status</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="20">
+          <span *ngIf="element.statusZlecenia === statusZlecenia.DOSTARCZONO">Dostarczono</span>
+          <span
+            *ngIf="element.statusZlecenia === statusZlecenia.DO_ROZPATRZENIA && element.dataGodzinaWyjazdu < dateNow">Odrzucono</span>
+          <span
+            *ngIf="element.statusZlecenia === statusZlecenia.DO_ROZPATRZENIA && element.dataGodzinaWyjazdu >= dateNow">Czeka na rozpatrzenie</span>
+          <span *ngIf="element.statusZlecenia === statusZlecenia.ODRZUCONO">Odrzucono</span>
+          <span *ngIf="element.statusZlecenia === statusZlecenia.ZAAKCEPTOWANO && element.dataGodzinaWyjazdu < dateNow">W trakcie realizacji</span>
+          <span
+            *ngIf="element.statusZlecenia === statusZlecenia.ZAAKCEPTOWANO && element.dataGodzinaWyjazdu >= dateNow">Czeka na realizację</span>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['dataZlecenia', 'tytul', 'szczegoly', 'status']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['dataZlecenia', 'tytul', 'szczegoly', 'status'];"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-title>Przeglądanie zleconych Tobie przesyłek</mat-card-title>
+  <mat-card-content>
+    <mat-spinner *ngIf="!zleconeMiDataSource"></mat-spinner>
+    <mat-table #table *ngIf="zleconeMiDataSource" [dataSource]="zleconeMiDataSource">
+
+      <ng-container matColumnDef="dataZlecenia">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="15"> Data i godzina</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="15"> {{ element.dataZlecenia | date: 'dd.MM.yyyy HH:mm' }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tytul">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="25"> Tytuł oferty</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="25"><a mat-icon-button
+                                                               [routerLink]="['/oferta/wyswietl', element.dotyczyOferty.id]"
+                                                               color="accent">
+          <mat-icon aria-label="Przejdź do oferty">assignment</mat-icon>
+        </a>
+          {{ element.dotyczyOferty.tytul }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="zlecajacy">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="15"> Zlecajacy</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="15"><a
+          [routerLink]="['/uzytkownik/profil', element.zlecajacyUzytkownik.login]" target="_blank"
+          title="Przejdź do profilu użytkownika" mat-icon-button color="primary">
+          <mat-icon aria-label="Przejdź do profilu">face</mat-icon>
+        </a> {{ element.zlecajacyUzytkownik.login }}
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="szczegoly">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="45"> Szczegóły zlecenia</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="45">
+          <mat-chip-list>
+            <mat-chip>{{ element.kategoriaPaczki }}</mat-chip>
+            <mat-chip>{{ element.rozmiarPaczki }}</mat-chip>
+            <mat-chip>{{ element.wagaPaczki }}kg</mat-chip>
+          </mat-chip-list>
+          <span *ngIf="element.komentarz.length > 0"><strong>Uwagi:</strong> {{ element.komentarz }}</span>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef flex-gt-xs="20"> Status</mat-header-cell>
+        <mat-cell *matCellDef="let element" flex-gt-xs="20">
+          <span *ngIf="element.statusZlecenia === statusZlecenia.DOSTARCZONO">Dostarczono</span>
+          <span
+            *ngIf="element.statusZlecenia === statusZlecenia.DO_ROZPATRZENIA && element.dataGodzinaWyjazdu < dateNow">Odrzucono</span>
+          <span
+            *ngIf="element.statusZlecenia === statusZlecenia.DO_ROZPATRZENIA && element.dataGodzinaWyjazdu >= dateNow">
+            <button matTooltip="Akceptuj transakcję" title="Akceptuj transakcję" mat-icon-button color="primary"
+                    (click)="zmienStatus(element, statusZlecenia.ZAAKCEPTOWANO)">
+              <mat-icon aria-label="Akceptuj transakcję">thumb_up</mat-icon>
+            </button>
+            <button matTooltip="Odrzuć transakcję" title="Odrzuć transakcję" mat-icon-button color="warn"
+                    (click)="zmienStatus(element, statusZlecenia.ODRZUCONO)">
+              <mat-icon aria-label="Odrzuć transakcję">thumb_down</mat-icon>
+            </button>
+          </span>
+          <span *ngIf="element.statusZlecenia === statusZlecenia.ODRZUCONO">Odrzucono</span>
+          <span *ngIf="element.statusZlecenia === statusZlecenia.ZAAKCEPTOWANO && element.dataGodzinaWyjazdu < dateNow">
+            <button matTooltip="Oznacz jako dostarczoną" title="Oznacz jako dostarczoną" mat-icon-button color="primary"
+                    (click)="zmienStatus(element, statusZlecenia.DOSTARCZONO)">
+              <mat-icon aria-label="Oznacz jako dostarczoną">markunread_mailbox</mat-icon>
+            </button>
+          </span>
+          <span
+            *ngIf="element.statusZlecenia === statusZlecenia.ZAAKCEPTOWANO && element.dataGodzinaWyjazdu >= dateNow">Czeka na realizację</span>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['dataZlecenia', 'tytul', 'zlecajacy', 'szczegoly', 'status']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['dataZlecenia', 'tytul', 'zlecajacy', 'szczegoly', 'status'];"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>

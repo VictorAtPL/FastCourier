@@ -122,4 +122,8 @@ export class OfertaService {
   patchZlecenie(id: number, data: any) {
     return this.http.patch(environment.restUrl + '/zleceniatransportu/' + id, data);
   }
+
+  getZlecenia() {
+    return this.http.get<any>(environment.restUrl + '/zleceniatransportu');
+  }
 }

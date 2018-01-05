@@ -30,7 +30,12 @@
             <ng-template let-last="last" ngFor let-item [ngForOf]="powiadomienia">
               <a mat-list-item [ngClass]="{'bgc-purple-50': !item.przeczytane}" (click)="przeczytaj(item)">
                 <mat-icon matListAvatar>shopping_cart</mat-icon>
-                <h4 matLine><span class="text-wrap">Dla Twojej oferty <em>{{ item.obiekt?._embedded.oferta.tytul }}</em> zostało złożone nowe zlecenie transportu przesyłki przez <em>{{ item.obiekt?._embedded.uzytkownik.login }}</em>.</span>
+
+                <h4 matLine *ngIf="item.typPowiadomienia == typPowiadomienia.ZLECONO_TRANSPORT_PRZESYLKI"><span
+                  class="text-wrap">Dla Twojej oferty <em>{{ item.obiekt?._embedded.oferta.tytul }}</em> zostało złożone nowe zlecenie transportu przesyłki przez <em>{{ item.obiekt?._embedded.uzytkownik.login }}</em>. Kliknij i podejmij decyzję co z nim zrobić.</span>
+                </h4>
+                <h4 matLine *ngIf="item.typPowiadomienia == typPowiadomienia.ZMIANA_STATUSU_ZLECENIA"><span
+                  class="text-wrap">W Twoim zleceniu do oferty <em>{{ item.obiekt?._embedded.oferta.tytul }}</em> zmienił się status. Kliknij i zobacz na jaki.</span>
                 </h4>
                 <p matLine>{{ item.dataDodania | timeAgo:reference }}</p>
               </a>
