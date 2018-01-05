@@ -65,8 +65,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" required formControlName="dataUrodzenia"
-               required>
+        <input matInput [max]="maxDate" [matDatepicker]="picker" placeholder="Data urodzenia" readonly="readonly" formControlName="dataUrodzenia" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error

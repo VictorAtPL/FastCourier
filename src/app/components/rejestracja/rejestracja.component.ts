@@ -18,6 +18,11 @@ import {MatSnackBar} from '@angular/material';
   viewProviders: [UzytkownikService]
 })
 export class RejestracjaComponent implements OnInit {
+  /**
+   * Obiekt przechowujący dzisiejszą datę
+   */
+  maxDate: Date;
+
   rejestracjaForm: FormGroup;
 
   /**
@@ -56,6 +61,8 @@ export class RejestracjaComponent implements OnInit {
    */
   ngOnInit(): void {
 
+    const today = new Date();
+    this.maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     this.haslo2 = new FormControl('');
     this.haslo = new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)]);
     this.haslo2.setValidators([Validators.required, this.czyHasloTakieSamo(this.haslo)]);
@@ -68,7 +75,7 @@ export class RejestracjaComponent implements OnInit {
         's@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')]),
       imie: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')]),
       nazwisko: new FormControl('', [Validators.required, Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')]),
-      dataUrodzenia: new FormControl(null, [Validators.required]),
+      dataUrodzenia: new FormControl('', [Validators.required]),
       wojewodztwo: new FormControl(''),
       miejscowosc: new FormControl(''),
       ulica: new FormControl(''),
