@@ -6,48 +6,96 @@
   <mat-card-content>
     <form class="example-form" [formGroup]="edytujProfilUzytkownikaForm">
       <mat-form-field class="example-full-width">
-        <input matInput type="password" placeholder="Hasło" formControlName="haslo">
+        <input matInput type="password" #inputPassword minlength="8" #inputPassword maxlength="30" placeholder="Hasło"
+               formControlName="haslo"
+               (change)="weryfikujPHaslo()">
         <mat-hint>Wpisz hasło!</mat-hint>
+        <mat-error
+          *ngIf="this.edytujProfilUzytkownikaForm.controls['haslo'].invalid">
+          Długość hasła wynosi od 8 do 30 znaków
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput type="password" placeholder="Powtórz Hasło">
+        <input matInput type="password" placeholder="Powtórz Hasło" #inputPassword minlength="8" #inputPassword
+               maxlength="30" formControlName="phaslo"
+               (change)="weryfikujHaslo()">
         <mat-hint>Potwierdź hasło!</mat-hint>
+        <mat-error *ngIf="this.edytujProfilUzytkownikaForm.controls['phaslo'].invalid">
+          <span
+            *ngIf="this.edytujProfilUzytkownikaForm.controls['phaslo'].errors.czyHasloJestTakieSamo; else elseBlock2">Podane hasło różni się od podanego wcześniej.</span>
+          <ng-template #elseBlock2>
+            <span
+              *ngIf="this.edytujProfilUzytkownikaForm.controls['phaslo'].errors.required">Musisz potwierdzić hasło.</span>
+          </ng-template>
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Adres e-mail" formControlName="email" [value]="zalogowanyUzytkownik.email">
         <mat-hint>Wpisz e-mail!</mat-hint>
+        <mat-error
+          *ngIf="this.edytujProfilUzytkownikaForm.controls['email'].invalid">
+          Podaj poprawny email
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Imię" formControlName="imie" [value]="zalogowanyUzytkownik.imie">
+        <input matInput placeholder="Imię" formControlName="imie" #inputImię maxlength="2" #inputImię maxlength="30"
+               [value]="zalogowanyUzytkownik.imie">
         <mat-hint>Wpisz imię!</mat-hint>
+        <mat-error
+          *ngIf="this.edytujProfilUzytkownikaForm.controls['imie'].invalid">
+          Podaj poprawne imię
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nazwisko" formControlName="nazwisko" [value]="zalogowanyUzytkownik.nazwisko">
+        <input matInput placeholder="Nazwisko" formControlName="nazwisko" #inputNazwisko maxlength="2" #inputNazwisko
+               maxlength="30" [value]="zalogowanyUzytkownik.nazwisko">
         <mat-hint>Wpisz nazwisko!</mat-hint>
+        <mat-error
+          *ngIf="this.edytujProfilUzytkownikaForm.controls['nazwisko'].invalid">
+          Podaj poprwane nazwisko
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Data urodzenia" formControlName="dataUrodzenia"
-               [value]="zalogowanyUzytkownik.dataUrodzenia | date: 'dd.MM.yyyy'">
-        <mat-hint>W formacie rrrr-mm-dd.</mat-hint>
+        <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" formControlName="dataUrodzenia">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error
+          *ngIf="this.edytujProfilUzytkownikaForm.controls['dataUrodzenia'].invalid && this.edytujProfilUzytkownikaForm.controls['dataUrodzenia'].errors.matDatepickerParse">
+          Data musi być wybrana z powyższego kalendarza
+        </mat-error>
+        <mat-hint align="end">Wybierz datę z powyższego kalendarza</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Województwo" formControlName="wojewodztwo"
-               [value]="zalogowanyUzytkownik.wojewodztwo">
-        <mat-hint>Wpisz województwo!</mat-hint>
+        <mat-select matInput placeholder="Województwo" formControlName="wojewodztwo" [value]="zalogowanyUzytkownik.wojewodztwo">
+          <mat-option value="Mazowieckie">Mazowieckie</mat-option>
+          <mat-option value="Lubelskie">Lubelskie</mat-option>
+          <mat-option value="Wielkopolskie">Wielkopolskie</mat-option>
+        </mat-select>
+        <mat-hint>Wybierz jedno z województw występujących na liście</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Miejscowość" formControlName="miejscowosc"
-               [value]="zalogowanyUzytkownik.miejscowosc">
-        <mat-hint>Wpisz miejscowość!</mat-hint>
+        <mat-select matInput placeholder="Miejscowość" formControlName="miejscowosc" [value]="zalogowanyUzytkownik.miejscowosc">
+          <mat-option value="Warszawa">Warszawa</mat-option>
+          <mat-option value="Kraków">Kraków</mat-option>
+          <mat-option value="Pruszków">Pruszków</mat-option>
+          <mat-option value="Halinów">Halinów</mat-option>
+          <mat-option value="Ostrów Mazowiecka">Ostrów Mazowiecka</mat-option>
+        </mat-select>
+        <mat-hint>Wybierz jedno z miast występujących na liście</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Ulica" formControlName="ulica" [value]="zalogowanyUzytkownik.ulica">
         <mat-hint>Wpisz ulicę!</mat-hint>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Nr telefonu" formControlName="numerTelefonu"
+        <input matInput placeholder="Nr telefonu" #input minlength="9" #input maxlength="15"
+               formControlName="numerTelefonu"
                [value]="zalogowanyUzytkownik.numerTelefonu">
         <mat-hint>Wpisz nr telefonu!</mat-hint>
+        <mat-error
+          *ngIf="this.edytujProfilUzytkownikaForm.controls['numerTelefonu'].invalid">
+          Podaj poprawny numer telefonu
+        </mat-error>
       </mat-form-field>
       <br><br>
       <button mat-raised-button color="accent" (click)="edytujProfilUzytkownika(edytujProfilUzytkownikaForm.value)">

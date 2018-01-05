@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {UwierzytelnianieService} from '../../services/uwierzytelnianie.service';
-import {UzytkownikService} from "../../services/uzytkownik.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AutentykacjaService} from '../../services/autentykacja.service';
+import {UzytkownikService} from '../../services/uzytkownik.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {UwierzytelnianieService} from "../../services/uwierzytelnianie.service";
 
 /**
  * Logika biznesowa dla komponentu edycji profilu użytkownika.
@@ -27,6 +28,9 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
    */
   zalogowanyUzytkownik: any;
 
+  haslo: FormControl;
+  phaslo: FormControl;
+
   /**
    * Konstruktor formularza, umożliwiający użycie dodatkowych serwisów.
    * @param {UwierzytelnianieService} autentykacjaService
@@ -41,6 +45,9 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
    * Metoda inicjująca formualrz. Ustawia parametry walidacji.
    */
   ngOnInit() {
+    this.phaslo = new FormControl('',);
+    this.haslo = new FormControl('', [Validators.minLength(8), Validators.maxLength(30)]);
+    this.phaslo.setValidators([this.czyHasloTakieSamo(this.haslo)]);
     this.autentykacjaService.czyZalogowany().subscribe((uzytkownik: any) => {
       if (uzytkownik != null) {
         uzytkownik.dataUrodzenia = new Date(uzytkownik.dataUrodzenia);
@@ -49,15 +56,16 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
     });
 
     this.edytujProfilUzytkownikaForm = new FormGroup({
-      haslo: new FormControl(),
-      email: new FormControl(),
-      imie: new FormControl(),
-      nazwisko: new FormControl(),
-      dataUrodzenia: new FormControl(),
+      haslo: this.haslo,
+      phaslo: this.phaslo,
+      email: new FormControl('', Validators.pattern('^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$')),
+      imie: new FormControl('', Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')),
+      nazwisko: new FormControl('', Validators.pattern('^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,30}$')),
+      dataUrodzenia: new FormControl(new Date()),
       wojewodztwo: new FormControl(),
       miejscowosc: new FormControl(),
       ulica: new FormControl(),
-      numerTelefonu: new FormControl()
+      numerTelefonu: new FormControl('', Validators.pattern('^[0-9\\-\\+]{9,15}$'))
     });
   }
 
@@ -67,7 +75,7 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
    */
   edytujProfilUzytkownika(data: any) {
     for (const key in data) {
-      if (data[key] == null) {
+      if (data[key] == null || data[key].length == 0) {
         delete data[key];
       }
     }
@@ -85,5 +93,20 @@ export class EdycjaProfiluUzytkownikaComponent implements OnInit {
         duration: 2000,
       });
     });
+  }
+
+  czyHasloTakieSamo(haslo: FormControl) {
+    return (input: FormControl) => {
+      const czyRowne = input.value === haslo.value;
+      return czyRowne ? null : {czyHasloJestTakieSamo: true};
+    };
+  }
+
+  weryfikujHaslo() {
+    this.edytujProfilUzytkownikaForm.controls['haslo'].updateValueAndValidity();
+  }
+
+  weryfikujPHaslo() {
+    this.edytujProfilUzytkownikaForm.controls['phaslo'].updateValueAndValidity();
   }
 }
