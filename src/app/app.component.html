@@ -1,10 +1,10 @@
 <td-layout>
-  <td-navigation-drawer flex sidenavTitle="Menu">
+  <td-navigation-drawer flex sidenavTitle="Menu" #navigationDrawer>
     <mat-nav-list>
       <ng-container *ngFor="let link of navLinks">
         <a
           *ngIf="link.enable && ((zalogowanyUzytkownik?.rola && link.role.indexOf(zalogowanyUzytkownik.rola) > -1) || (!zalogowanyUzytkownik && link.role.indexOf('') > -1))"
-          mat-list-item [routerLink]="link.path">{{ link.label }}</a>
+          mat-list-item [routerLink]="link.path" (click)="navigationDrawer.close()">{{ link.label }}</a>
       </ng-container>
       <a mat-list-item *ngIf="zalogowanyUzytkownik?.imie" (click)="wyloguj()">Wyloguj</a>
     </mat-nav-list>
@@ -17,7 +17,7 @@
       <img src="/assets/logo.png" alt="Logo FastCourier"/>
       <span hide-xs class="tc-blue-500 mat-subhead">FastCourier</span>
       <span flex></span>
-      <span>Magical Solutions</span>
+      <span hide-xs>Magical Solutions</span>
       <button class="overflow-visible" mat-icon-button [matMenuTriggerFor]="notificationsMenu"
               *ngIf="zalogowanyUzytkownik && powiadomienia" (click)="unsubscribeNotifications()">
         <td-notification-count [notifications]="nieprzeczytanychPowiadomien">

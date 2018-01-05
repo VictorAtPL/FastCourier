@@ -28,7 +28,10 @@
           </div>
         </div>
         <br/>
-        <button mat-raised-button color="warn" (click)="zglosUzytkownika(login)">Zgłoś użytkownika</button>
+        <button mat-raised-button color="warn" (click)="zglosUzytkownika(login)"
+                *ngIf="!zalogowanyUzytkownik || zalogowanyUzytkownik === null || zalogowanyUzytkownik.login !== uzytkownik.login">
+          Zgłoś użytkownika
+        </button>
         <button *ngIf="zalogowanyUzytkownik && zalogowanyUzytkownik.rola === 'ROLE_ADMIN'" mat-raised-button
                 color="warn" (click)="zablokujUzytkownika(login, uzytkownik)">Zablokuj użytkownika
         </button>
