@@ -3,14 +3,29 @@
     Dodaj regulamin
   </mat-card-title>
   <mat-card-content>
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Tytuł regulaminu">
+    <form class="example-form" [formGroup]="dodawanieRegulaminuForm">
+      <mat-form-field class="example-full-width" hintLabel="Min. 3, Max. 100 znaków.">
+        <input matInput #input minlength="3" maxlength="100" placeholder="Tytuł regulaminu" required
+               formControlName="tytul">
+        <mat-error
+          *ngIf="this.dodawanieRegulaminuForm.controls['tytul'].invalid && this.dodawanieRegulaminuForm.controls['tytul'].errors.minlength">
+          Długość tytułu musi wynosić co najmniej 3 znaki.
+        </mat-error>
+        <mat-error
+          *ngIf="this.dodawanieRegulaminuForm.controls['tytul'].invalid && this.dodawanieRegulaminuForm.controls['tytul'].errors.maxLength">
+          Długość tytułu musi wynosić najwyżej 100 znaków.
+        </mat-error>
+        <mat-hint align="end">{{ input.value?.length || 0 }}/100</mat-hint>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="Treść regulaminu" matTextareaAutosize matAutosizeMinRows="2"
-                      matAutosizeMaxRows="20"></textarea>
+      <mat-form-field class="example-full-width" hintLabel="Wpisz treść regulaminu. Max. 5000 znaków.">
+            <textarea matInput #textarea placeholder="Treść regulaminu" matTextareaAutosize matAutosizeMinRows="2"
+                      matAutosizeMaxRows="20" required formControlName="tresc"></textarea>
+        <mat-error
+          *ngIf="this.dodawanieRegulaminuForm.controls['tresc'].invalid && this.dodawanieRegulaminuForm.controls['tresc'].errors.maxLength">
+          Długość regulaminu musi wynosić najwyżej 5000 znaków.
+        </mat-error>
+        <mat-hint align="end">{{ textarea.value?.length || 0 }}/5000</mat-hint>
       </mat-form-field>
 
       <button mat-raised-button>Anuluj</button>
